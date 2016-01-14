@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN" lang="en">
+<head>
+<title>{% block base_title %}{{ title|default:"Devid's Home Page" }}{% endblock %}-CC8789</title>
+<!--网站头信息-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-CN" />
+<meta name="author" content="CC8789-wei" />
+<meta name="Copyright" content="CC8789.net" />
+<meta name="baidu-site-verification" content="EiqT6SDYwv" />
+<meta name="description" content="this is good website" />
+{#<meta http-equiv="refresh" content="10;url=http://www.IceFire.com" />#}
+<meta name="keywords" content="工具 博客 html css javascript java python CC8789 加密 解密"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/static/images/logo-32x32.ico" type="image/x-icon" />
+
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" sizes="196x196" href="/static/images/logo-196x196.ico">
+
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+<link rel="apple-touch-icon-precomposed" href="/static/images/logo-144x144.ico">
+
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage" content="/static/images/logo-144x144.ico">
+<meta name="msapplication-TileColor" content="#0e90d2">
+
+<!--**********end**********-->
+{#外部链接块#}
+{#外部CSS和JS引入#}
+{% include 'common/styles.html' %}
+{#额外块设置#}
+{% block css1 %}{% endblock %}
+{% block css2 %}{% endblock %}
+{% block css3 %}{% endblock %}
+
+{% block javascript1 %}{% endblock %}
+{% block javascript2 %}{% endblock %}
+{#**********end************#}
+</head>
+{#页面主内容#}
+<body>
+{% block header %}{% include 'common/header.html' %}{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% include 'common/footer.html' %}{% endblock %}
+{% block extra %}
+{#    <script type="text/javascript" color="#000000" opacity='0.5' zIndex="-2" count="9" src="/static/js/canvas-nest.min.js"></script>#}
+    <div class="am-show-lg-up about-author">
+        <div class="qq">
+            <img src="/static/images/qqqun.png" alt="qq二维码" width="100%" height="100%">
+            <strong class="am-icon-qq">群号：288171956</strong>
+        </div>
+        <hr style="margin: 5px 0;">
+        <div class="weixin">
+            <img src="/static/images/weixin.png" alt="微信二维码" width="100%" height="100%">
+            <strong class="am-icon-weixin">微信:guowei1003</strong>
+        </div>
+        <hr style="margin: 5px 0 25px 0;">
+        <div  data-am-smooth-scroll class="go-top"></div>
+    </div>
+{% endblock %}
+</body>
+</html>

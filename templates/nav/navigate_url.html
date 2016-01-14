@@ -1,0 +1,146 @@
+{% extends "common/base.html" %}
+
+{% block css1 %}
+    <link rel="stylesheet" href="/static/css/navigation.css" >
+{% endblock %}
+
+{% block javascript1 %}
+    <script type="text/javascript" src="/static/js/navigation.js" ></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="content-top"></div>
+        <div class="content-mnue">
+            <button class="am-btn am-btn-warning am-round" data-am-offcanvas="{target: '#url-mnue'}">
+                菜<（@￣︶￣@）>单
+            </button>
+        </div>
+        <div class="content-center">
+            {% block navigate_class %}
+                <div class="content-center-common">
+                    <div class="am-panel am-panel-danger">
+                        <div class="am-panel-hd">常用网站</div>
+                        <div class="am-panel-bd">
+                            <ul>
+                                {% for site in site_list %}
+                                        <li><a title="{{ site.name }}" href="{{ site.url }}" target="_blank" onclick="updateReads('{{ site.id }}')">{{ site.name|truncatechars:"6" }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-g content-enter-content ">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
+                        <div class="am-panel am-panel-primary">
+                            <div class="am-panel-hd">
+                                <h3 class="am-panel-title">点击量最大的站站</h3>
+                            </div>
+                            <table class="am-table am-table-striped am-table-hover am-text-nowrap am-monospace">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>网站名</th>
+                                    <th>点击数</th>
+                                    <th>归类</th>
+                                </tr>
+                                {% for site in champion_reads %}
+                                    <tr title="{{ site.describe }}">
+                                        <td>{{ forloop.counter }}</td>
+                                        <td title="{{ site.name }}" ><a href="{{ site.url }}" target="_blank" onclick="updateReads('{{ site.id }}')">{{ site.name|truncatechars:"10" }}</a></td>
+                                        <td ><span>{{ site.url_reads }}</span></td>
+                                        {% if site.url_class_id == "common" %}
+                                        <td title="{{ site.describe }}"><span>{{ site.url_class.class_name_cn }}</span></td>
+                                        {% else %}
+                                            <td title=""><span> <a href="/nav/navsite/{{ site.url_class_id }}">{{ site.url_class.class_name_cn }}</a></span></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+            {#               <div class="am-panel-footer">...</div>#}
+                        </div>
+                    </div>
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
+                        <div class="am-panel am-panel-primary">
+                            <div class="am-panel-hd">
+                                <h3 class="am-panel-title">最受喜欢的站站</h3>
+                            </div>
+
+                            <table class="am-table  am-table-striped am-table-hover am-monospace">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>网站名</th>
+                                    <th>喜欢数</th>
+                                    <th>归类</th>
+                                </tr>
+                                {% for site in champion_likes %}
+                                    <tr title="{{ site.describe }}">
+                                        <td>{{ forloop.counter }}</td>
+                                        <td title="{{ site.name }}"><a href="{{ site.url }}" target="_blank" onclick="updateReads('{{ site.id }}')">{{ site.name|truncatechars:"10" }}</a></td>
+                                        <td ><span>{{ site.url_likes }}</span></td>
+                                        {% if site.url_class_id == "common" %}
+                                        <td title="{{ site.describe }}"><span>{{ site.url_class.class_name_cn }}</span></td>
+                                        {% else %}
+                                            <td ><span> <a href="/nav/navsite/{{ site.url_class_id }}">{{ site.url_class.class_name_cn }}</a></span></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+            {#               <div class="am-panel-footer">...</div>#}
+                        </div>
+                    </div>
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
+                        <div class="am-panel am-panel-primary">
+                            <div class="am-panel-hd">
+                                <h3 class="am-panel-title">收藏最多的站站</h3>
+                            </div>
+
+                            <table class="am-table am-table-striped am-table-hover am-monospace">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>网站名</th>
+                                    <th>收藏数</th>
+                                    <th>归类</th>
+                                </tr>
+                                {% for site in champion_collects %}
+                                    <tr title="{{ site.describe }}">
+                                        <td>{{ forloop.counter }}</td>
+                                        <td title="{{ site.name }}"><a href="{{ site.url }}" target="_blank" onclick="updateReads('{{ site.id }}')">{{ site.name|truncatechars:"10" }}</a></td>
+                                        <td ><span>{{ site.url_collects }}</span></td>
+                                        {% if site.url_class_id == "common" %}
+                                        <td title="{{ site.describe }}"><span>{{ site.url_class.class_name_cn }}</span></td>
+                                        {% else %}
+                                            <td ><span> <a href="/nav/navsite/{{ site.url_class_id }}">{{ site.url_class.class_name_cn }}</a></span></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+            {#               <div class="am-panel-footer">...</div>#}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+        <div id="url-mnue" class="am-offcanvas">
+            <div class="am-offcanvas-bar">
+                <div class="am-offcanvas-content">
+                    <h2>顶层菜单栏</h2>
+                    <hr data-am-widget="divider" style="border-color: #575757" class="am-divider am-divider-default" />
+                    <hr data-am-widget="divider" style="border-color: #575757" class="am-divider am-divider-default" />
+                    <ul>
+                        <li class="url-mnue"><a href="/nav/navsite/news">新闻</a></li>
+                        <li class="url-mnue"><a href="/nav/navsite/videos">视频</a></li>
+                        <li class="url-mnue"><a href="/nav/navsite/shopping">购物</a></li>
+                        <li class="url-mnue"><a href="/nav/navsite/cars">汽车</a></li>
+                        <li class="url-mnue"><a href="/nav/navsite/finance">金融</a></li>
+                        <li class="url-mnue"><a href="/nav/navsite/develop">开发</a></li>
+                        <li class="url-mnue"><a href="/nav/navsite/live">生活</a></li>
+                        <li class="url-mnue"><a href="/nav/navsite/cool">酷站</a></li>
+                        <li class="url-mnue"><a href="/nav/navsite/relax">休闲</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

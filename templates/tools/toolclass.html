@@ -1,0 +1,20 @@
+{% extends "tools/toolshome.html" %}
+
+{% block tooldetail %}
+    <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default content-tools-content-class">
+        <h2 class="am-titlebar-title ">分类 | {{ header_title }} | Tools Classfication</h2>
+    </div>
+    <hr/>
+    <div class="content-tools-content-class">
+        <ul>
+            {% for tool in toolsbyclass %}
+                <span>{{ forloop.counter }}. </span>
+                <li class="am-icon-hand-o-right"> <a title="{{ tool.tool_name }}" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a>
+                | <span title="喜欢一下" class="update_like am-icon-heart-o" name="{{ tool.id }}"> {{ tool.like_count }}</span>
+                | <span title="点击量" class="am-icon-user"> {{ tool.usage_count }}</span>
+                | <span title="简单描述">{{ tool.tool_dec|truncatechars:"30" }}</span><a title="点击打开" href="/tools/tooldetail/{{ tool.tool_ename }}/"> More</a></li>
+                <br/>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

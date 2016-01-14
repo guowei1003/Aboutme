@@ -1,0 +1,90 @@
+{% extends "tools/toolshome.html" %}
+
+{% block css2 %}
+{#    <link rel="stylesheet" href="/static/css/toolcss/json_format.css" >#}
+{% endblock %}
+
+{% block javascript2 %}
+{#    <script type="text/javascript" src="/static/js/tooljs/json_format.js"></script>#}
+    <script type="text/javascript" src="/static/js/tooljs/c.js"></script>
+    <script type="text/javascript" src="/static/js/tooljs/urchin.js"></script>
+    <script type="text/javascript" src="/static/js/tooljs/m.js"></script>
+{% endblock %}
+
+{% block tooldetail %}
+    <div class="am-form content-tools-content-jsonformat">
+        <div class="am-form-group">
+            <textarea class="" rows="5" id="text-input" placeholder="请输入文本内容">
+{
+"title":"欢迎使用CC8789小工具",
+"content":"您可以直接将json字符串粘贴到这里哦:)",
+"url":"http://www.cc8789.net/tools/tooldetail/json_format/"
+}
+            </textarea>
+        </div>
+        <div id="ControlsRow">
+            <input class="am-btn am-btn-success am-round" type="Button" value="格式化" onclick="Process()"/>
+            <span id="TabSizeHolder">
+                 |缩进:
+                <select id="TabSize" onchange="TabSizeChanged()" data-am-selected="{btnWidth: '50', btnSize: 'sm', btnStyle: 'success'}">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </span>|
+            <label for="QuoteKeys"  class="am-checkbox-inline">
+                <input type="checkbox" id="QuoteKeys" onclick="QuoteKeysClicked()" data-am-ucheck checked>引号
+            </label>
+            <label for="CollapsibleView"  class="am-checkbox-inline">
+                <input type="checkbox" id="CollapsibleView" onclick="CollapsibleViewClicked()" data-am-ucheck checked>显示控制
+            </label>
+            <button type="button" class="am-btn am-btn-success am-btn-xs am-round am-icon-transgender" onclick="SelectAllClicked()">全选</button>
+            <span id="CollapsibleViewDetail">
+                <button type="button" class="am-btn am-btn-success am-btn-xs am-round am-icon-eye" onclick="ExpandAllClicked()">展开</button>
+                <button type="button" class="am-btn am-btn-success am-btn-xs am-round am-icon-eye-slash" onclick="CollapseAllClicked()">叠起</button>
+                <span>
+                <label class="am-radio-inline am-success">
+                    <input type="radio" value="" onclick="CollapseLevel(3,this)" data-am-ucheck>2级
+                </label>
+                <label class="am-radio-inline am-success">
+                    <input type="radio" value="" onclick="CollapseLevel(4,this)" data-am-ucheck>3级
+                </label>
+                <label class="am-radio-inline am-success">
+                    <input type="radio" value="" onclick="CollapseLevel(5,this)" data-am-ucheck>4级
+                </label>
+                <label class="am-radio-inline am-success">
+                    <input type="radio" value="" onclick="CollapseLevel(6,this)" data-am-ucheck>5级
+                </label>
+                <label class="am-radio-inline am-success">
+                    <input type="radio" value="" onclick="CollapseLevel(7,this)" data-am-ucheck>6级
+                </label>
+                <label class="am-radio-inline am-success">
+                    <input type="radio" value="" onclick="CollapseLevel(8,this)" data-am-ucheck>7级
+                </label>
+                <label class="am-radio-inline am-success">
+                    <input type="radio" value="" onclick="CollapseLevel(9,this)" data-am-ucheck checked>8级
+                </label>
+                </span>
+            </span>
+        </div>
+        <div id="Canvas" class="Canvas"></div>
+    </div>
+
+    <div class="content-tools-content-introduce">
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title">  关于 | About | <span  data-am-popover="{theme: 'success sm', content: '快来喜欢我(＾∀＾)', trigger: 'hover'}" class="update_like am-icon-heart-o am-icon-sm " name="{{ tool.id }}"> {{ tool.like_count }}</span> |</h2>
+        </div>
+        <hr/>
+        <div class="am-kai">
+            <ol type="a">
+                <li>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式，采用完全独立于语言的文本格式，是理想的数据交换格式。</li>
+                <li>她基于 JavaScript Programming Language , Standard ECMA-262 3rd Edition - December 1999 的一个子集。 JSON采用完全独立于程序语言的文本格式，但是也使用了类C语言的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。这些特性使JSON成为理想的数据交换语言。</li>
+                <li>JSON是目前应用最广的数据传输格式之一，人与机器对其的易读性使大多数程序开发者对她异常钟爱。</li>
+                <li>目前工具还在不断完善中，欢迎给作者提出意见和建议,在其中如遇到任何BUG或建议，可以加QQ群: <strong data-am-popover="{theme: 'success lg', content: '如果方便请加群，亲！<br>希望能给些意见(＾∀＾)', trigger: 'hover'}">288171956</strong>交流探讨。</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}

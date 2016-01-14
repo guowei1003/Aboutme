@@ -1,0 +1,166 @@
+/*主页的级联样式表*/
+
+.content-top{
+    width: 100%;
+    height: 400px;
+    background: #FFFFFF url("/static/images/banner-home-cn.jpg") no-repeat top left;
+    background-size: 100% auto;
+}
+
+.content-banner{
+    padding:50px;
+    width: 100%;
+    height: 350px;
+    background: rgba(0, 0, 0, 0) url("/static/images/banner_bg.png") no-repeat center center;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+.content-banner div{
+    padding-left: 4.5rem;
+}
+
+.content-banner div h1{
+    font-size: 30px;
+    font-weight: 600;
+    overflow-y: hidden;
+}
+
+.content-center{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.content-center-cell{
+    min-height: 300px;
+}
+
+.content-center-1{
+    padding: 100px 0;
+    color: #FFFFFF;
+    font-family: "Courier New", sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    background: #FFFFFF url("/static/images/center_bg_1.jpg") no-repeat top left fixed;
+    background-size: 100% 100%;
+    -webkit-box-shadow:  0 0 10px #000000;
+    -moz-box-shadow:  0 0 10px  #000000;
+    box-shadow:  0 0 10px  #000000;
+    text-align: center;
+}
+
+.content-center-2{
+    padding: 20px 0;
+}
+
+.content-center-2 > div{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-family: "微软雅黑", "MicrosoftYahei", "宋体", "Arial";
+}
+
+.am-thumbnail {
+    padding: 20px;
+}
+
+.am-thumbnail:hover{
+    -webkit-box-shadow:inset  0 0 10px #000000;
+    -moz-box-shadow: inset 0 0 10px  #000000;
+    box-shadow: inset 0 0 10px  #000000;
+    position: relative;
+    top: 1px;
+    left: 1px;
+}
+
+.am-thumbnail-caption h3{
+    text-align: center;
+    font-family: "微软雅黑", "MicrosoftYahei", "宋体", "Arial";
+    font-size: 2.3rem;
+    font-weight: bold;
+}
+
+.content-center-3{
+    height: 500px;
+    color: #FFFFFF;
+    font-family: "Courier New", sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    background: #FFFFFF url("/static/images/center_bg_py.jpg") no-repeat 0 40% fixed;
+    background-size: 100% auto;
+    -webkit-box-shadow:  0 0 10px #000000;
+    -moz-box-shadow:  0 0 10px  #000000;
+    box-shadow:  0 0 10px  #000000;
+    text-align: center;
+}
+
+.content-center-4{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 500px;
+    color: #000000;
+    font-family: "Courier New", sans-serif;
+    text-align: center;
+    background: #FFFFFF url("/static/images/notebook_bd_bg.jpg") repeat top left fixed;
+    -webkit-box-shadow:inset  0 0 10px #000000;
+    -moz-box-shadow: inset 0 0 10px  #000000;
+    box-shadow: inset 0 0 10px  #000000;
+}
+.content-center-4-notebook{
+    margin: auto;
+    max-width: 1000px;
+}
+
+.content-center-4-notebook > h1{
+    height: 100px;
+    line-height: 100px;
+    background: rgba(0, 0, 0, 0) url("/static/images/notebook_title.png") no-repeat center center ;
+    background-size: 100% 100%;
+}
+
+.content-center-4-notebook-cell article{
+    padding: 10px;
+    background: rgba(255, 255, 255, 0) url("/static/images/notebook_bg.jpg") no-repeat top left;
+    background-size: 100% 100%;
+    -webkit-box-shadow:  0 0 10px #000000;
+    -moz-box-shadow:  0 0 10px  #000000;
+    box-shadow:  0 0 10px  #000000;
+    border-radius: 15px;
+}
+
+.am-article-lead-index{
+    border-radius: 2px;
+    color: #555555;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    padding: 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+.content-timeline{
+    padding: 50px 200px;
+    background-color: #eff0f0;
+    -webkit-box-shadow:  0 5px 10px #000000;
+    -moz-box-shadow:  0 5px 10px  #000000;
+    box-shadow:  0 5px 10px  #000000;
+
+}
+
+.content-timeline li{
+    margin-left: 50px;
+    list-style: circle;
+}
+.content-bottom{
+    margin-top: 20px;
+    padding: 50px;
+    color: #000000;
+    background-color: rgba(252, 238, 16, 0.84);
+    text-align: center;
+    font-size: 4.3rem;
+    -webkit-box-shadow:  0 0 10px #000000;
+    -moz-box-shadow:  0 0 10px  #000000;
+    box-shadow:  0 0 10px  #000000;
+}
+
+.content-bottom-touch:hover{
+
+}

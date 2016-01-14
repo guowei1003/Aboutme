@@ -1,0 +1,72 @@
+
+
+.header{
+    padding-top: 100px;
+    padding-left: 350px;
+    height: 200px;
+    background-color: #CCCCCC;
+    background-image: url("/static/images/top_pic2.png");
+    background-repeat: no-repeat;
+    background-position: 70% top;
+    background-size: auto 100%;
+}
+
+.header-title{
+    font-family: "微软雅黑", "MicrosoftYahei", "宋体", "Arial";
+    font-size: 3.3rem;
+}
+.header-subtitle{
+    font-family: Monaco, Menlo, Consolas, "Courier New", "FontAwesome", monospace;
+    font-size: 1.5rem;
+}
+
+* + .am-article-divider {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.container{
+    text-align: center;
+    padding-top: 10px;
+    position: relative;
+}
+
+.tags-cell{
+    margin: 5px;
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+.tags-cell:hover{
+    position: relative;
+    right: 1px;
+    bottom: 1px;
+    -webkit-box-shadow:  0 0 2px #555555;
+    -moz-box-shadow:  0 0 2px  #555555;
+    box-shadow:  0 0 2px  #555555;
+}
+.tags-cell-title{
+    font-size: 3rem;
+    font-weight: bold;
+}
+.tags-cell-bd{
+    margin: 0 5px;
+    color: #555555;
+    text-align: left;
+    font-size: 1.3rem;
+}
+
+.tags-cell-bd a{
+    color: #555555;
+}
+.tags-cell-bd a:hover{
+    text-decoration: underline;
+}
+
+
+.tags-cell-bd span:last-child{
+    float: right;
+}
+

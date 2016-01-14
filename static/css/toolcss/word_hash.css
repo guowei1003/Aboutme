@@ -1,0 +1,19 @@
+
+
+.content-tools-content-wordhash .starthash{
+    margin-top:26px;
+    margin-bottom:0;
+    padding:5px;
+    vertical-align: middle;
+}
+.content-tools-content-wordhash .starthash button{
+    width: 72px;
+    height: 72px;
+
+    -webkit-box-shadow: 1px 1px 3px #555555;
+    -moz-box-shadow: 1px 1px 3px  #555555;
+    box-shadow: 1px 1px 3px  #555555;
+}
+.content-tools-content-wordhash .am-radio-inline + .am-radio-inline{
+    margin-left: 0;
+}

@@ -1,0 +1,135 @@
+{% extends "common/base.html" %}
+
+{% block css1 %}
+    <link rel="stylesheet" href="/static/css/tools.css" >
+{% endblock %}
+{% block javascript1 %}
+    <script type="text/javascript" src="/static/js/tools.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <div class="am-show-lg-up header-show">
+            <div class="header-title am-animation-slide-top am-animation-delay">{{ header_title|default:"工善其器" }}</div>
+            <div class="header-subtitle am-animation-slide-left am-animation-delay">{{ header_subtitle|default:"居是邦也，事其大夫之贤者，友其士之仁者" }}</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content-tools-menu">
+            <form action="/tools/toolclass" method="get">
+{#            <button type="submit" class="am-btn am-btn-tools am-round" name="menu" value="tool_site">站长工具</button>#}
+            <button type="submit" class="am-btn am-btn-tools am-round" name="menu" value="tool_words">文字处理</button>
+{#            <button type="submit" class="am-btn am-btn-tools am-round" name="menu" value="tool_file">文件处理</button>#}
+            <button type="submit" class="am-btn am-btn-tools am-round" name="menu" value="tool_encrypt">加密解密</button>
+{#            <button type="submit" class="am-btn am-btn-tools am-round" name="menu" value="tool_geek">极客工具</button>#}
+            <button type="submit" class="am-btn am-btn-tools am-round" name="menu" value="tool_develop">开发工具</button>
+{#            <button type="submit" class="am-btn am-btn-tools am-round" name="menu" value="tool_wonder">新奇技艺</button>#}
+{#            <button type="submit" class="am-btn am-btn-tools am-round" name="menu" value="tool_orther">其他</button>#}
+            </form>
+        </div>
+        <div class="content-tools-content">
+            {% block tooldetail %}
+                <div class="content-tools-content-newtools">
+                    <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+                        <h2 class="am-titlebar-title ">最新工具 | Newest</h2>
+                    </div>
+                    <hr/>
+                    <div>
+                        <ol>
+                            {% for tool in new_tool_list %}
+                                {% if tool.usage_count > 100 %}
+                                    {% if tool.like_count > 100 %}
+                                        <li> <a class="am-icon-leaf am-sans-serif content-tools-list-red" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                    {% else %}
+                                        <li> <a class="am-icon-leaf am-sans-serif content-tools-list-blue" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                    {% endif %}
+                                {% else %}
+                                    <li> <a class="am-icon-leaf am-sans-serif content-tools-list-black" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+                <div class="content-tools-content-mostuse">
+                    <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+                        <h2 class="am-titlebar-title ">使用最多 | Use Most</h2>
+                    </div>
+                    <hr/>
+                    <div>
+                        <ol type="I">
+                            {% for tool in use_most_list %}
+                                {% if tool.usage_count > 100 %}
+                                    {% if tool.like_count > 100 %}
+                                        <li> <a class="am-icon-trophy am-sans-serif content-tools-list-red" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                    {% else %}
+                                        <li> <a class="am-icon-trophy am-sans-serif content-tools-list-blue" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                    {% endif %}
+                                {% else %}
+                                    <li> <a class="am-icon-trophy am-sans-serif content-tools-list-black" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+                <div class="content-tools-content-mostlike">
+                    <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+                        <h2 class="am-titlebar-title ">最受欢迎 | Most Popular</h2>
+                    </div>
+                    <hr/>
+                    <div>
+                        <ol type="a">
+                            {% for tool in like_most_list %}
+                                {% if tool.usage_count > 100 %}
+                                    {% if tool.like_count > 100 %}
+                                        <li> <a class="am-icon-heart am-sans-serif content-tools-list-red" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                    {% else %}
+                                        <li> <a class="am-icon-heart am-sans-serif content-tools-list-blue" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                    {% endif %}
+                                {% else %}
+                                    <li> <a class="am-icon-heart am-sans-serif content-tools-list-black" href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            {% endblock %}
+            <hr/>
+            <hr/>
+            <div class="content-tools-sitemap">
+                <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+                     <h2 class="am-titlebar-title">站点导航 | Site Navigation <span id="scan_id">　</span></h2>
+                </div>
+                <hr/>
+                <div class="content-tools-sitemap-show am-sans-serif">
+                    {% for class,site in siteMap.items %}
+                        <ul>
+                            {{ forloop.counter }}.
+                            <li>{{ class }}：</li>
+                            {% for tool in site %}
+                                {% if forloop.last %}
+                                    <li><a href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>
+                                {% else %}
+                                    <li><a href="/tools/tooldetail/{{ tool.tool_ename }}/">{{ tool.tool_name }}</a></li>|
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr/>
+            <div class="content-tools-comment am-monospace">
+{#                多说分享#}
+                <div class="ds-share" data-thread-key="{{ ds_web_id }}" data-title="{{ title }}" data-images="" data-content="{{ title }}" data-url="{{ ds_web_url }}">
+                    <div class="ds-share-aside-left">
+                        <div class="ds-share-aside-inner"></div>
+                        <div class="ds-share-aside-toggle">分享一下</div>
+                    </div>
+                </div>
+{#                多说分享#}
+                <!-- 多说评论框 start -->
+                    <div class="ds-thread" data-thread-key="{{ ds_web_id }}" data-title="{{ title }}" data-url="{{ ds_web_url }}"></div>
+                <!-- 多说评论框 end -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

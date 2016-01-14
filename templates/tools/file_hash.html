@@ -1,0 +1,89 @@
+{% extends "tools/toolshome.html" %}
+
+{% block css2 %}
+    <link rel="stylesheet" href="/static/css/toolcss/file_hash.css" >
+{% endblock %}
+
+{% block javascript2 %}
+    <script type="text/javascript" src="/static/js/tooljs/file_hash.min.js"></script>
+
+    <script type="text/javascript" src="/static/js/calculator/md5.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha1.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha3.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha224.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha256.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha384.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha512.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-sha1.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-sha224.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-md5.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/ripemd160.js"></script>
+{% endblock %}
+
+{% block tooldetail %}
+    <div class="content-tools-content-filehash ">
+        <div class="am-form-group am-form-file filehash-filearea">
+            <button type="button" class="am-btn am-btn-warning am-btn-sm">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件{不支持拖拽:)}</button>
+            <input id="upload-files" type="file" multiple>
+        </div>
+        <div class="select-box am-monospace">
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_md5" type="checkbox" value="MD5" data-am-ucheck checked>MD5
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha1" type="checkbox" value="SHA1" data-am-ucheck checked>SHA1
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha224" type="checkbox" value="SHA224" data-am-ucheck checked>SHA224
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha256" type="checkbox" value="SHA256" data-am-ucheck checked>SHA256
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha384" type="checkbox" value="SHA384" data-am-ucheck >SHA384
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha512" type="checkbox" value="SHA512" data-am-ucheck >SHA512
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha3_224" type="checkbox" value="SHA3-224" data-am-ucheck disabled>SHA3-224
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha3_256" type="checkbox" value="SHA3-256" data-am-ucheck disabled>SHA3-256
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha3_384" type="checkbox" value="SHA3-384" data-am-ucheck disabled>SHA3-384
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_sha3_512" type="checkbox" value="SHA3-512 " data-am-ucheck disabled>SHA3-512
+            </label>
+            <label class="am-checkbox-inline am-warning">
+                <input id="hash_ripemd-160" type="checkbox" value="RIPEMD-160" data-am-ucheck >RIPEMD-160
+            </label>
+        </div>
+        <hr/>
+        <div class="am-monospace"><strong>文件列表</strong>|File List</div>
+        <div id="file-list" class="am-monospace"></div>
+        <hr/>
+        <div id="table_result"></div>
+    </div>
+    <div class="content-tools-content-introduce">
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title">关于 | About| <span  data-am-popover="{theme: 'secondary sm', content: '快来喜欢我(＾∀＾)', trigger: 'hover'}" class="update_like am-icon-heart-o am-icon-sm " name="{{ tool.id }}"> {{ tool.like_count }}</span> |</h2>
+
+        </div>
+        <hr/>
+        <div class="am-kai">
+            <ol type="a">
+
+                <li>哈希值是将任意长度的二进制值映射为固定长度的较小二进制值，哈希值是一段数据唯一且极其紧凑的数值表现形式。如果散列一段数据哪怕只做微小的更改，随后的哈希都将产生不同的值。要找到散列为同一个值的两个不同的输入，在计算上是不可能的，所以数据的哈希值可以检验数据的完整性。</li>
+                <li>MD5将整个文件当作一个大文本信息，通过其不可逆的字符串变换算法，产生唯一的MD5信息摘要。，这意味着MD5值理论上有极大可能(并不绝对)是不同的，因此MD5经常用于校验字符串或者文件。</li>
+                <li>MD5的典型应用是对一段Message(字节串)产生fingerprint(指纹)，以防止被“篡改”，同时MD5还广泛用于操作系统的登陆认证和文件校验上，如Unix、各类BSD系统登录密码、游戏patch包的校验、病毒文件确认、app提审校验等诸多方面。</li>
+                <li>在边开发边学习的过程中，使用HTML5 FILE API接口在前端对上载文件进行校验，过程中没有任何和服务器的交互通信，此为保证用户校验隐私信息。</li>
+                <li>本在线工具依据的是CryptoJs的加密库实现，CryptoJS为 JavaScript 提供了各种各样的加密算法，是加密能在前端全部完成，而无需与后端进行交互，更好的保护个人数据安全。</li>
+                <li>目前工具还在不断完善中，理论上可以加密任何大小的文件，但是请不要欺负她，小心她崩溃给你看:),在其中如遇到任何BUG或建议，可以加QQ群: <strong data-am-popover="{theme: 'warning lg', content: '如果方便请加群，亲！<br>希望能给些意见(＾∀＾)', trigger: 'hover'}">288171956</strong>交流探讨。</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}

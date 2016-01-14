@@ -1,0 +1,240 @@
+{% extends "tools/toolshome.html" %}
+
+{% block css2 %}
+    <link rel="stylesheet" href="/static/css/toolcss/word_hash.css" >
+{% endblock %}
+
+{% block javascript2 %}
+    <script type="text/javascript" src="/static/js/tooljs/word_hash.min.js"></script>
+
+    <script type="text/javascript" src="/static/js/calculator/md5.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha1.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha3.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha224.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha256.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha384.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/sha512.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-md5.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-sha1.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-sha3.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-sha224.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-sha256.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-sha384.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-sha512.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/ripemd160.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/hmac-ripemd160.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/pbkdf2.js"></script>
+{% endblock %}
+
+{% block tooldetail %}
+    <div class="am-form am-g content-tools-content-wordhash am-monospace">
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="md5-input">MD5算法:一度被广泛应用于安全领域的加密算法</label>
+                <textarea class="am-form-field" rows="3" id="md5-input" placeholder="请输入文本"></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="md5" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="md5-output">Output</label>
+                <textarea class="am-form-field" rows="3" id="md5-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="sha1-input">SHA1算法:安全哈希算法</label>
+                <textarea class="am-form-field" rows="3" id="sha1-input" placeholder="请输入文本"></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="sha1" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="sha1-output">Output</label>
+                <textarea class="am-form-field" rows="3" id="sha1-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="sha224-input">SHA2算法:SHA224算法是SHA-2的四个变种之一</label>
+                <textarea class="am-form-field" rows="3" id="sha224-input" placeholder="请输入文本"></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="sha224" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="sha224-output">Output</label>
+                <textarea class="am-form-field" rows="3" id="sha224-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="sha256-input">SHA2算法:SHA256算法是SHA-2的四个变种之一</label>
+                <textarea class="am-form-field" rows="3" id="sha256-input" placeholder="请输入文本"></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="sha256" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="sha256-output">Output</label>
+                <textarea class="am-form-field" rows="3" id="sha256-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="sha384-input">SHA2算法:SHA384算法是SHA-2的四个变种之一</label>
+                <textarea class="am-form-field" rows="3" id="sha384-input" placeholder="请输入文本"></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="sha384" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="sha384-output">Output</label>
+                <textarea class="am-form-field" rows="3" id="sha384-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="sha512-input">SHA2算法:SHA512算法是SHA-2的四个变种之一</label>
+                <textarea class="am-form-field" rows="3" id="sha512-input" placeholder="请输入文本"></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="sha512" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="sha512-output">Output</label>
+                <textarea class="am-form-field" rows="3" id="sha512-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="sha3-input">SHA3算法|输出长度:</label>
+                <label class="am-radio-inline">
+                  <input type="radio" name="224" onclick="switch_radio(this)" data-am-ucheck>224
+                </label>
+                <label class="am-radio-inline">
+                  <input type="radio" name="256" onclick="switch_radio(this)" data-am-ucheck>256
+                </label>
+                <label class="am-radio-inline">
+                  <input type="radio" name="384" onclick="switch_radio(this)" data-am-ucheck>384
+                </label>
+                <label class="am-radio-inline">
+                  <input type="radio" name="512" onclick="switch_radio(this)" data-am-ucheck checked>512
+                </label>
+                <textarea class="am-form-field" rows="3" id="sha3-input" placeholder="请输入文本"></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="sha3" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="sha3-output">Output</label>
+                <textarea class="am-form-field" rows="3" id="sha3-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="hmac-input">HMAC加密:哈希算法与消息认证码结合加密</label>
+                <div class="am-form-group am-form-inline">
+                    <input type="text" class="am-form-field am-input-sm" id="hmac-h-input" placeholder="请输入认证码">
+                </div>
+                <label class="am-radio-inline">
+                    <input type="radio" name="md5" onclick="switch_radio(this)" data-am-ucheck checked>MD5
+                </label>
+                <label class="am-radio-inline">
+                    <input type="radio" name="sha1" onclick="switch_radio(this)" data-am-ucheck>SHA1
+                </label>
+                <label class="am-radio-inline">
+                  <input type="radio" name="sha256" onclick="switch_radio(this)" data-am-ucheck>SHA256
+                </label>
+                <label class="am-radio-inline">
+                    <input type="radio" name="sha512" onclick="switch_radio(this)" data-am-ucheck>SHA512
+                </label>
+                <label class="am-radio-inline">
+                    <input type="radio" name="sha3" onclick="switch_radio(this)" data-am-ucheck>SHA3
+                </label>
+                <label class="am-radio-inline">
+                    <input type="radio" name="ripemd-160" onclick="switch_radio(this)" data-am-ucheck>RIPEMD-160
+                </label>
+                <textarea class="am-form-field" rows="2" id="hmac-input" placeholder="请输入文本"></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="hmac" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="hmac-output">Output</label>
+                <textarea class="am-form-field" rows="6" id="hmac-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="ripemd-160-input">RIPEMD-160算法:一个160位加密哈希函数</label>
+                <textarea class="am-form-field" rows="3" id="ripemd-160-input" placeholder="请输入文本" ></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="ripemd-160" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="ripemd-160-output">Output</label>
+                <textarea class="am-form-field" rows="3" id="ripemd-160-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf">
+            <div class="am-form-group am-u-sm-6 am-u-md-6 am-u-lg-6 am-form-warning">
+                <label for="pbkdf2-input">PBKDF2:伪随机函数以导出密钥</label>
+                <div class="am-form-inline">
+                    <div class="am-form-group">
+                        <input type="text" class="am-form-field am-input-sm" id="pbkdf2-salt-input" placeholder="盐">
+                    </div>
+                    <div class="am-form-group">
+                        <input type="text" class="am-form-field am-input-sm" id="pbkdf2-iter-input" placeholder="迭代次数">
+                    </div>
+                    <select id="pbkdf2-size-select" data-am-selected="{btnWidth: '100%', btnSize: 'sm', btnStyle: 'warning'}">
+                        <option value="128" selected>128</option>
+                        <option value="256">256</option>
+                        <option value="512">512</option>
+                    </select>
+                </div>
+                <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+                <textarea class="am-form-field" rows="2" id="pbkdf2-input" placeholder="请输入文本" ></textarea>
+            </div>
+            <div class="am-form-group am-u-sm-1 am-u-md-1 am-u-lg-1 starthash">
+                <button type="button" class="am-btn am-btn-warning am-round" name="pbkdf2" onclick="goencrypt(this.name)">GO</button>
+            </div>
+            <div class="am-form-group am-u-sm-2 am-u-md-5 am-u-lg-5 am-form-warning">
+                <label for="pbkdf2-output">Output</label>
+                <textarea class="am-form-field" rows="5" id="pbkdf2-output" placeholder="没输出呢:)" readonly></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="content-tools-content-introduce">
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title">关于 | About| <span  data-am-popover="{theme: 'warning sm', content: '快来喜欢我(＾∀＾)', trigger: 'hover'}" class="update_like am-icon-heart-o am-icon-sm " name="{{ tool.id }}"> {{ tool.like_count }}</span> |</h2>
+        </div>
+        <hr/>
+        <div class="am-kai">
+            <ol type="a">
+
+                <li>哈希值是将任意长度的二进制值映射为固定长度的较小二进制值，哈希值是一段数据唯一且极其紧凑的数值表现形式。如果散列一段数据哪怕只做微小的更改，随后的哈希都将产生不同的值。要找到散列为同一个值的两个不同的输入，在计算上是不可能的，所以数据的哈希值可以检验数据的完整性。</li>
+                <li>MD5将整个文件当作一个大文本信息，通过其不可逆的字符串变换算法，产生唯一的MD5信息摘要。，这意味着MD5值理论上有极大可能(并不绝对)是不同的，因此MD5经常用于校验字符串或者文件。</li>
+                <li>SHA-256和SHA-512是很新的杂凑函数，它们分别使用了不同的偏移量，或用不同的常数，然而，实际上二者结构是相同的，只在循环执行的次数上有所差异。SHA-224以及SHA-384则是SHA-256和SHA-512二种杂凑函数的截短版，利用不同的初始值做计算。</li>
+                <li>SHA1在许多安全协议中广为使用，包括TLS和SSL、PGP、SSH、S/MIME和IPsec，曾被视为是MD5的后继者。</li>
+                <li>SHA3就是Keccak算法，由意法半导体的Guido Bertoni、Joan Daemen（AES算法合作者）和Gilles Van Assche，以及恩智浦半导体的Michaël Peeters联合开发，Keccak的优势在于它与SHA-2设计上存在极大差别，适用于SHA-2的攻击方法将不能作用于Keccak。</li>
+                <li>RIPEMD-160 是一个160字节加密哈希函数,是Hans Dobbertin等3人在md4,md5的基础上，于1996年提出来的,用于替代128位哈希函数 MD4、MD5 和 RIPEMD。</li>
+                <li>HMAC是密钥相关的哈希运算消息认证码（Hash-based Message Authentication Code）,HMAC运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出。</li>
+                <li>HMAC算法更象是一种密钥加密算法，它引入了密钥，其安全性已经不完全依赖于所使用的HASH算法，安全性相对而且更好。</li>
+                <li>PBKDF2(Password-Based Key Derivation Function)，PBKDF2简单而言就是将salted hash进行多次重复计算，这个次数是可选择的。如果计算一次所需要的时间是1微秒，那么计算1百万次就需要1秒钟。假如攻击一个密码所需的rainbow table有1千万条，建立所对应的rainbow table所需要的时间就是115天。这个代价足以让大部分的攻击者忘而生畏。</li>
+                <li>本在线工具依据的是CryptoJs的加密库实现，CryptoJS为 JavaScript 提供了各种各样的加密算法，是加密能在前端全部完成，而无需与后端进行交互，更好的保护个人数据安全。</li>
+                <li>目前工具还在不断完善中，理论上可以加密任何大小的文件，但是请不要欺负她，小心她崩溃给你看:),在其中如遇到任何BUG或建议，可以加QQ群: <strong data-am-popover="{theme: 'warning lg', content: '如果方便请加群，亲！<br>希望能给些意见(＾∀＾)', trigger: 'hover'}">288171956</strong>交流探讨。</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}

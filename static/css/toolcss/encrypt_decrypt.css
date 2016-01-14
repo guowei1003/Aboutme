@@ -1,0 +1,11 @@
+
+
+.content-tools-content-wordswitch-cell{
+    padding: 10px;
+    /*height: 500px;*/
+    /*border: 1px solid grey;*/
+}
+
+.content-tools-content-wordswitch-cell .ende button{
+    width: 140px;
+}

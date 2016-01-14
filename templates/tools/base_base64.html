@@ -1,0 +1,81 @@
+{% extends "tools/toolshome.html" %}
+
+{% block css2 %}
+    <link rel="stylesheet" href="/static/css/toolcss/base_base64.css" >
+{% endblock %}
+
+{% block javascript2 %}
+    <script type="text/javascript" src="/static/js/tooljs/base-base64.min.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/base64.js"></script>
+
+{% endblock %}
+
+{% block tooldetail %}
+    <div class="am-form am-g content-tools-content-wordhash am-monospace">
+        <div class="am-g">
+            <div class="am-u-sm-5 am-u-md-5 am-u-lg-5 content-tools-content-base64-cell">
+            <div class="am-form-group am-form-warning">
+                <textarea class="am-form-field am-radius" rows="8" id="text-input" placeholder="解码后数据">http://www.cc8789.net</textarea>
+            </div>
+            </div>
+            <div id="type-method" class="am-form-group am-u-sm-2 am-u-md-2 am-u-lg-2 am-form-warning content-tools-content-base64-cell">
+                <label>Base64文字编码</label>
+                <hr>
+                <div class="am-form-group ende">
+                    <button type="button" class="am-btn am-btn-warning am-round" onclick="encode_tool()">编码</button>
+                </div>
+                <div class="am-form-group ende">
+                    <button type="button" class="am-btn am-btn-warning am-round" onclick="decode_tool()">解码</button>
+                </div>
+            </div>
+            <div class="am-u-sm-5 am-u-md-5 am-u-lg-5 content-tools-content-base64-cell">
+                <div class="am-form-group am-form-warning">
+                    <textarea class="am-form-field am-radius" rows="8" id="text-output" placeholder="编码后数据"></textarea>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div  class="am-g">
+            <div class="am-u-sm-4 am-u-md-4 am-u-lg-4 content-tools-content-base64-cell">
+                <label>Base64图像编码(<=2M)</label>
+                <div class="am-form-group am-form-file base-upfile">
+                    <button type="button" class="am-btn am-btn-warning am-btn-sm">
+                    <i class="am-icon-cloud-upload"></i> 选择图片(可拖)</button>
+                    <input id="image-input" type="file">
+                </div>
+                <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+
+                <label>图片展示:</label>
+                <div id="pre-img">
+                    <img src="/static/images/expression_4.png" alt="图像预览" width="100%" height="100%">
+                </div>
+            </div>
+            <div class="am-u-sm-8 am-u-md-8 am-u-lg-8 content-tools-content-base64-cell">
+                <div class="am-form-group am-form-warning">
+                    <textarea class="am-form-field am-radius" rows="25" id="img-output" placeholder="图像编码"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-tools-content-introduce">
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title">关于 | About| <span  data-am-popover="{theme: 'warning sm', content: '快来喜欢我(＾∀＾)', trigger: 'hover'}" class="update_like am-icon-heart-o am-icon-sm " name="{{ tool.id }}"> {{ tool.like_count }}</span> |</h2>
+        </div>
+        <hr/>
+        <div class="am-kai">
+            <ol type="a">
+
+                <li>Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一。</li>
+                <li>Base64编码经常用于在HTTP环境下传递较长的标识信息，采用Base64编码不仅比较简短，同时也具有不可读性，即所编码的数据不会被人用肉眼所直接看到。</li>
+                <li>base64的编码都是按字符串长度，以每3个8bit的字符为一组，</li>
+                <li>然后针对每组，首先获取每个字符的ASCII编码，</li>
+                <li>然后将ASCII编码转换成8bit的二进制，得到一组3*8=24bit的字节，</li>
+                <li>然后再将这24bit划分为4个6bit的字节，并在每个6bit的字节前面都填两个高位0，得到4个8bit的字节，</li>
+                <li>然后将这4个8bit的字节转换成10进制，对照Base64编码表 （下表），得到对应编码后的字符。</li>
+                <li>图片大部分都是可以转换成base64编码的data：image，很有效的可以将canvas保存为img。</li>
+                <li>本工具的图片转Base64实现是基于HTML5的FILE api实现，未进行前后端数据传输。所以速度不受网络环境影响。</li>
+                <li>目前工具还在不断完善中，理论上可以加密任何大小的文件，但是请不要欺负她，小心她崩溃给你看:),在其中如遇到任何BUG或建议，可以加QQ群: <strong data-am-popover="{theme: 'warning lg', content: '如果方便请加群，亲！<br>希望能给些意见(＾∀＾)', trigger: 'hover'}">288171956</strong>交流探讨。</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}

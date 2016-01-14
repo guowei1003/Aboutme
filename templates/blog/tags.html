@@ -1,0 +1,45 @@
+{% extends "common/base.html" %}
+
+{% block css1 %}
+    <link rel="stylesheet" href="/static/css/tags.css" >
+{% endblock %}
+
+{% block javascript1 %}
+    <script type="text/javascript" src="/static/js/tags.js" ></script>
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+    <div class="header-title am-animation-slide-top am-animation-delay-1">各抒各言</div>
+    <div class="header-subtitle am-animation-slide-left am-animation-delay-2">理智要比心灵为高,思想要比感情可靠</div>
+    </div>
+    <div class="container">
+        {% for tag,count in tags_list reversed%}
+            <div class="tags-cell">
+                <div class="tags-cell-title">
+                    <a href="#" onclick="detail_tags(this)" data-am-modal="{target: '#tags-popup'}">{{ tag }}</a>
+                </div>
+                <hr class="am-article-divider"/>
+                <hr class="am-article-divider"/>
+                <div class="tags-cell-bd">
+                    <span>使用数量：{{ count }}</span>
+                    <span><a href="/blog/search/?tag={{ tag }}">进入>>></a></span>
+                </div>
+            </div>
+        {% endfor %}
+{#        调用模态框#}
+    <div class="am-popup" id="tags-popup">
+        <div class="am-popup-inner">
+            <div class="am-popup-hd">
+            <h4 class="am-popup-title">标签介绍</h4>
+            <span data-am-modal-close class="am-close">&times;</span>
+            </div>
+            <div class="am-popup-bd">
+                木有介绍
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+

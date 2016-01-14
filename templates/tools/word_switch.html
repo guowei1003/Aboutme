@@ -1,0 +1,41 @@
+{% extends "tools/toolshome.html" %}
+
+{% block css2 %}
+    <link rel="stylesheet" href="/static/css/toolcss/word_switch.css" >
+{% endblock %}
+
+{% block javascript2 %}
+    <script type="text/javascript" src="/static/js/tooljs/word_switch.min.js"></script>
+    <script type="text/javascript" src="/static/js/tooljs/jQuery.Hz2Py-min.js"></script>
+    <script type="text/javascript" src="/static/js/tooljs/pmj.js"></script>
+{% endblock %}
+
+{% block tooldetail %}
+    <div class="am-form content-tools-content-wordswitch">
+        <div class="am-form-group">
+            <textarea class="" rows="5" id="text-input" placeholder="请输入文本内容"></textarea>
+        </div>
+        <button type="button" class="am-btn am-btn-secondary am-round" name="zh-unicode">中文转unicode</button>
+        <button type="button" class="am-btn am-btn-secondary am-round" name="unicode-zh"  title="若存在'\\u'则会将'\\u'解析为'\u',需再次解析" >unicode转中文</button>
+        <button type="button" class="am-btn am-btn-secondary am-round" name="zh-pinyin">中文转拼音</button>
+        <button type="button" class="am-btn am-btn-secondary am-round" name="zh-pinyin-beta">中文转拼音(带音节)</button>
+        <button type="button" class="am-btn am-btn-danger am-round" name="text-reset">重置</button>
+        <div class="am-form-group">
+            <br/>
+            <textarea class="" rows="3" id="text-output" placeholder="这里显示输出内容"></textarea>
+        </div>
+    </div>
+    <div class="content-tools-content-introduce">
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title">  关于 | About | <span  data-am-popover="{theme: 'secondary sm', content: '快来喜欢我(＾∀＾)', trigger: 'hover'}" class="update_like am-icon-heart-o am-icon-sm " name="{{ tool.id }}"> {{ tool.like_count }}</span> |</h2>
+        </div>
+        <hr/>
+        <div class="am-kai">
+            <ol type="a">
+                <li>在计算机科学领域中，Unicode（统一码、万国码、单一码、标准万国码）是业界的一种标准，它可以使电脑得以呈现世界上数十种文字的系统。</li>
+                <li>中文转拼音(测试版)字库存储数量可能未达到全部汉字的收录，仅作参考，功能适用浏览器：IE9+、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗。</li>
+                <li>目前工具还在不断完善中，欢迎给作者提出意见和建议,在其中如遇到任何BUG或建议，可以加QQ群: <strong data-am-popover="{theme: 'primary lg', content: '如果方便请加群，亲！<br>希望能给些意见(＾∀＾)', trigger: 'hover'}">288171956</strong>交流探讨。</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}

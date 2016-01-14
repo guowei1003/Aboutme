@@ -1,0 +1,69 @@
+{% extends "blog/blog.html" %}
+{% block content-cneter-left %}
+    <div class="am-u-sm-12 am-u-md-8 am-u-lg-9 content-cneter-left">
+    <div class="content-cneter-left-article">
+        {% if cur_blog.cornerite == "J" %}
+            <span class="cornerite-j"></span>
+        {% elif cur_blog.cornerite == "H" %}
+            <span class="cornerite-h"></span>
+        {% elif cur_blog.cornerite == "C" %}
+            <span class="cornerite-c"></span>
+        {% else %}
+            <span class="cornerite"></span>
+        {% endif %}
+        <article class="am-article">
+            <div class="am-article-hd">
+                <h1 class="am-article-title" >{{ cur_blog.title|default:"none" }}</h1>
+                <p class="am-g am-article-meta">
+                    <span class="am-u-sm-6 am-u-md-6 am-u-lg-6">By <a href="/space/{{ cur_blog.author.author_name|default:"none" }}">{{ cur_blog.author.author_nickname|default:"none" }}</a></span>
+                    <span class="am-u-sm-6 am-u-md-6 am-u-lg-6" style="text-align: right">发表于<a href="/blog/search/?datetime={{ cur_blog.create_time|date:"Y-m-d"|default:"none" }}">{{ cur_blog.create_time|timesince|default:"none" }}</a>前</span>
+{#                    <span class="am-u-sm-3 am-u-md-3 am-u-lg-6 ">发表地点： <a href="/blog/local/{{ cur_blog.location|default:"none" }}">{{ cur_blog.location|default:"none" }}</a></span>#}
+                </p>
+            </div>
+            <div class="am-article-bd  am-article-article">
+                {{ cur_blog.article_lead|safe|default:"哎呀，文章跑哪去啦？" }}
+            </div>
+            {% if cur_blog.quote != "原创" %}
+                <div class="am-article-bd">
+                    <p class="am-article-lead">引自: <a limit="50" href="{{ cur_blog.quote }}" target="_blank">{{ cur_blog.quote }}</a></p>
+                </div>
+            {% else %}
+                <div class="am-article-bd">
+                    <p class="am-article-lead">文章系原创,转载请注明.</p>
+                </div>
+            {% endif %}
+
+            <div class="am-article-yw am-g">
+                <span class="am-u-sm-6 am-u-md-6 am-u-lg-6" title="分类标签">
+                    <img src="/static/images/tags.png" alt="标签" width="20px" height="20px"/>
+                    {% for tag in cur_blog.article_tags.all %}
+                    <span><a href="/blog/search/?tag={{ tag.tag }}" target="_blank">{{ tag.tag }}</a> </span>
+                    {% endfor %}
+                </span>
+                <span class="am-u-sm-6 am-u-md-6 am-u-lg-6" style="text-align: right">
+                    <span title="喜欢一下"><img src="/static/images/article_like_sm.png" alt="喜欢" width="20px" height="20px"/> <span id="{{ cur_blog.id }}" class="up-likes" style="cursor:pointer;">{{ cur_blog.article_likes }}</span></span>
+{#                                <span title="收藏本文的人数"><img src="/static/images/article_collect_sm.png" alt="收藏本文" width="15px" height="15px"/> <span>{{ cur_blog.article_collects }}</span></span>#}
+                </span>
+            </div>
+            <hr class="am-article-divider"/>
+        </article>
+    </div>
+{#    <div class="content-cneter-left-hot">#}
+{#        <h6>热门文章列表：</h6>#}
+{#        <ul  class="ds-top-threads" data-range="weekly" data-num-items="5"></ul>#}
+{#    </div>#}
+    <div class="content-cneter-left-comments">
+    {#                多说分享#}
+            <div class="ds-share" data-thread-key="{{ cur_blog.id }}" data-title="{{ cur_blog.title }}" data-images="" data-content="{{ cur_blog.title }}" data-url="{{ blog_web_url }}">
+                <div class="ds-share-aside-left">
+                    <div class="ds-share-aside-inner"></div>
+                    <div class="ds-share-aside-toggle">分享一下</div>
+                </div>
+            </div>
+{#                多说分享#}
+        <!-- 多说评论框 start -->
+            <div class="ds-thread" data-thread-key="{{ cur_blog.id }}" data-title="{{ cur_blog.title }}" data-url="{{ blog_web_url }}"></div>
+        <!-- 多说评论框 end -->
+    </div>
+</div>
+{% endblock %}

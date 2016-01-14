@@ -1,0 +1,83 @@
+{% extends "tools/toolshome.html" %}
+
+{% block css2 %}
+    <link rel="stylesheet" href="/static/css/toolcss/encrypt_decrypt.css" >
+{% endblock %}
+
+{% block javascript2 %}
+    <script type="text/javascript" src="/static/js/tooljs/encrypt_decrypt.min.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/rabbit.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/rabbit-legacy.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/aes.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/rc4.js"></script>
+    <script type="text/javascript" src="/static/js/calculator/tripledes.js"></script>
+{% endblock %}
+
+{% block tooldetail %}
+    <div class="am-form content-tools-content-wordswitch">
+        <div class="am-g">
+            <div class="am-u-sm-5 am-u-md-5 am-u-lg-5 content-tools-content-wordswitch-cell">
+            <div class="am-form-group am-form-warning">
+                <textarea class="am-form-field am-radius" rows="25" id="text-input" placeholder="解密数据"></textarea>
+            </div>
+            </div>
+            <div id="type-method" class="am-form-group am-u-sm-2 am-u-md-2 am-u-lg-2 am-form-warning content-tools-content-wordswitch-cell">
+                <label>选择加密方法</label>
+                <label class="am-radio">
+                  <input type="radio" name="aes" onclick="switch_radio(this)" data-am-ucheck checked>AES
+                </label>
+                <label class="am-radio">
+                  <input type="radio" name="des" onclick="switch_radio(this)" data-am-ucheck>DES
+                </label>
+                <label class="am-radio">
+                  <input type="radio" name="triple-des" onclick="switch_radio(this)" data-am-ucheck>Triple DES
+                </label>
+                <label class="am-radio">
+                  <input type="radio" name="rabbit" onclick="switch_radio(this)" data-am-ucheck>Rabbit
+                </label>
+                <label class="am-radio">
+                  <input type="radio" name="rabbitlegacy" onclick="switch_radio(this)" data-am-ucheck>Rabbit Legacy
+                </label>
+                <label class="am-radio">
+                  <input type="radio" name="rc4" onclick="switch_radio(this)" data-am-ucheck>RC4
+                </label>
+                <label class="am-radio">
+                  <input type="radio" name="rc4drop" onclick="switch_radio(this)" data-am-ucheck>RC4 Drop
+                </label>
+                <hr>
+                <div class="am-form-group">
+                    <label>输入密钥</label>
+                    <input type="text" class="am-form-field am-input-sm" id="key-word-input" placeholder="密钥">
+                </div>
+                <hr>
+                <div class="am-form-group ende">
+                    <button type="button" class="am-btn am-btn-warning am-round" onclick="encrypt_tool()">加密</button>
+                </div>
+                <div class="am-form-group ende">
+                    <button type="button" class="am-btn am-btn-warning am-round" onclick="decrypt_tool()">解密</button>
+                </div>
+            </div>
+            <div class="am-u-sm-5 am-u-md-5 am-u-lg-5 content-tools-content-wordswitch-cell">
+            <div class="am-form-group am-form-warning">
+                <textarea class="am-form-field am-radius" rows="25" id="text-output" placeholder="加密数据"></textarea>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-tools-content-introduce">
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title">  关于 | About | <span  data-am-popover="{theme: 'warning sm', content: '快来喜欢我(＾∀＾)', trigger: 'hover'}" class="update_like am-icon-heart-o am-icon-sm " name="{{ tool.id }}"> {{ tool.like_count }}</span> |</h2>
+        </div>
+        <hr/>
+        <div class="am-kai">
+            <ol type="a">
+                <li>DES全称为Data Encryption Standard，即数据加密标准，是一种使用密钥加密的块算法，1976年被美国联邦政府的国家标准局确定为联邦资料处理标准（FIPS），随后在国际上广泛流传开来。</li>
+                <li>高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的DES，已经被多方分析且广为全世界所使用。</li>
+                <li>RC4加密算法是大名鼎鼎的RSA三人组中的头号人物Ronald Rivest在1987年设计的密钥长度可变的流加密算法簇。之所以称其为簇，是由于其核心部分的S-box长度可为任意，但一般为256字节。该算法的速度可以达到DES加密的10倍左右，且具有很高级别的非线性。</li>
+                <li>Rabbit是E-STREAM工程最终胜选的流密码算法之一,她是由Cryptico公司（http://www.cryptico.com）设计的，密钥长度128位，最大加密消息长度为264 Bytes，即16 TB，若消息超过该长度，则需要更换密钥对剩下的消息进行处理。它是目前安全性较高，加/解密速度比较高效的流密码之一</li>
+                <li>本在线工具依据的是CryptoJs的加密库实现，CryptoJS为 JavaScript 提供了各种各样的加密算法，是加密能在前端全部完成，而无需与后端进行交互，更好的保护个人数据安全。</li>
+                <li>目前工具还在不断完善中，欢迎给作者提出意见和建议,在其中如遇到任何BUG或建议，可以加QQ群: <strong data-am-popover="{theme: 'warning lg', content: '如果方便请加群，亲！<br>希望能给些意见(＾∀＾)', trigger: 'hover'}">288171956</strong>交流探讨。</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}

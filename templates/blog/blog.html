@@ -1,0 +1,168 @@
+{% extends "common/base.html" %}
+
+{% block css1 %}
+    <link rel="stylesheet" href="/static/css/blog.css" >
+{% endblock %}
+
+{% block javascript1 %}
+    <script type="text/javascript" src="/static/js/tag.js" ></script>
+    <script type="text/javascript" src="/static/js/blog.js" ></script>
+{#    <script type="text/javascript" src="/static/js/three.min.js"></script>#}
+{#    <script type="text/javascript" src="/static/js/Detector.js"></script>#}
+{% endblock %}
+{#注释部分为云层动态效果，需要时，将注释解开，同时还要将css中的注释解开#}
+{#{% block javascript2 %}#}
+{#    <script id="vs" type="x-shader/x-vertex">#}
+{#        varying vec2 vUv;#}
+{#        void main() {#}
+{#            vUv = uv;#}
+{#            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );#}
+{#        }#}
+{#    </script>#}
+{#    <script id="fs" type="x-shader/x-fragment">#}
+{##}
+{#        uniform sampler2D map;#}
+{##}
+{#        uniform vec3 fogColor;#}
+{#        uniform float fogNear;#}
+{#        uniform float fogFar;#}
+{##}
+{#        varying vec2 vUv;#}
+{##}
+{#        void main() {#}
+{##}
+{#            float depth = gl_FragCoord.z / gl_FragCoord.w;#}
+{#            float fogFactor = smoothstep( fogNear, fogFar, depth );#}
+{##}
+{#            gl_FragColor = texture2D( map, vUv );#}
+{#            gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );#}
+{#            gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );#}
+{##}
+{#        }#}
+{##}
+{#    </script>#}
+{#    <script type="text/javascript" src="/static/js/banner_cloud.js"></script>#}
+{#{% endblock %}#}
+
+{% block content %}
+{#    <div id="cloud-nice"></div>#}
+    <div class="header">
+        <div class="am-show-lg-up header-show">
+        <div class="header-title am-animation-slide-top am-animation-delay">寄兴寓情</div>
+        <div class="header-subtitle am-animation-slide-left am-animation-delay">或情寄所托，放浪形骸之外</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="am-g am-g-fixed content-center">
+            {% block content-cneter-left %}
+                <div class="am-u-sm-12 am-u-md-8 am-u-lg-9 content-cneter-left" id="content-cneter-left">
+                {% if DataBlogAritcles %}
+                    {% for article in DataBlogAritcles %}
+                    <div class="content-cneter-left-cell" data-am-scrollspy="{animation: 'scale-up', repeat: false}">
+                    {% if article.cornerite == "J" %}
+                        <span class="cornerite-j"></span>
+                    {% elif article.cornerite == "H" %}
+                        <span class="cornerite-h"></span>
+                    {% elif article.cornerite == "C" %}
+                        <span class="cornerite-c"></span>
+                    {% else %}
+                        <span class="cornerite"></span>
+                    {% endif %}
+                        <article class="am-article">
+                            <span id="article-id" class="am-hide">{{ article.id }}</span>
+                            <div class="am-article-hd">
+                                <h1 class="am-article-title" ><a limit="22" href="/blog/article/{{ article.id }}">{{ article.title|default:"none" }}</a></h1>
+    {#                            <p class="am-g am-article-meta">#}
+    {#                                <span class="am-u-sm-2 am-u-md-2 am-u-lg-4">By <a href="/space/{{ article.author.author_name|default:"none" }}">{{ article.author.author_nickname|default:"none" }}</a></span>　#}
+    {#                                <span class="am-u-sm-3 am-u-md-3 am-u-lg-4">发表时间：  <a href="/blog/datetime/?datetime={{ article.create_time|date:"Y-m-d"|default:"none" }}">{{ article.create_time|date:"Y年m月d日 h:m:s"|default:"none" }}</a></span>　#}
+    {#                                <span class="am-u-sm-3 am-u-md-3 am-u-lg-2 " style="text-align: right">发表地点： <a href="/blog/local/{{ article.local|default:"none" }}">{{ article.local|default:"none" }}</a></span>#}
+    {#                            </p>#}
+                            </div>
+                            <hr class="am-article-divider"/>
+    {#                        <div class="am-article-bd">#}
+    {#                            <p class="am-article-lead">{{ article.article_lead|default:"哎呀，文章跑哪去啦？" }}</p>#}
+    {#                        </div>#}
+                            <div class="am-article-yw am-g">
+                                <span class="am-u-sm-3 am-u-md-3 am-u-lg-3"  title="作者是{{ article.author.author_nickname|default:"none" }}">
+    {#                                <span title="喜欢本文的人数" style="text-align: left"><img src="/static/images/article_like_sm.png" alt="喜欢" width="15px" height="15px"/> <span>{{ article.article_likes }}</span></span>#}
+    {#                                <span title="收藏本文的人数"><img src="/static/images/article_collect_sm.png" alt="收藏本文" width="15px" height="15px"/> <span>{{ article.article_collects }}</span></span>#}
+                                    <span class="content-cneter-left-cell-author">By <a limit="4" href="/space/{{ article.author.author_name|default:"none" }}">{{ article.author.author_nickname|default:"none" }}</a></span>
+                                </span>
+                                <span class="am-u-sm-2 am-u-md-2 am-u-lg-2" title="所属分类">
+                                    <span><a limit="10" href="/blog/search/?class={{ article.article_class|default:"none" }}">{{ article.article_class|default:"none" }}</a></span>
+                                </span>
+                                <span class="am-u-sm-3 am-u-md-3 am-u-lg-3" title="发表时间">
+                                    <span ><a href="/blog/search/?datetime={{ article.create_time|date:"Y-m-d"|default:"none" }}">{{ article.create_time|date:"Y-m-d h:m"|default:"none" }}</a></span>　
+                                </span>
+                                <span class="am-u-sm-4 am-u-md-4 am-u-lg-4" title="标签">
+                                    <img src="/static/images/tags.png" alt="标签" width="15px" height="15px"/>
+                                    {% for tag in article.article_tags.all %}
+                                    <span><a href="/blog/search/?tag={{ tag.tag }}" target="_blank">{{ tag.tag }}</a> </span>
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                    <div class="load-more">
+                        <button type="button" class="am-btn am-btn-warning am-round btn-loading-more" data-am-loading="{loadingText: '努力获取新文章...o(≧v≦)o~~好棒', resetText: '再获取一次...哼(ˉ(∞)ˉ)唧'}">客官还要其他的文章不？咕~~(╯﹏╰)b</button>
+                        <div class="am-alert am-hide"  data-am-alert>
+{#                            <button type="button" class="am-close">&times;</button>#}
+                            <div class="alert-text"></div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="content-cneter-left-cell">木有数据！</div>
+                    <img src="/static/images/no_data.png" alt="猫咪哭泣"/>
+                {% endif %}
+                </div>
+            {% endblock %}
+            {% block  content-center-right%}
+                <div class="am-u-sm-12 am-u-md-4 am-u-lg-3 content-center-right am-show-sm-up">
+                    <div class="content-center-right-tags">
+                        {% for tag in AllTags %}
+                            <a limit="10" href="/blog/search/?tag={{ tag }}">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    <hr/>
+                    {% block content-center-right-class %}
+                        <div class="content-center-right-class">
+                            <h6>博文分类:</h6>
+                            <ul>
+                                {% for key,value in ClassList.items %}
+                                    <li title="{{ key }}"><a href="/blog/search/?class={{ key }}">{{ key|truncatechars:"10" }} ({{ value }})</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <hr/>
+                    {% endblock %}
+                    <article class="am-article am-kai">
+                        <div class="am-article-hd">
+                            <h3 class="am-article-title">介绍(关于)</h3>
+                            <p class="am-article-meta">作者：曹国伟 | 一个Python程序开发者</p>
+                        </div>
+                        <hr/>
+                        <p class="am-article-bd">
+                            　对于一名从事多年Python开发的开发者来说，亲手创建一个自己的网站是件让人欣喜的是事情。
+                            体验过挫折和坎坷，经历过成功与失败，使得我能够以更加成熟的性格和更加理性的头脑来面
+                            对未来的挑战。<br>
+                            　年轻是我最大的资本，在年轻的季节我甘愿吃苦受累，只愿通过自己富有激情、积极
+                            主动的努力实现自身价值，证明自己。<br>
+                            　本站是设计之初定为是一个博客，后来又再次基础思路上做了很多改动，就当做是自己一次实验吧。
+                        </p>
+                    </article>
+                    <hr/>
+                    <div class="content-center-right-aboutme">
+                        <h3>关注我：</h3>
+                        <a href="http://weibo.com/u/1252289521" class="am-icon-btn am-icon-weibo" target="_blank"></a>
+                        <a href="https://github.com/guowei1003" class="am-icon-btn am-icon-github" target="_blank"></a>
+                        <a href="http://wpa.qq.com/msgrd?v=3&uin=343557432&site=qq&menu=yes" class="am-icon-btn am-icon-qq"></a>
+                        <a href="weixin://contacts/profile/guowei1003" class="am-icon-btn am-icon-weixin"></a>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+

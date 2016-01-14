@@ -1,0 +1,60 @@
+{% extends "common/base.html" %}
+
+{% block css1 %}
+    <link rel="stylesheet" href="/static/css/navigation.css" >
+{% endblock %}
+
+{% block javascript1 %}
+    <script type="text/javascript" src="/static/js/navigation.js" ></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="content-top"></div>
+        <div class="content-add">
+            <form class="am-form" action="/nav/navsite_addsiteinfos/" method="post">
+                <fieldset>
+                    <legend>
+                        新增加网站
+                        {% if msg == "0" %}
+                            <span class="am-icon-check">添加成功</span>
+                        {% elif not msg %}
+                            <span class="am-icon-barcode"></span>
+                        {% else %}
+                            <span class="am-icon-close">添加失败:{{ msg }}</span>
+                        {% endif %}
+                    </legend>
+
+                <div class="am-form-group">
+                    <label for="site_name">网站名</label>
+                    <input type="text" class="am-form-field am-radius" id="site_name" name ="site_name" placeholder="请输入网站名">
+                    <label for="site_url">网址</label>
+                    <input type="text" class="" id="site_url" name="site_url" placeholder="输入网站|请带(http://)">
+
+                    <label for="site_class">分类</label><br>
+                    <select id="site_class" name="site_class"  data-am-selected="{maxHeight: 200,btnWidth: 1000, btnSize: 'sm', btnStyle: 'secondary'}">
+                        {% for class in site_class_mysql %}
+                            <option value="{{ class.id }}">{{ class.class_name_cn }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <label for="site_group">分组</label><br>
+                    <select id="site_group" name="site_group"  data-am-selected="{maxHeight: 200,btnWidth: '1000px', btnSize: 'sm', btnStyle: 'success'}">
+                        {% for group in site_group_mysql %}
+                            <option value="{{ group.id }}">{{ group.group_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label class="am-checkbox am-secondary">
+                        <input type="checkbox"  name="site_onhome" value="1" data-am-ucheck>
+                        是否显示在首页
+                    </label>
+                    <label for="site_describe">网站描述</label>
+                    <textarea class="" rows="5" id="site_describe" name="site_describe"></textarea>
+                    </div>
+
+                    <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}

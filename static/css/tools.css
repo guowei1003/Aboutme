@@ -1,0 +1,98 @@
+/*工具之家级联样式表*/
+
+.header{
+    height: 200px;
+    padding-top: 100px;
+    /*padding-left: 350px;*/
+    /*height: 200px;*/
+    /*background-color: #CCCCCC;*/
+    /*background-image: url("/static/images/top_pic2.png");*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: 70% top;*/
+    /*background-size: auto 100%;*/
+    background: url("/static/images/hd_bg.jpg") no-repeat center ;
+    background-size: 100% 100%;
+
+}
+.header-show{
+    margin: auto;
+    max-width: 1000px;
+}
+
+.header-title{
+    font-family: "微软雅黑", "MicrosoftYahei", "宋体", "Arial";
+    font-size: 3.3rem;
+    text-shadow: 0 0 4px #0e8fd1;
+
+}
+.header-subtitle{
+    font-family: Monaco, Menlo, Consolas, "Courier New", "FontAwesome", monospace;
+    font-size: 1.5rem;
+    text-shadow: 0 0 4px #0e8fd1;
+}
+
+* + .am-article-divider {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.container{
+    margin: auto;
+    background: url("/static/images/tools_bd_bg.jpg") repeat left center ;
+}
+
+
+.content-tools-menu{
+    text-align: center;
+}
+.content-tools-menu .am-btn-tools {
+    background-color: #f4f4db;
+    border-color: #cbcbcb;
+    color: #127fd0;
+    margin-bottom: 5px;
+    /*border-radius: 0 0 10px 10px;*/
+}
+
+.content-tools-content{
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #acacac;
+    max-width: 1000px;
+    font-family: "Droid Serif",Georgia,"Times New Roman",STHeiti,serif;
+    -webkit-box-shadow:  0 0 5px #555555;
+    -moz-box-shadow:  0 0 5px  #555555;
+    box-shadow:  0 0 5px  #555555;
+    border-radius: 5px;
+    background-color: beige;
+}
+
+.content-tools-comment{
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    -webkit-box-shadow: inset 0 0 5px #555555;
+    -moz-box-shadow: inset 0 0 5px  #555555;
+    box-shadow: inset 0 0 5px  #555555;
+    border-radius: 5px;
+}
+
+.update_like{
+    cursor:pointer;
+}
+
+
+.content-tools-sitemap-show ul{
+    margin: 0;
+}
+.content-tools-sitemap-show li{
+    display: inline-block;
+}
+
+.content-tools-list-red{
+    color: #ff0000;
+}
+.content-tools-list-blue{
+    color: #1280d1;
+}
+.content-tools-list-black{
+    color: #000000;
+}

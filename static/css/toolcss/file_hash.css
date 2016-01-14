@@ -1,0 +1,21 @@
+
+
+.content-tools-content-filehash{
+    border: 1px #dddddd solid;
+    border-radius: 10px;
+    padding: 10px;
+}
+.filehash-filearea{
+    padding: 10px;
+    text-align: center;
+    height: 60px;
+    background-color: #f27b1d;
+    vertical-align: middle;
+    border: 3px #cbcbcb solid;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.am-checkbox-inline+.am-checkbox-inline{
+    margin-left: 0;
+}

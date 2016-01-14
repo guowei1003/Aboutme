@@ -1,0 +1,110 @@
+{% extends "blog/blog.html" %}
+
+{% block css2 %}
+    <link rel="stylesheet" type="text/css" href="/UE/third-party/SyntaxHighlighter/shCoreDefault.css">
+{% endblock %}
+
+{% block javascript2 %}
+<script type="text/javascript" src="/UE/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript" charset="utf-8" src="/UE/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/UE/ueditor.all.js"></script>
+{#<script type="text/javascript" charset="utf-8" src="/UE/ueditor.all.min.js"></script>#}
+<script type="text/javascript" charset="utf-8" src="/UE/ueditor.parse.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/UE/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="/UE/lang/en/en.js"></script>
+
+<script type="text/javascript">
+    var ue = UE.getEditor('editor');
+    SyntaxHighlighter.all();
+</script>
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+    <div class="header-title am-animation-slide-top am-animation-delay-1">博文撰写</div>
+    <div class="header-subtitle am-animation-slide-left am-animation-delay-2">By 天向流云</div>
+    </div>
+    <div class="container">
+        <div class="am-g am-g-fixed content-center">
+            {% block content-cneter-left %}
+                <div class="am-u-sm-12 am-u-md-8 am-u-lg-9 content-cneter-left">
+                    <div class="content-center-write">
+                        <div class="content-center-write-title">
+                            <input class="am-form-field am-radius" type="text" placeholder="请输入文章标题^_^" id="blog_title" name="blog_title"  maxlength="50"/>
+                        </div>
+                        <script id="editor" type="text/plain" style="width:auto;height:500px;"></script>
+                        <div class="content-center-write-meta">
+                            <div>
+                                <span class="">引用:</span>
+                                <select data-am-selected="{btnWidth: '90', btnSize: 'xs'}" name="blog_quote" id="blog_quote">
+                                    <option value="C">原创</option>
+                                    <option value="Y">转载</option>
+                                </select>
+                                <span id="span_quote"></span>
+                            </div>
+                            <div>
+                                <span>分类:</span>
+                                <select data-am-selected="{btnWidth: '90', btnSize: 'xs'}" name="blog_class" id="blog_class">
+                                    {% for cla in ClassList %}
+                                        <option value="{{ cla }}">{{ cla }}</option>
+                                    {% endfor %}
+                                    <option value="0">新建分类</option>
+                                </select>
+                                <span id="span_class"></span>
+                            </div>
+                            <div>
+                                <span>标签:</span>
+                                <select multiple data-am-selected="{btnWidth: '90', btnSize: 'xs',dropUp: 1}" name="blog_tags" id="blog_tags">
+                                    {% for cla in AllTags %}
+                                        <option value="{{ cla }}">{{ cla }}</option>
+                                    {% endfor %}
+                                </select>
+                                <span id="span_tags">
+                                    <button id="button_tags" type="button" class="am-btn am-btn-secondary am-btn-xs am-round">增加标签</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="content-center-write-submit">
+                            <button id="blog_submit" class="am-btn am-btn-warning am-btn-lg am-round am-btn-block" type="button" onclick="blog_submit();" >发布喽</button>
+                        </div>
+
+                    </div>
+                </div>
+            {% endblock %}
+            {% block  content-center-right%}
+                <div class="am-u-sm-0 am-u-md-4 am-u-lg-3 content-center-right">
+                <div class="content-center-right-tags">
+                    {% for tag in AllTags %}
+                        <a href="/blog/tag/?tag={{ tag }}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                <hr/>
+                {% block content-center-right-class %}{% endblock %}
+                <article class="am-article am-kai">
+                    <div class="am-article-hd">
+                        <h3 class="am-article-title">介绍(关于)</h3>
+                        <p class="am-article-meta">作者：曹国伟 | 一个Python程序开发者</p>
+                    </div>
+                    <hr/>
+                    <p class="am-article-bd">
+                        　对于一名从事多年Python开发的开发者来说，亲手创建一个自己的网站是件让人欣喜的是事情。
+                        体验过挫折和坎坷，经历过成功与失败，使得我能够以更加成熟的性格和更加理性的头脑来面
+                        对未来的挑战。<br>
+                        　年轻是我最大的资本，在年轻的季节我甘愿吃苦受累，只愿通过自己富有激情、积极
+                        主动的努力实现自身价值，证明自己。<br>
+                        　本站是设计之初定为是一个博客，后来又再次基础思路上做了很多改动，就当做是自己一次实验吧。
+                    </p>
+                </article>
+                <hr/>
+                <div class="content-center-right-aboutme">
+                    <h3>关注我：</h3>
+                    <a href="http://weibo.com/u/1252289521" class="am-icon-btn am-icon-weibo" target="_blank"></a>
+                    <a href="https://github.com/guowei1003" class="am-icon-btn am-icon-github" target="_blank"></a>
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=343557432&site=qq&menu=yes" class="am-icon-btn am-icon-qq"></a>
+                    <a href="weixin://contacts/profile/guowei1003" class="am-icon-btn am-icon-weixin"></a>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

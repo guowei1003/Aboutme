@@ -1,0 +1,23 @@
+
+
+.content-tools-content-base64-cell{
+    padding: 15px;
+}
+
+.content-tools-content-base64-cell .ende button{
+    width:100%;
+}
+#pre-img{
+    border: 1px #dddddd ridge;
+    height: auto;
+}
+
+.content-tools-content-base64-cell .base-upfile{
+    text-align: center;
+    background-color: #f27b1d;
+    border: 1px solid #cbcbcb;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
