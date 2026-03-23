@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 import { Link, NavLink, Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import {
   Wrench, BookOpenText, Globe,
   Zap, TrendingUp, Star, ArrowUpRight, Tag,
   Layers, Radio, ChevronRight, Code2, Lock, Database,
-  Package, Cpu, ScanSearch, RefreshCw,
+  Package, Cpu, ScanSearch, RefreshCw, Sun, Moon,
 } from 'lucide-react'
 
 // ─────────────── API ───────────────
@@ -30,17 +31,46 @@ function AuroraBg() {
 
 // ─────────────── NAV ───────────────
 function Nav() {
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+
+  useEffect(() => {
+    const saved = localStorage.getItem('theme')
+    const initial = saved === 'light' ? 'light' : 'dark'
+    setTheme(initial)
+    document.documentElement.setAttribute('data-theme', initial)
+  }, [])
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    document.documentElement.setAttribute('data-theme', next)
+    localStorage.setItem('theme', next)
+  }
+
   return (
     <header className="nav">
-      <Link to="/" className="nav__brand" style={{ textDecoration: 'none' }}>
-        CC8789
-      </Link>
-      <nav className="nav__links">
-        <NavLink className="nav__link" to="/tools" end>Tools</NavLink>
-        <NavLink className="nav__link" to="/blog">Blog</NavLink>
-        <NavLink className="nav__link" to="/nav">Nav</NavLink>
-        <NavLink className="nav__link" to="/about">About</NavLink>
-      </nav>
+      <div className="nav__left">
+        <Link to="/" className="nav__brand" style={{ textDecoration: 'none' }}>
+          CC8789
+        </Link>
+        <nav className="nav__links">
+          <NavLink className="nav__link" to="/tools" end>Tools</NavLink>
+          <NavLink className="nav__link" to="/blog">Blog</NavLink>
+          <NavLink className="nav__link" to="/nav">Nav</NavLink>
+          <NavLink className="nav__link" to="/about">About</NavLink>
+        </nav>
+      </div>
+      <button
+        type="button"
+        className="theme-toggle"
+        onClick={toggleTheme}
+        aria-label="切换主题"
+        title={theme === 'dark' ? '切换到亮色' : '切换到暗色'}
+      >
+        <span className="theme-toggle__thumb" />
+        <span className="theme-toggle__icon theme-toggle__icon--sun"><Sun size={14} /></span>
+        <span className="theme-toggle__icon theme-toggle__icon--moon"><Moon size={14} /></span>
+      </button>
     </header>
   )
 }
