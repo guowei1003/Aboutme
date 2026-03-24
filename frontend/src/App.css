@@ -1,81 +1,76 @@
-.material-symbols-outlined {
-  font-family: "Material Symbols Outlined";
-  font-weight: normal;
-  font-style: normal;
-  font-size: 1.25rem;
-  display: inline-block;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 500,
-    "GRAD" 0,
-    "opsz" 24;
+:root {
+  --surface: #f7f9fc;
+  --surface-low: #f2f4f7;
+  --surface-card: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --primary: #004ac6;
+  --primary-2: #2563eb;
 }
 
-.editorial-content {
-  color: #0f172a;
-  line-height: 1.9;
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, "PingFang SC", sans-serif; color: var(--text); background: var(--surface); }
+a { color: inherit; text-decoration: none; }
+
+.container { width: min(1200px, 92vw); margin: 0 auto; }
+.page-main { padding: 2rem 0 3rem; }
+.page-shell { min-height: 100vh; }
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(20px);
+  background: rgb(255 255 255 / 0.75);
+}
+.nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.logo { font-size: 1.25rem; font-weight: 800; }
+.tab { border-radius: 10px; padding: 0.55rem 0.85rem; color: #334155; font-size: 0.92rem; }
+.tab.active { background: #fff; color: var(--primary); }
+.admin-btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 0.58rem 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.editorial-content h2,
-.editorial-content h3 {
-  margin: 1.6rem 0 0.8rem;
-  font-family: Manrope, Inter, "PingFang SC", sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.015em;
-}
+.site-footer { margin-top: 3rem; background: var(--surface-low); }
+.footer-inner { display: flex; justify-content: space-between; font-size: 0.88rem; color: #64748b; padding: 1rem 0; }
 
-.editorial-content h2 {
-  font-size: 1.6rem;
-}
-
-.editorial-content h3 {
-  font-size: 1.3rem;
-}
-
-.editorial-content p {
-  margin: 0.95rem 0;
-  color: #1e293b;
-}
-
-.editorial-content blockquote {
-  margin: 1rem 0;
-  padding: 0.85rem 1rem;
-  border-radius: 0.75rem;
-  background: #f2f6ff;
-  color: #0f3f8d;
-}
-
-.editorial-content pre {
-  margin: 1rem 0;
+.layout-two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; }
+.hero-title { margin: 0 0 0.4rem; font: 800 2.4rem/1.2 Manrope, Inter, sans-serif; }
+.hero-subtitle { color: var(--muted); margin-bottom: 1rem; }
+.panel {
+  background: var(--surface-card);
+  border-radius: 16px;
   padding: 1rem;
-  overflow-x: auto;
-  border-radius: 0.75rem;
-  background: #0f172a;
-  color: #e2e8f0;
+  box-shadow: 0 20px 40px rgb(25 28 30 / 6%);
+  margin-bottom: 1rem;
 }
+.section-title { font: 700 1.1rem/1.3 Manrope, Inter, sans-serif; margin: 0 0 0.8rem; }
+.issue-title { margin: 0 0 0.6rem; font: 800 1.7rem/1.2 Manrope, Inter, sans-serif; }
+.issue-oneline { color: var(--muted); margin-bottom: 0.9rem; }
+.chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.7rem 0; }
+.chip { background: #eff4ff; color: var(--primary); border-radius: 999px; padding: 0.25rem 0.62rem; font-size: 0.76rem; }
+.top-list, .archive-list { padding-left: 1.2rem; margin: 0; display: grid; gap: 0.5rem; }
+.biz-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.biz-title { margin: 0 0 0.6rem; font-size: 1.1rem; }
+.score { color: var(--primary); font-weight: 700; }
 
-.editorial-content code {
-  border-radius: 0.4rem;
-  padding: 0.1rem 0.35rem;
-  background: #eef2ff;
-  color: #1e3a8a;
-}
-
-.editorial-content pre code {
-  padding: 0;
-  background: transparent;
-  color: inherit;
-}
-
-.editorial-content img {
+.admin-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 1rem; }
+.admin-input {
   width: 100%;
-  margin: 1.2rem 0;
-  border-radius: 0.9rem;
-  object-fit: cover;
+  border: 0;
+  background: var(--surface-low);
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.7rem;
+  font: inherit;
+}
+
+@media (max-width: 960px) {
+  .layout-two-col, .biz-grid, .admin-grid, .footer-inner { grid-template-columns: 1fr; display: grid; }
 }

@@ -1,55 +1,48 @@
-# Aboutme Modern Stack
+# Aivora Clone Multi-Service Stack
 
-±¾ÏîÄ¿ÒÑÖØ¹¹ÎªÇ°ºó¶Ë·ÖÀë¼Ü¹¹£º
+æœ¬é¡¹ç›®æŒ‰ã€ŒAIæ—¥æŠ¥ + AIå•†æœº + ä¸ªäººä¸»é¡µã€é‡æ„ä¸º React å‰ç«¯ + Python å¤šæœåŠ¡åç«¯ã€‚
 
-- ºó¶Ë£ºDjango 4 + DRF + MySQL£¨ÈİÆ÷ `c-service`£©
-- Ç°¶Ë£ºReact + Vite£¨ÈİÆ÷ `c-web`£©
-- Êı¾İ¿â£ºMySQL 8£¨ÈİÆ÷ `c-mysql`£©
+## æœåŠ¡æ¶æ„
 
-## Ä¿Â¼½á¹¹
+- `frontend`ï¼šReact + Viteï¼Œé¡µé¢å¤åˆ»å…¥å£
+- `api-gateway`ï¼šç»Ÿä¸€ `/api/*` å…¥å£ï¼ˆBFFï¼‰
+- `daily-service`ï¼šæ—¥æŠ¥ã€æœºå™¨äººé…ç½®ã€ä»»åŠ¡çŠ¶æ€
+- `biz-service`ï¼šAI å•†æœºå†…å®¹
+- `profile-service`ï¼šä¸ªäººä¸»é¡µå†…å®¹
+- `scheduler-worker`ï¼šå®šæ—¶æŠ“å–ä¸ AI ç”Ÿæˆä»»åŠ¡
+- `c-mysql`ï¼šMySQL
+- `redis`ï¼šä»»åŠ¡ä¸ç¼“å­˜ä¾èµ–
 
-- `backend/` Django API ·şÎñ
-- `frontend/` React SPA
-- `deploy/nginx.conf` ·´Ïò´úÀíÓë SPA »ØÍË
-- `docker-compose.yml` ÈıÈİÆ÷±àÅÅ
-- `scripts/build.sh` / `scripts/deploy.sh` ¹¹½¨²¿Êğ½Å±¾
+## ç›®å½•
 
-## ¿ìËÙ¿ªÊ¼
+- `frontend/` å‰ç«¯å·¥ç¨‹
+- `services/` å¤šæœåŠ¡åç«¯
+- `services/db/schema.sql` æ•°æ®åº“è¡¨ç»“æ„
+- `deploy/nginx.conf` ç½‘å…³è½¬å‘é…ç½®
+- `docker-compose.yml` å¤šå®¹å™¨ç¼–æ’
 
-1. ¸´ÖÆ»·¾³±äÁ¿£º
+## å¿«é€Ÿå¯åŠ¨
 
 ```bash
 cp .env.example .env
+docker compose up --build -d
 ```
 
-2. ¹¹½¨¾µÏñ£º
+è®¿é—®ï¼š
 
-```bash
-./scripts/build.sh
-```
+- ç«™ç‚¹ï¼š`http://localhost`
+- APIï¼š`http://localhost/api/`
 
-3. Æô¶¯·şÎñ£º
+## æ ¸å¿ƒæ¥å£
 
-```bash
-./scripts/deploy.sh
-```
+- æ—¥æŠ¥ï¼š`GET /api/daily/issues`
+- æ—¥æŠ¥è¯¦æƒ…ï¼š`GET /api/daily/issues/{date}`
+- æœºå™¨äººé…ç½®ï¼š`POST /api/daily/robots`
+- æŠ“å–ä»»åŠ¡ï¼š`GET /api/daily/jobs`
+- å•†æœºåˆ—è¡¨ï¼š`GET /api/biz/issues`
+- ä¸ªäººä¸»é¡µï¼š`GET /api/profile`
 
-4. ·ÃÎÊ£º
+## è¯´æ˜
 
-- Ç°¶Ë£º`http://localhost`
-- Django Admin£º`http://localhost/admin/`
-- API Èë¿Ú£º`http://localhost/api/`
-
-## ¹Ø¼ü API
-
-- µÇÂ¼£º`POST /api/auth/token/`
-- ²©¿Í£º`/api/blog/articles/`
-- ¹¤¾ß£º`/api/tools/home/`
-- µ¼º½£º`/api/nav/sites/home/`
-- Í¼Æ¬ÉÏ´«£º`POST /api/uploads/images/`
-
-## ×¢ÒâÊÂÏî
-
-- Ê×´ÎÆô¶¯Ê± `c-service` »á×Ô¶¯Ö´ĞĞ `migrate`¡£
-- Éú²ú»·¾³Îñ±ØĞŞ¸Ä `DJANGO_SECRET_KEY`¡¢Êı¾İ¿âÃÜÂëºÍ `ALLOWED_HOSTS`¡£
-- ¾É°æ `UEditor` Â·¾¶ºÍ Django Ä£°åÒ³ÃæÒÑ²»ÔÙ×÷ÎªÖ÷Á÷³ÌÒÀÀµ¡£ 
+- å½“å‰æŠ“å–ä¸ AI ç”Ÿæˆä½¿ç”¨å¯æ›¿æ¢ç®¡é“å®ç°ï¼Œå·²é¢„ç•™çœŸå® LLM æ¥å…¥é…ç½®ã€‚
+- å¦‚éœ€æŒä¹…åŒ–ç”Ÿäº§æ•°æ®ï¼Œè¯·å°† `services/db/schema.sql` å¯¼å…¥ MySQLï¼Œå¹¶æ›¿æ¢å†…å­˜ä»“å‚¨å®ç°ã€‚

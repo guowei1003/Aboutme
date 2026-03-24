@@ -18,19 +18,87 @@ services:
       timeout: 5s
       retries: 10
 
-  c-service:
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  daily-service:
     build:
       context: .
-      dockerfile: backend/Dockerfile
-    container_name: c-service
+      dockerfile: services/daily_service/Dockerfile
+    container_name: daily-service
     restart: unless-stopped
     env_file:
       - .env
     depends_on:
       c-mysql:
         condition: service_healthy
-    volumes:
-      - media_data:/app/media
+      redis:
+        condition: service_started
+    expose:
+      - "8001"
+
+  biz-service:
+    build:
+      context: .
+      dockerfile: services/biz_service/Dockerfile
+    container_name: biz-service
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      c-mysql:
+        condition: service_healthy
+    expose:
+      - "8002"
+
+  profile-service:
+    build:
+      context: .
+      dockerfile: services/profile_service/Dockerfile
+    container_name: profile-service
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      c-mysql:
+        condition: service_healthy
+    expose:
+      - "8003"
+
+  scheduler-worker:
+    build:
+      context: .
+      dockerfile: services/daily_service/Dockerfile
+    container_name: scheduler-worker
+    restart: unless-stopped
+    env_file:
+      - .env
+    command: ["python", "service/worker.py"]
+    depends_on:
+      daily-service:
+        condition: service_started
+      redis:
+        condition: service_started
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: services/api_gateway/Dockerfile
+    container_name: api-gateway
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      daily-service:
+        condition: service_started
+      biz-service:
+        condition: service_started
+      profile-service:
+        condition: service_started
     expose:
       - "8000"
 
@@ -43,10 +111,9 @@ services:
     container_name: c-web
     restart: unless-stopped
     depends_on:
-      - c-service
+      - api-gateway
     ports:
       - "80:80"
 
 volumes:
   mysql_data:
-  media_data:
