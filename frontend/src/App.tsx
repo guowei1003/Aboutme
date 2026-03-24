@@ -1,736 +1,572 @@
-import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-import { Link, NavLink, Route, Routes, useNavigate, useParams } from 'react-router-dom'
-import {
-  Wrench, BookOpenText, Globe,
-  Zap, TrendingUp, Star, ArrowUpRight, Tag,
-  Layers, Radio, ChevronRight, Code2, Lock, Database,
-  Package, Cpu, ScanSearch, RefreshCw, Sun, Moon,
-} from 'lucide-react'
+import { useQuery } from "@tanstack/react-query"
+import { EditorContent, useEditor, type Editor } from "@tiptap/react"
+import StarterKit from "@tiptap/starter-kit"
+import { useMemo, useState, type ReactNode } from "react"
+import { Link, NavLink, Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom"
+import "./App.css"
 
-// ─────────────── API ───────────────
-const API_BASE = import.meta.env.VITE_API_BASE || '/api'
-type Item = Record<string, unknown>
+const API_BASE = import.meta.env.VITE_API_BASE || "/api"
+
+type ArticleListItem = {
+  id: number
+  title: string
+  article_class: string
+  article_lead: string
+  author: string
+  publish_time: string
+  cover_image: string
+  read_time: number
+}
+type ArticleDetail = ArticleListItem & { article_body: string }
+type WorkshopItem = {
+  id: number
+  name: string
+  description: string
+  url: string
+  icon_url: string
+  category: string
+  sort_order: number
+  is_active: boolean
+}
+type LoginRes = { access: string; refresh: string }
+
+function token(): string {
+  return localStorage.getItem("admin_access_token") || ""
+}
+function isLoggedIn(): boolean {
+  return Boolean(token())
+}
+function formatDate(value: string): string {
+  if (!value) return "未知日期"
+  const d = new Date(value)
+  return Number.isNaN(d.getTime()) ? value.slice(0, 10) : d.toLocaleDateString("zh-CN")
+}
+function fallbackCover(seed: number): string {
+  return `https://picsum.photos/seed/aboutme-${seed}/1200/800`
+}
 
 async function apiGet<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`)
-  if (!res.ok) throw new Error(`${res.status}`)
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  return res.json() as Promise<T>
+}
+async function apiAuthed<T>(path: string, method = "GET", body?: unknown): Promise<T> {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method,
+    headers: {
+      Authorization: `Bearer ${token()}`,
+      ...(body ? { "Content-Type": "application/json" } : {}),
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  })
+  if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  if (res.status === 204) return {} as T
   return res.json() as Promise<T>
 }
 
-// ─────────────── AURORA ───────────────
-function AuroraBg() {
+function NavBar() {
+  const logged = isLoggedIn()
   return (
-    <div className="aurora" aria-hidden>
-      <div className="aurora__blob aurora__blob--1" />
-      <div className="aurora__blob aurora__blob--2" />
-      <div className="aurora__blob aurora__blob--3" />
-    </div>
-  )
-}
-
-// ─────────────── NAV ───────────────
-function Nav() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
-
-  useEffect(() => {
-    const saved = localStorage.getItem('theme')
-    const initial = saved === 'light' ? 'light' : 'dark'
-    setTheme(initial)
-    document.documentElement.setAttribute('data-theme', initial)
-  }, [])
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    document.documentElement.setAttribute('data-theme', next)
-    localStorage.setItem('theme', next)
-  }
-
-  return (
-    <header className="nav">
-      <div className="nav__left">
-        <Link to="/" className="nav__brand" style={{ textDecoration: 'none' }}>
-          CC8789
-        </Link>
-        <nav className="nav__links">
-          <NavLink className="nav__link" to="/tools" end>Tools</NavLink>
-          <NavLink className="nav__link" to="/blog">Blog</NavLink>
-          <NavLink className="nav__link" to="/nav">Nav</NavLink>
-          <NavLink className="nav__link" to="/about">About</NavLink>
+    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 md:px-8">
+        <Link to="/blog" className="font-[Manrope] text-2xl font-extrabold tracking-tight text-slate-900">Aboutme</Link>
+        <nav className="flex items-center gap-2 rounded-xl bg-[#f2f4f7] p-1">
+          <NavLink
+            to="/blog"
+            className={({ isActive }) =>
+              `rounded-lg px-4 py-2 text-sm font-medium transition ${
+                isActive ? "bg-white text-[#004ac6]" : "text-slate-600 hover:text-slate-900"
+              }`
+            }
+          >
+            博客
+          </NavLink>
+          <NavLink
+            to="/workshop"
+            className={({ isActive }) =>
+              `rounded-lg px-4 py-2 text-sm font-medium transition ${
+                isActive ? "bg-white text-[#004ac6]" : "text-slate-600 hover:text-slate-900"
+              }`
+            }
+          >
+            工坊
+          </NavLink>
         </nav>
+        <Link
+          to={logged ? "/admin/dashboard" : "/admin/login"}
+          className="rounded-xl bg-gradient-to-r from-[#004ac6] to-[#2563eb] px-4 py-2 text-sm font-semibold text-white shadow-[0_20px_40px_rgba(25,28,30,0.06)]"
+        >
+          {logged ? "后台管理" : "登录"}
+        </Link>
       </div>
-      <button
-        type="button"
-        className="theme-toggle"
-        onClick={toggleTheme}
-        aria-label="切换主题"
-        title={theme === 'dark' ? '切换到亮色' : '切换到暗色'}
-      >
-        <span className="theme-toggle__thumb" />
-        <span className="theme-toggle__icon theme-toggle__icon--sun"><Sun size={14} /></span>
-        <span className="theme-toggle__icon theme-toggle__icon--moon"><Moon size={14} /></span>
-      </button>
     </header>
   )
 }
 
-// ─────────────── SHELL ───────────────
-function Shell({ children }: { children: React.ReactNode }) {
+function Footer() {
   return (
-    <>
-      <AuroraBg />
-      <div className="page">
-        <Nav />
-        {children}
+    <footer className="mt-16 bg-[#f2f4f7]">
+      <div className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-2 px-5 py-7 text-sm text-slate-500 md:flex-row md:px-8">
+        <p>© {new Date().getFullYear()} Aboutme. All rights reserved.</p>
+        <p>Personal blog & workshop.</p>
       </div>
-    </>
+    </footer>
   )
 }
 
-// ═══════════════════════════════════════════════════
-//  HOME PAGE
-// ═══════════════════════════════════════════════════
-const FEATURES = [
-  {
-    to: '/tools',
-    icon: <Wrench size={22} />,
-    iconClass: 'icon-box--cyan',
-    accent: 'rgba(6,182,212,0.08)',
-    accentBorder: 'rgba(6,182,212,0.2)',
-    label: 'Tools',
-    title: '开发工具箱',
-    desc: '加密解密、哈希计算、编码转换、文件处理——覆盖日常开发全流程。',
-    stat: '20+',
-    statLabel: '工具',
-  },
-  {
-    to: '/blog',
-    icon: <BookOpenText size={22} />,
-    iconClass: 'icon-box--violet',
-    accent: 'rgba(139,92,246,0.08)',
-    accentBorder: 'rgba(139,92,246,0.2)',
-    label: 'Blog',
-    title: '技术博客',
-    desc: 'Python · 前端工程 · 系统设计 · 工程实践，持续更新的原创内容。',
-    stat: '∞',
-    statLabel: '文章',
-  },
-  {
-    to: '/nav',
-    icon: <Globe size={22} />,
-    iconClass: 'icon-box--blue',
-    accent: 'rgba(59,130,246,0.08)',
-    accentBorder: 'rgba(59,130,246,0.2)',
-    label: 'Nav',
-    title: '精选导航',
-    desc: '筛选优质资源，分类整理的开发者导航，告别无效搜索。',
-    stat: '100+',
-    statLabel: '站点',
-  },
-]
-
-const STACK = [
-  { icon: <Code2    size={14} />, label: 'React 19 + Vite' },
-  { icon: <Database size={14} />, label: 'Django 4 + DRF' },
-  { icon: <Package  size={14} />, label: 'MySQL 8' },
-  { icon: <Lock     size={14} />, label: 'JWT Auth' },
-  { icon: <Cpu      size={14} />, label: 'Docker Compose' },
-]
-
-function HomePage() {
-  const navigate = useNavigate()
-  const { data: toolsData } = useQuery({
-    queryKey: ['tools-home'],
-    queryFn: () => apiGet<{ new_tool_list: Item[] }>('/tools/home/'),
-    retry: 1,
-  })
-  const { data: blogData } = useQuery({
-    queryKey: ['blog'],
-    queryFn: () => apiGet<{ results: Item[] }>('/blog/articles/'),
-    retry: 1,
-  })
-
-  const recentTools   = toolsData?.new_tool_list?.slice(0, 6)  ?? []
-  const recentArticles = blogData?.results?.slice(0, 3)         ?? []
-
+function AppShell({ children }: { children: ReactNode }) {
+  const location = useLocation()
+  const isAdminPage = location.pathname.startsWith("/admin/")
+  if (isAdminPage) return <>{children}</>
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-
-      {/* ── HERO ── */}
-      <section className="home-hero card card--flat">
-        {/* Grid lines decoration */}
-        <div className="home-hero__grid" aria-hidden />
-
-        <div className="home-hero__body">
-          <p className="hero__eyebrow">
-            <Radio size={11} />
-            个人技术平台 · React + Django + Docker
-          </p>
-
-          <h1 className="hero__title" style={{ marginBottom: 20 }}>
-            <span className="hero__title--white">工欲善其事，<br /></span>
-            <span className="hero__title--glow">必先利其器。</span>
-          </h1>
-
-          <p className="hero__desc" style={{ maxWidth: 560 }}>
-            集工具、博客、导航于一体的个人技术空间——快速的工具集、深度的原创文章、精选的开发者资源。
-          </p>
-
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 36 }}>
-            <button className="btn btn--primary" onClick={() => navigate('/tools')}>
-              <Wrench size={15} /> 浏览工具
-              <ChevronRight size={14} style={{ marginLeft: 2 }} />
-            </button>
-            <button
-              className="btn"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#94a3b8' }}
-              onClick={() => navigate('/blog')}
-            >
-              <BookOpenText size={15} /> 读博客
-            </button>
-          </div>
-
-          <div className="home-hero__stack">
-            {STACK.map(s => (
-              <span key={s.label} className="badge">
-                {s.icon} {s.label}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Floating stat orbs */}
-        <div className="home-hero__orbs" aria-hidden>
-          <div className="orb orb--1"><span>AES</span></div>
-          <div className="orb orb--2"><span>SHA</span></div>
-          <div className="orb orb--3"><span>JWT</span></div>
-          <div className="orb orb--4"><span>API</span></div>
-        </div>
-      </section>
-
-      {/* ── FEATURE CARDS ── */}
-      <section className="bento">
-        {FEATURES.map(f => (
-          <Link key={f.to} to={f.to} style={{ textDecoration: 'none' }}>
-            <article
-              className={`card feature-card card--${f.iconClass.replace('icon-box--', '')}`}
-              style={{
-                background: `linear-gradient(140deg, ${f.accent} 0%, rgba(12,18,38,0.55) 60%)`,
-                borderColor: f.accentBorder,
-                height: '100%',
-              }}
-            >
-              <div className="icon-box feature-card__icon-box">{f.icon}</div>
-              <span className="badge feature-card__label" style={{ marginBottom: 12, alignSelf: 'flex-start' }}>
-                {f.label}
-              </span>
-              <h3 className="card__title" style={{ fontSize: 22, letterSpacing: '-0.5px', marginBottom: 10 }}>
-                {f.title}
-              </h3>
-              <p style={{ color: '#64748b', fontSize: 14, lineHeight: 1.65, flex: 1 }}>{f.desc}</p>
-              <div style={{ marginTop: 24, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-                <div>
-                  <div style={{ fontSize: 36, fontWeight: 900, letterSpacing: '-2px', lineHeight: 1 }} className="hero__title--glow">
-                    {f.stat}
-                  </div>
-                  <div style={{ fontSize: 12, color: '#475569', marginTop: 4 }}>{f.statLabel}</div>
-                </div>
-                <ArrowUpRight size={20} style={{ color: '#334155' }} />
-              </div>
-            </article>
-          </Link>
-        ))}
-      </section>
-
-      {/* ── RECENT ── */}
-      <section className="bento">
-
-        {/* Recent Tools */}
-        <div className="card span-2">
-          <p className="card__eyebrow"><Zap size={11} />最新工具</p>
-          {recentTools.length > 0 ? (
-            <ul className="item-list">
-              {recentTools.map(t => (
-                <li key={String(t.id)}>
-                  <Link className="item-list__row" to={`/tools/${t.tool_ename}`}>
-                    <span className="item-list__name">{String(t.tool_name)}</span>
-                    <span className="item-list__meta">{String(t.tool_class ?? '')}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <EmptySlot icon={<Zap size={20} />} label="暂无工具数据" />
-          )}
-          <Link to="/tools" style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 16, fontSize: 13, color: '#22d3ee', textDecoration: 'none', fontWeight: 600 }}>
-            查看全部工具 <ChevronRight size={14} />
-          </Link>
-        </div>
-
-        {/* Recent Blog */}
-        <div className="card card--violet">
-          <p className="card__eyebrow"><BookOpenText size={11} />最新文章</p>
-          {recentArticles.length > 0 ? (
-            <ul className="item-list">
-              {recentArticles.map(a => (
-                <li key={String(a.id)}>
-                  <Link className="item-list__row" to={`/blog/${a.id}`}>
-                    <span className="item-list__name">{String(a.title)}</span>
-                    <span className="item-list__meta">{String(a.publish_time ?? '').slice(0, 10)}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <EmptySlot icon={<BookOpenText size={20} />} label="暂无文章" />
-          )}
-          <Link to="/blog" style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 16, fontSize: 13, color: '#a78bfa', textDecoration: 'none', fontWeight: 600 }}>
-            阅读博客 <ChevronRight size={14} />
-          </Link>
-        </div>
-
-      </section>
-
-      {/* ── BOTTOM INFO ── */}
-      <section className="bento" style={{ marginBottom: 0 }}>
-
-        <div className="card" style={{ background: 'linear-gradient(135deg,rgba(6,182,212,0.06),rgba(139,92,246,0.05))' }}>
-          <p className="card__eyebrow"><Layers size={11} />架构</p>
-          <ul style={{ paddingLeft: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {[
-              ['前端', 'React 19 + Vite + TS'],
-              ['后端', 'Django 4 + DRF'],
-              ['网关', 'Nginx SPA Proxy'],
-              ['部署', 'Docker Compose × 3'],
-            ].map(([k, v]) => (
-              <li key={k} style={{ display: 'flex', gap: 10, fontSize: 13 }}>
-                <span style={{ color: '#334155', minWidth: 40 }}>{k}</span>
-                <span style={{ color: '#64748b' }}>{v}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="card">
-          <p className="card__eyebrow"><ScanSearch size={11} />API 入口</p>
-          {['/api/tools/home/', '/api/blog/articles/', '/api/nav/sites/home/', '/api/auth/token/'].map(ep => (
-            <div key={ep} style={{ fontFamily: 'ui-monospace,monospace', fontSize: 11, color: '#475569', padding: '5px 8px', borderRadius: 7, marginBottom: 3, background: 'rgba(255,255,255,0.03)' }}>
-              {ep}
-            </div>
-          ))}
-        </div>
-
-        <div className="card card--flat" style={{ background: 'linear-gradient(140deg,rgba(139,92,246,0.08),rgba(12,18,38,0.55))' }}>
-          <p className="card__eyebrow"><RefreshCw size={11} />版本</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 4 }}>
-            {[
-              { label: 'React',   ver: '19.2',  cls: 'icon-box--cyan'   },
-              { label: 'Django',  ver: '4.2 LTS', cls: 'icon-box--violet' },
-              { label: 'Vite',    ver: '8.0',   cls: 'icon-box--blue'   },
-            ].map(item => (
-              <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
-                <span style={{ color: '#94a3b8', fontWeight: 600 }}>{item.label}</span>
-                <span style={{ color: '#334155', fontFamily: 'ui-monospace,monospace', fontSize: 12 }}>v{item.ver}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-      </section>
+    <div className="min-h-screen bg-[#f7f9fc] text-slate-900">
+      <NavBar />
+      <main className="mx-auto w-full max-w-7xl px-5 py-10 md:px-8">{children}</main>
+      <Footer />
     </div>
   )
 }
 
-// ─────────────── SHARED EMPTY ───────────────
-function EmptySlot({ icon, label }: { icon: React.ReactNode; label: string }) {
+function Pagination({ page, setPage, total }: { page: number; setPage: (v: number) => void; total: number }) {
   return (
-    <div className="empty" style={{ padding: '24px 0' }}>
-      <span style={{ opacity: 0.2 }}>{icon}</span>
-      {label}
-    </div>
-  )
-}
-
-// ═══════════════════════════════════════════════════
-//  TOOLS PAGE
-// ═══════════════════════════════════════════════════
-function ToolsPage() {
-  const { data, isError } = useQuery({
-    queryKey: ['tools-home'],
-    queryFn: () => apiGet<{ new_tool_list: Item[]; like_most_list: Item[]; use_most_list: Item[] }>('/tools/home/'),
-    retry: 1,
-  })
-
-  const newList  = data?.new_tool_list  ?? []
-  const likeList = data?.like_most_list ?? []
-  const useList  = data?.use_most_list  ?? []
-
-  return (
-    <div className="bento">
-      {/* HEADER */}
-      <div className="card card--flat span-3" style={{ padding: '36px 44px' }}>
-        <div className="icon-box icon-box--cyan"><Wrench size={18} /></div>
-        <h2 className="hero__title" style={{ fontSize: 'clamp(32px,4vw,56px)', marginBottom: 12 }}>
-          <span className="hero__title--white">工具 </span>
-          <span className="hero__title--glow">集合</span>
-        </h2>
-        <p className="hero__desc">加密解密、哈希、编码、文件处理——覆盖日常开发全流程。</p>
-      </div>
-
-      {/* NEW — tall */}
-      <div className="card row-2">
-        <p className="card__eyebrow"><Zap size={12} />最新收录</p>
-        {newList.length > 0 ? (
-          <ul className="item-list">
-            {newList.map(t => (
-              <li key={String(t.id)}>
-                <Link className="item-list__row" to={`/tools/${t.tool_ename}`}>
-                  <span className="item-list__name">{String(t.tool_name)}</span>
-                  <span className="item-list__meta">{String(t.tool_class ?? '')}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <EmptySlot icon={<Zap size={22} />} label={isError ? '后端未连接' : '暂无数据'} />
-        )}
-      </div>
-
-      {/* LIKED */}
-      <div className="card">
-        <div className="icon-box icon-box--violet"><Star size={18} /></div>
-        <p className="card__eyebrow"><Star size={12} />最受喜欢</p>
-        {likeList.length > 0 ? (
-          <ul className="item-list">
-            {likeList.slice(0, 6).map(t => (
-              <li key={String(t.id)}>
-                <Link className="item-list__row" to={`/tools/${t.tool_ename}`}>
-                  <span className="item-list__name">{String(t.tool_name)}</span>
-                  <span className="item-list__meta">♥ {String(t.like_count ?? 0)}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : <EmptySlot icon={<Star size={20} />} label="" />}
-      </div>
-
-      {/* USED */}
-      <div className="card card--violet">
-        <div className="icon-box icon-box--cyan"><TrendingUp size={18} /></div>
-        <p className="card__eyebrow"><TrendingUp size={12} />使用最多</p>
-        {useList.length > 0 ? (
-          <ul className="item-list">
-            {useList.slice(0, 6).map(t => (
-              <li key={String(t.id)}>
-                <Link className="item-list__row" to={`/tools/${t.tool_ename}`}>
-                  <span className="item-list__name">{String(t.tool_name)}</span>
-                  <span className="item-list__meta">{String(t.usage_count ?? 0)}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : <EmptySlot icon={<TrendingUp size={20} />} label="" />}
-      </div>
-
-      {/* STAT */}
-      <div className="card span-2" style={{ background: 'linear-gradient(135deg,rgba(6,182,212,0.05),rgba(139,92,246,0.05))' }}>
-        <p className="card__eyebrow"><Layers size={11} />工具概览</p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 8 }}>
-          {[
-            { n: newList.length  || '—', l: '最新工具数' },
-            { n: likeList.length || '—', l: '喜欢排行' },
-            { n: useList.length  || '—', l: '使用排行' },
-          ].map(s => (
-            <div key={s.l}>
-              <div className="stat__number" style={{ fontSize: 44 }}>{s.n}</div>
-              <p className="stat__label">{s.l}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="card">
-        <p className="card__eyebrow"><Globe size={11} />快速跳转</p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 4 }}>
-          {[
-            { to: '/blog', label: '博客', icon: <BookOpenText size={14} /> },
-            { to: '/nav',  label: '导航', icon: <Globe size={14} /> },
-          ].map(item => (
-            <Link key={item.to} to={item.to} style={{ textDecoration: 'none' }}>
-              <div className="item-list__row" style={{ borderRadius: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-                {item.icon}
-                <span className="item-list__name">{item.label}</span>
-                <ArrowUpRight size={13} style={{ color: '#334155' }} />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// ═══════════════════════════════════════════════════
-//  TOOL DETAIL
-// ═══════════════════════════════════════════════════
-function ToolDetailPage() {
-  const { ename = '' } = useParams()
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ['tool', ename],
-    queryFn: () => apiGet<Item>(`/tools/${ename}/`),
-    retry: 1,
-  })
-
-  return (
-    <div className="bento">
-      <div className="card span-3 card--flat">
-        <div className="icon-box icon-box--cyan"><Wrench size={18} /></div>
-        <h2 style={{ fontSize: 36, fontWeight: 900, letterSpacing: '-1.5px', color: '#f1f5f9', marginBottom: 12 }}>
-          {isLoading ? '加载中…' : String(data?.tool_name ?? ename)}
-        </h2>
-        <p style={{ color: '#64748b', lineHeight: 1.65, maxWidth: 600 }}>
-          {isError ? '无法获取工具信息，请确认后端服务已启动。' : String(data?.tool_dec ?? '暂无描述')}
-        </p>
-      </div>
-      <div className="card">
-        <p className="card__eyebrow"><TrendingUp size={12} />使用次数</p>
-        <div className="stat__number">{String(data?.usage_count ?? '—')}</div>
-      </div>
-      <div className="card">
-        <p className="card__eyebrow"><Star size={12} />喜欢数</p>
-        <div className="stat__number">{String(data?.like_count ?? '—')}</div>
-      </div>
-      <div className="card">
-        <p className="card__eyebrow"><Tag size={12} />分类</p>
-        <p style={{ color: '#e2e8f0', fontWeight: 700, fontSize: 18 }}>{String(data?.tool_class ?? '—')}</p>
-      </div>
-    </div>
-  )
-}
-
-// ═══════════════════════════════════════════════════
-//  BLOG LIST
-// ═══════════════════════════════════════════════════
-function BlogPage() {
-  const { data, isError } = useQuery({
-    queryKey: ['blog'],
-    queryFn: () => apiGet<{ results: Item[] }>('/blog/articles/'),
-    retry: 1,
-  })
-  const articles = data?.results ?? []
-
-  return (
-    <div className="bento">
-      <div className="card span-3 card--flat" style={{ padding: '36px 44px' }}>
-        <div className="icon-box icon-box--violet"><BookOpenText size={18} /></div>
-        <h2 className="hero__title" style={{ fontSize: 'clamp(32px,4vw,56px)', marginBottom: 12 }}>
-          <span className="hero__title--white">技术 </span>
-          <span className="hero__title--glow">博客</span>
-        </h2>
-        <p className="hero__desc">记录与分享——Python、前端、系统设计与工程实践。</p>
-      </div>
-
-      {isError && (
-        <div className="card span-3"><EmptySlot icon={<BookOpenText size={24} />} label="后端未连接" /></div>
-      )}
-
-      {!isError && articles.length === 0 && (
-        <div className="card span-3"><EmptySlot icon={<BookOpenText size={24} />} label="暂无文章" /></div>
-      )}
-
-      {articles.map(a => (
-        <Link key={String(a.id)} to={`/blog/${a.id}`} style={{ textDecoration: 'none' }}>
-          <article className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-            {a.cornerite === 'H' && <span className="hero__eyebrow" style={{ fontSize: 10, marginBottom: 12, alignSelf: 'flex-start' }}>热门</span>}
-            {a.cornerite === 'C' && <span className="hero__eyebrow" style={{ fontSize: 10, marginBottom: 12, alignSelf: 'flex-start', borderColor: 'rgba(167,139,250,0.4)', color: '#a78bfa', background: 'rgba(139,92,246,0.1)' }}>原创</span>}
-            <p className="card__eyebrow"><Tag size={11} />{String(a.article_class ?? '未分类')}</p>
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#e2e8f0', letterSpacing: '-0.3px', marginBottom: 10, flex: 1 }}>
-              {String(a.title)}
-            </h3>
-            <p style={{ fontSize: 13, color: '#475569', lineHeight: 1.55, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
-              {String(a.article_lead ?? '')}
-            </p>
-            <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 12, color: '#334155' }}>
-              <span>{String(a.author ?? '')}</span>
-              <span>{String(a.publish_time ?? '').slice(0, 10)}</span>
-            </div>
-          </article>
-        </Link>
+    <div className="mt-10 flex items-center justify-center gap-2">
+      {Array.from({ length: total }, (_, i) => i + 1).map((p) => (
+        <button
+          key={p}
+          type="button"
+          onClick={() => setPage(p)}
+          className={`h-9 min-w-9 rounded-lg px-3 text-sm font-semibold ${
+            p === page ? "bg-[#004ac6] text-white" : "bg-white text-slate-600 hover:text-slate-900"
+          }`}
+        >
+          {p}
+        </button>
       ))}
     </div>
   )
 }
 
-// ═══════════════════════════════════════════════════
-//  BLOG DETAIL
-// ═══════════════════════════════════════════════════
-function BlogDetailPage() {
-  const { id = '' } = useParams()
-  const { data, isError } = useQuery({
-    queryKey: ['blog-detail', id],
-    queryFn: () => apiGet<Item>(`/blog/articles/${id}/`),
-    retry: 1,
+function BlogPage() {
+  const [page, setPage] = useState(1)
+  const pageSize = 6
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["blog-list"],
+    queryFn: () => apiGet<{ results: ArticleListItem[] }>("/blog/articles/"),
   })
+  const list = data?.results || []
+  const featured = list[0]
+  const totalPage = Math.max(1, Math.ceil(list.length / pageSize))
+  const pageList = list.slice((page - 1) * pageSize, page * pageSize)
 
   return (
-    <div className="bento">
-      <div className="card span-3 card--flat">
-        {isError ? <EmptySlot icon={<BookOpenText size={24} />} label="无法加载文章" /> : (
-          <article>
-            <p className="card__eyebrow"><Tag size={11} />{String(data?.article_class ?? '')}</p>
-            <h1 style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: 16, color: '#f1f5f9' }}>
-              {String(data?.title ?? '加载中…')}
-            </h1>
-            <div style={{ display: 'flex', gap: 16, marginBottom: 28, fontSize: 13, color: '#334155' }}>
-              <span>{String(data?.author ?? '')}</span>
-              <span>{String(data?.publish_time ?? '').slice(0, 10)}</span>
-            </div>
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 24 }}>
-              <p style={{ color: '#94a3b8', lineHeight: 1.8, fontSize: 16 }}>{String(data?.article_lead ?? '')}</p>
-            </div>
-          </article>
-        )}
-      </div>
-    </div>
-  )
-}
-
-// ═══════════════════════════════════════════════════
-//  NAV PAGE
-// ═══════════════════════════════════════════════════
-function NavPage() {
-  const { data, isError } = useQuery({
-    queryKey: ['nav'],
-    queryFn: () => apiGet<{ site_list: Item[]; champion_reads: Item[] }>('/nav/sites/home/'),
-    retry: 1,
-  })
-  const sites = data?.site_list       ?? []
-  const reads = data?.champion_reads?.slice(0, 8) ?? []
-
-  return (
-    <div className="bento">
-      <div className="card card--flat span-3" style={{ padding: '36px 44px' }}>
-        <div className="icon-box icon-box--blue"><Globe size={18} /></div>
-        <h2 className="hero__title" style={{ fontSize: 'clamp(32px,4vw,56px)', marginBottom: 12 }}>
-          <span className="hero__title--white">精选 </span>
-          <span className="hero__title--glow">导航</span>
-        </h2>
-        <p className="hero__desc">汇集优质网站与工具，分类整理，随时直达你需要的资源。</p>
+    <section className="space-y-8">
+      <div className="space-y-2">
+        <h1 className="font-[Manrope] text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">Editorial Blog</h1>
+        <p className="text-slate-600">记录我的开发实践、产品思考与 AI 工作流沉淀。</p>
       </div>
 
-      {isError && <div className="card span-3"><EmptySlot icon={<Globe size={24} />} label="后端未连接" /></div>}
+      {isLoading && <div className="rounded-xl bg-white p-6 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">加载中...</div>}
+      {isError && <div className="rounded-xl bg-white p-6 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">加载失败，请检查后端服务。</div>}
 
-      {sites.length > 0 && (
-        <div className="card span-2">
-          <p className="card__eyebrow"><Star size={11} />首页精选</p>
-          <ul className="item-list">
-            {sites.map(s => (
-              <li key={String(s.id)}>
-                <a className="item-list__row" href={String(s.url)} target="_blank" rel="noreferrer">
-                  <span className="item-list__name">{String(s.name)}</span>
-                  <ArrowUpRight size={13} style={{ color: '#334155', flexShrink: 0 }} />
-                </a>
-              </li>
-            ))}
-          </ul>
+      {featured && (
+        <div className="grid gap-5 lg:grid-cols-[2fr_1fr]">
+          <Link to={`/blog/${featured.id}`} className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+            <img
+              src={featured.cover_image || fallbackCover(featured.id)}
+              alt={featured.title}
+              className="aspect-[16/9] w-full object-cover grayscale transition duration-300 hover:grayscale-0"
+            />
+            <div className="space-y-3 p-6">
+              <span className="inline-flex rounded-full bg-[#eff4ff] px-3 py-1 text-xs font-medium text-[#004ac6]">{featured.article_class || "未分类"}</span>
+              <h2 className="font-[Manrope] text-2xl font-bold">{featured.title}</h2>
+              <p className="text-slate-600">{featured.article_lead}</p>
+            </div>
+          </Link>
+          <aside className="rounded-2xl bg-gradient-to-br from-[#004ac6] to-[#2563eb] p-6 text-white shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+            <p className="mb-2 text-sm font-semibold">Newsletter</p>
+            <h3 className="font-[Manrope] text-2xl font-extrabold">保持更新</h3>
+            <p className="mt-3 text-sm text-white/90">获取最新文章与工具动态，持续迭代你的技术视野。</p>
+          </aside>
         </div>
       )}
 
-      {reads.length > 0 && (
-        <div className="card">
-          <p className="card__eyebrow"><TrendingUp size={11} />热门点击</p>
-          <ul className="item-list">
-            {reads.map(s => (
-              <li key={String(s.id)}>
-                <a className="item-list__row" href={String(s.url)} target="_blank" rel="noreferrer">
-                  <span className="item-list__name">{String(s.name)}</span>
-                  <span className="item-list__meta">{String(s.url_reads ?? 0)}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {!isError && sites.length === 0 && reads.length === 0 && (
-        <div className="card span-3"><EmptySlot icon={<Globe size={24} />} label="暂无导航数据" /></div>
-      )}
-    </div>
-  )
-}
-
-// ═══════════════════════════════════════════════════
-//  ABOUT
-// ═══════════════════════════════════════════════════
-function AboutPage() {
-  return (
-    <div className="bento">
-      <div className="card card--flat span-3" style={{ padding: '36px 44px' }}>
-        <div className="icon-box icon-box--cyan"><Layers size={18} /></div>
-        <h2 className="hero__title" style={{ fontSize: 'clamp(32px,4vw,56px)', marginBottom: 12 }}>
-          <span className="hero__title--white">关于这个 </span>
-          <span className="hero__title--glow">项目</span>
-        </h2>
-        <p className="hero__desc">从 Python 2 + 老版 Django 模板站，全面重构为前后端分离 SPA，保持功能对等并引入现代工程规范。</p>
-      </div>
-
-      <div className="card span-2">
-        <p className="card__eyebrow"><Wrench size={11} />技术栈</p>
-        <ul className="item-list">
-          {[
-            ['后端',   'Django 4.2 LTS + DRF'],
-            ['前端',   'React 19 + Vite + TypeScript'],
-            ['样式',   'Tailwind CSS v4'],
-            ['认证',   'JWT (simplejwt)'],
-            ['数据库', 'MySQL 8 + PyMySQL'],
-            ['网关',   'Nginx (SPA + /api proxy)'],
-            ['部署',   'Docker Compose (3 containers)'],
-          ].map(([k, v]) => (
-            <li key={k}>
-              <div className="item-list__row" style={{ cursor: 'default' }}>
-                <span className="item-list__meta" style={{ flexShrink: 0 }}>{k}</span>
-                <span style={{ color: '#94a3b8', fontSize: 13 }}>{v}</span>
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {pageList.map((item) => (
+          <Link key={item.id} to={`/blog/${item.id}`} className="group overflow-hidden rounded-2xl bg-white shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+            <img
+              src={item.cover_image || fallbackCover(item.id)}
+              alt={item.title}
+              className="aspect-[4/3] w-full object-cover grayscale transition duration-300 group-hover:-translate-y-0.5 group-hover:grayscale-0"
+            />
+            <div className="space-y-3 p-5">
+              <div className="flex items-center justify-between">
+                <span className="rounded-full bg-[#eff4ff] px-3 py-1 text-xs font-medium text-[#004ac6]">{item.article_class || "未分类"}</span>
+                <span className="text-xs text-slate-500">{item.read_time || 5} min read</span>
               </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="card card--violet">
-        <p className="card__eyebrow"><Radio size={11} />API 端点</p>
-        {[
-          'POST /api/auth/token/',
-          'GET  /api/blog/articles/',
-          'POST /api/blog/articles/create/',
-          'GET  /api/tools/home/',
-          'GET  /api/nav/sites/home/',
-          'POST /api/uploads/images/',
-        ].map(ep => (
-          <div key={ep} style={{ fontFamily: 'ui-monospace,monospace', fontSize: 11, color: '#64748b', padding: '6px 10px', borderRadius: 8, marginBottom: 4, background: 'rgba(255,255,255,0.03)' }}>
-            {ep}
-          </div>
+              <h3 className="line-clamp-2 font-[Manrope] text-xl font-bold">{item.title}</h3>
+              <p className="line-clamp-3 text-sm text-slate-600">{item.article_lead}</p>
+              <div className="flex items-center justify-between text-sm text-slate-500">
+                <span>{formatDate(item.publish_time)}</span>
+                <span className="material-symbols-outlined">arrow_outward</span>
+              </div>
+            </div>
+          </Link>
         ))}
       </div>
+
+      <Pagination page={page} setPage={setPage} total={totalPage} />
+    </section>
+  )
+}
+
+function BlogDetailPage() {
+  const { id = "" } = useParams()
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["blog-detail", id],
+    queryFn: () => apiGet<ArticleDetail>(`/blog/articles/${id}/`),
+  })
+  if (isLoading) return <div className="rounded-xl bg-white p-6 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">加载中...</div>
+  if (isError || !data) return <div className="rounded-xl bg-white p-6 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">文章不存在或加载失败。</div>
+
+  return (
+    <article className="space-y-8">
+      <header className="mx-auto max-w-3xl text-center">
+        <span className="inline-flex rounded-full bg-[#eff4ff] px-3 py-1 text-xs font-medium text-[#004ac6]">{data.article_class || "未分类"}</span>
+        <h1 className="mt-4 font-[Manrope] text-4xl font-extrabold tracking-tight md:text-5xl">{data.title}</h1>
+        <div className="mt-5 flex items-center justify-center gap-3 text-sm text-slate-500">
+          <div className="h-8 w-8 rounded-full bg-[#dbeafe]" />
+          <span>{data.author || "匿名作者"}</span>
+          <span>·</span>
+          <span>{formatDate(data.publish_time)}</span>
+          <span>·</span>
+          <span>{data.read_time || 5} min read</span>
+        </div>
+      </header>
+      <img src={data.cover_image || fallbackCover(data.id)} alt={data.title} className="aspect-[21/9] w-full rounded-2xl object-cover shadow-[0_20px_40px_rgba(25,28,30,0.06)]" />
+      <div className="mx-auto max-w-3xl rounded-2xl bg-white p-8 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+        <p className="text-lg text-slate-600">{data.article_lead}</p>
+        <div className="editorial-content mt-4" dangerouslySetInnerHTML={{ __html: data.article_body || "" }} />
+      </div>
+      <div className="mx-auto flex max-w-3xl items-center justify-between rounded-2xl bg-white px-6 py-4 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+        <button type="button" className="inline-flex items-center gap-2 rounded-xl bg-[#f2f4f7] px-4 py-2 text-sm font-semibold text-slate-700"><span className="material-symbols-outlined">favorite</span>点赞</button>
+        <button type="button" className="inline-flex items-center gap-2 rounded-xl bg-[#f2f4f7] px-4 py-2 text-sm font-semibold text-slate-700"><span className="material-symbols-outlined">share</span>分享</button>
+      </div>
+    </article>
+  )
+}
+
+function WorkshopPage() {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["workshop-list"],
+    queryFn: () => apiGet<{ results: WorkshopItem[] }>("/workshop/items/"),
+  })
+  const groups = useMemo(() => {
+    const map = new Map<string, WorkshopItem[]>()
+    for (const item of data?.results || []) {
+      const key = item.category || "未分类"
+      const arr = map.get(key) || []
+      arr.push(item)
+      map.set(key, arr)
+    }
+    return Array.from(map.entries())
+  }, [data])
+
+  return (
+    <section className="space-y-8">
+      <div className="space-y-2 text-center">
+        <h1 className="font-[Manrope] text-4xl font-extrabold tracking-tight md:text-5xl">Workshop</h1>
+        <p className="text-slate-600">以导航站结构展示我的工具与实验项目。</p>
+      </div>
+      {isLoading && <div className="rounded-xl bg-white p-6 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">加载中...</div>}
+      {isError && <div className="rounded-xl bg-white p-6 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">加载失败，请检查后端服务。</div>}
+      {groups.map(([category, items]) => (
+        <section key={category} className="space-y-5">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-16 bg-[#d8e0f0]" />
+            <h2 className="font-[Manrope] text-2xl font-bold">{category}</h2>
+            <div className="h-px w-16 bg-[#d8e0f0]" />
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {items.map((item) => (
+              <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="group rounded-2xl bg-white p-5 shadow-[0_20px_40px_rgba(25,28,30,0.06)] transition hover:-translate-y-0.5">
+                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#f2f4f7] text-[#004ac6]">
+                  {item.icon_url ? <img src={item.icon_url} alt={item.name} className="h-7 w-7 rounded-md object-cover" /> : <span className="material-symbols-outlined">extension</span>}
+                </div>
+                <h3 className="font-[Manrope] text-xl font-bold">{item.name}</h3>
+                <p className="mt-2 line-clamp-2 text-sm text-slate-600">{item.description || "暂无描述"}</p>
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="rounded-full bg-[#eff4ff] px-3 py-1 text-xs font-medium text-[#004ac6]">{item.category || "未分类"}</span>
+                  <span className="text-sm font-medium text-[#004ac6]">访问官网 ↗</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+    </section>
+  )
+}
+
+function RequireAuth({ children }: { children: ReactNode }) {
+  if (!token()) return <Navigate to="/admin/login" replace />
+  return <>{children}</>
+}
+
+function AdminLoginPage() {
+  const navigate = useNavigate()
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setError("")
+    try {
+      const res = await fetch(`${API_BASE}/auth/token/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      })
+      if (!res.ok) throw new Error("login")
+      const data = (await res.json()) as LoginRes
+      localStorage.setItem("admin_access_token", data.access)
+      localStorage.setItem("admin_refresh_token", data.refresh)
+      navigate("/admin/dashboard")
+    } catch {
+      setError("用户名或密码错误")
+    }
+  }
+
+  return (
+    <section className="relative grid min-h-screen place-items-center overflow-hidden bg-[#f7f9fc] px-4">
+      <span className="material-symbols-outlined absolute -left-8 -top-8 text-[220px] text-[#004ac6]/5">verified_user</span>
+      <span className="material-symbols-outlined absolute -bottom-8 -right-8 text-[220px] text-[#004ac6]/5">shield</span>
+      <form onSubmit={onSubmit} className="relative z-10 w-full max-w-md space-y-5 rounded-2xl bg-white p-8 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+        <div className="text-center">
+          <h1 className="font-[Manrope] text-3xl font-extrabold">后台登录</h1>
+          <p className="mt-2 text-sm text-slate-500">使用配置中的管理员账号进入内容控制台</p>
+        </div>
+        <label className="block text-sm font-medium text-slate-600">
+          用户名
+          <div className="mt-2 flex items-center rounded-xl bg-[#f2f4f7] px-3">
+            <span className="material-symbols-outlined text-slate-500">person</span>
+            <input className="w-full border-none bg-transparent px-2 py-3 outline-none" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          </div>
+        </label>
+        <label className="block text-sm font-medium text-slate-600">
+          密码
+          <div className="mt-2 flex items-center rounded-xl bg-[#f2f4f7] px-3">
+            <span className="material-symbols-outlined text-slate-500">lock</span>
+            <input className="w-full border-none bg-transparent px-2 py-3 outline-none" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+        </label>
+        {error && <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p>}
+        <button type="submit" className="w-full rounded-xl bg-gradient-to-r from-[#004ac6] to-[#2563eb] py-3 text-sm font-semibold text-white shadow-[0_20px_40px_rgba(25,28,30,0.06)]">登录</button>
+      </form>
+    </section>
+  )
+}
+
+function EditorToolbar({ editor }: { editor: Editor | null }) {
+  if (!editor) return null
+  const setLink = () => {
+    const url = window.prompt("输入链接", "https://")
+    if (!url) return
+    editor.chain().focus().insertContent(`<a href="${url}" target="_blank">链接</a>`).run()
+  }
+  const setImage = () => {
+    const url = window.prompt("输入图片 URL")
+    if (!url) return
+    editor.chain().focus().insertContent(`<p><img src="${url}" alt="image" /></p>`).run()
+  }
+  return (
+    <div className="flex flex-wrap gap-2">
+      <button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className="rounded-lg bg-[#f2f4f7] px-3 py-1 text-sm">format_bold</button>
+      <button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className="rounded-lg bg-[#f2f4f7] px-3 py-1 text-sm">format_italic</button>
+      <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className="rounded-lg bg-[#f2f4f7] px-3 py-1 text-sm">H2</button>
+      <button type="button" onClick={setLink} className="rounded-lg bg-[#f2f4f7] px-3 py-1 text-sm">link</button>
+      <button type="button" onClick={setImage} className="rounded-lg bg-[#f2f4f7] px-3 py-1 text-sm">image</button>
+      <button type="button" onClick={() => editor.chain().focus().toggleBulletList().run()} className="rounded-lg bg-[#f2f4f7] px-3 py-1 text-sm">list</button>
+      <button type="button" onClick={() => editor.chain().focus().toggleBlockquote().run()} className="rounded-lg bg-[#f2f4f7] px-3 py-1 text-sm">quote</button>
     </div>
   )
 }
 
-// ═══════════════════════════════════════════════════
-//  APP
-// ═══════════════════════════════════════════════════
+function BlogEditor() {
+  const [title, setTitle] = useState("")
+  const [articleClass, setArticleClass] = useState("随笔")
+  const [lead, setLead] = useState("")
+  const [coverImage, setCoverImage] = useState("")
+  const [readTime, setReadTime] = useState(5)
+  const [message, setMessage] = useState("")
+  const editor = useEditor({ extensions: [StarterKit], content: "<p>开始写作...</p>" })
+
+  async function uploadCover(file: File) {
+    const form = new FormData()
+    form.append("image", file)
+    const res = await fetch(`${API_BASE}/uploads/images/`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token()}` },
+      body: form,
+    })
+    if (!res.ok) throw new Error("upload")
+    const data = (await res.json()) as { url: string }
+    setCoverImage(data.url)
+  }
+  async function save() {
+    if (!editor) return
+    try {
+      await apiAuthed("/blog/articles/", "POST", {
+        title,
+        article_class: articleClass,
+        article_lead: lead,
+        article_body: editor.getHTML(),
+        cover_image: coverImage,
+        read_time: readTime,
+        location: "web",
+        quote: "原创",
+        cornerite: "",
+        tags: [],
+      })
+      setMessage("文章已发布")
+      setTitle("")
+      setLead("")
+      setCoverImage("")
+      setReadTime(5)
+      editor.commands.setContent("<p>开始写作...</p>")
+    } catch {
+      setMessage("发布失败")
+    }
+  }
+
+  return (
+    <section className="space-y-4 rounded-2xl bg-white p-6 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+      <h2 className="font-[Manrope] text-2xl font-bold">博文管理</h2>
+      <input className="w-full rounded-xl border-none bg-[#f2f4f7] px-4 py-3 text-2xl font-bold outline-none ring-1 ring-transparent focus:ring-[#bdd2ff]" placeholder="请输入文章标题" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <div className="grid gap-3 md:grid-cols-2">
+        <input className="rounded-xl border-none bg-[#f2f4f7] px-4 py-3 outline-none" placeholder="文章分类" value={articleClass} onChange={(e) => setArticleClass(e.target.value)} />
+        <input className="rounded-xl border-none bg-[#f2f4f7] px-4 py-3 outline-none" type="number" min={1} placeholder="阅读时长(分钟)" value={readTime} onChange={(e) => setReadTime(Number(e.target.value) || 5)} />
+      </div>
+      <textarea className="min-h-24 w-full rounded-xl border-none bg-[#f2f4f7] px-4 py-3 outline-none" placeholder="摘要" value={lead} onChange={(e) => setLead(e.target.value)} />
+      <div className="space-y-3 rounded-xl border border-dashed border-[#bdd2ff] bg-[#f8fbff] p-4">
+        <p className="text-sm text-slate-600">封面图上传</p>
+        <input type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && uploadCover(e.target.files[0]).catch(() => setMessage("封面上传失败"))} />
+        {coverImage && <img src={coverImage} alt="cover" className="h-36 w-full rounded-xl object-cover" />}
+      </div>
+      <EditorToolbar editor={editor} />
+      <EditorContent editor={editor} className="min-h-72 rounded-xl bg-[#f2f4f7] p-4" />
+      <button type="button" onClick={save} className="rounded-xl bg-gradient-to-r from-[#004ac6] to-[#2563eb] px-5 py-2.5 text-sm font-semibold text-white">发布文章</button>
+      {message && <p className="text-sm text-[#004ac6]">{message}</p>}
+    </section>
+  )
+}
+
+function WorkshopEditor() {
+  const [name, setName] = useState("")
+  const [description, setDescription] = useState("")
+  const [url, setUrl] = useState("")
+  const [iconUrl, setIconUrl] = useState("")
+  const [category, setCategory] = useState("通用")
+  const [message, setMessage] = useState("")
+  const { data, refetch } = useQuery({
+    queryKey: ["admin-workshop-list"],
+    queryFn: () => apiAuthed<{ results: WorkshopItem[] }>("/workshop/items/admin/"),
+  })
+  async function addItem() {
+    try {
+      await apiAuthed("/workshop/items/", "POST", {
+        name,
+        description,
+        url,
+        icon_url: iconUrl,
+        category,
+        sort_order: 0,
+        is_active: true,
+      })
+      setName("")
+      setDescription("")
+      setUrl("")
+      setIconUrl("")
+      setCategory("通用")
+      setMessage("工坊条目已新增")
+      refetch()
+    } catch {
+      setMessage("新增失败")
+    }
+  }
+  async function removeItem(id: number) {
+    await apiAuthed(`/workshop/items/${id}/`, "DELETE")
+    refetch()
+  }
+
+  return (
+    <section className="space-y-4 rounded-2xl bg-white p-6 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+      <h2 className="font-[Manrope] text-2xl font-bold">工坊管理</h2>
+      <div className="grid gap-3 md:grid-cols-2">
+        <input className="rounded-xl border-none bg-[#f2f4f7] px-4 py-3 outline-none" placeholder="名称" value={name} onChange={(e) => setName(e.target.value)} />
+        <input className="rounded-xl border-none bg-[#f2f4f7] px-4 py-3 outline-none" placeholder="分类" value={category} onChange={(e) => setCategory(e.target.value)} />
+      </div>
+      <textarea className="min-h-24 w-full rounded-xl border-none bg-[#f2f4f7] px-4 py-3 outline-none" placeholder="描述" value={description} onChange={(e) => setDescription(e.target.value)} />
+      <input className="w-full rounded-xl border-none bg-[#f2f4f7] px-4 py-3 outline-none" placeholder="链接 URL" value={url} onChange={(e) => setUrl(e.target.value)} />
+      <input className="w-full rounded-xl border-none bg-[#f2f4f7] px-4 py-3 outline-none" placeholder="图标 URL（可选）" value={iconUrl} onChange={(e) => setIconUrl(e.target.value)} />
+      <button type="button" className="rounded-xl bg-gradient-to-r from-[#004ac6] to-[#2563eb] px-5 py-2.5 text-sm font-semibold text-white" onClick={addItem}>新增条目</button>
+      {message && <p className="text-sm text-[#004ac6]">{message}</p>}
+      <ul className="space-y-2">
+        {(data?.results || []).map((item) => (
+          <li key={item.id} className="flex items-center justify-between rounded-xl bg-[#f2f4f7] px-4 py-3">
+            <span className="text-sm text-slate-700">{item.name}</span>
+            <button type="button" className="rounded-lg bg-red-50 px-3 py-1 text-sm text-red-600" onClick={() => removeItem(item.id)}>删除</button>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+function AdminDashboardPage() {
+  const navigate = useNavigate()
+  const [tab, setTab] = useState<"blog" | "workshop">("blog")
+  function logout() {
+    localStorage.removeItem("admin_access_token")
+    localStorage.removeItem("admin_refresh_token")
+    navigate("/admin/login")
+  }
+  return (
+    <section className="flex min-h-screen bg-[#f7f9fc]">
+      <aside className="sticky top-0 flex h-screen w-64 flex-col bg-white p-4 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+        <div className="mb-5 rounded-xl bg-[#f2f4f7] p-3">
+          <p className="text-xs text-slate-500">admin</p>
+          <p className="font-[Manrope] font-bold">Content Console</p>
+        </div>
+        <button type="button" onClick={() => setTab("blog")} className={`mb-2 rounded-xl px-4 py-2 text-left text-sm ${tab === "blog" ? "bg-[#eff4ff] text-[#004ac6]" : "bg-[#f2f4f7] text-slate-700"}`}>博文管理</button>
+        <button type="button" onClick={() => setTab("workshop")} className={`mb-2 rounded-xl px-4 py-2 text-left text-sm ${tab === "workshop" ? "bg-[#eff4ff] text-[#004ac6]" : "bg-[#f2f4f7] text-slate-700"}`}>工坊管理</button>
+        <button type="button" onClick={logout} className="mt-auto rounded-xl bg-red-50 px-4 py-2 text-sm text-red-600">退出登录</button>
+      </aside>
+      <div className="min-w-0 flex-1 px-6 py-6">
+        <header className="sticky top-4 z-20 mb-5 flex items-center justify-between rounded-2xl bg-white px-5 py-3 shadow-[0_20px_40px_rgba(25,28,30,0.06)]">
+          <p className="text-sm text-slate-500">Admin / {tab === "blog" ? "Blog Editor" : "Workshop Editor"}</p>
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-slate-500">状态: 草稿</span>
+            <button type="button" className="rounded-xl bg-gradient-to-r from-[#004ac6] to-[#2563eb] px-4 py-2 text-sm font-semibold text-white">发布</button>
+          </div>
+        </header>
+        {tab === "blog" ? <BlogEditor /> : <WorkshopEditor />}
+      </div>
+    </section>
+  )
+}
+
 export default function App() {
   return (
-    <Shell>
+    <AppShell>
       <Routes>
-        <Route path="/"             element={<HomePage />}       />
-        <Route path="/tools"        element={<ToolsPage />}      />
-        <Route path="/tools/:ename" element={<ToolDetailPage />} />
-        <Route path="/blog"         element={<BlogPage />}       />
-        <Route path="/blog/:id"     element={<BlogDetailPage />} />
-        <Route path="/nav"          element={<NavPage />}        />
-        <Route path="/about"        element={<AboutPage />}      />
+        <Route path="/" element={<Navigate to="/blog" replace />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:id" element={<BlogDetailPage />} />
+        <Route path="/workshop" element={<WorkshopPage />} />
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route path="/admin/dashboard" element={<RequireAuth><AdminDashboardPage /></RequireAuth>} />
       </Routes>
-    </Shell>
+    </AppShell>
   )
 }

@@ -27,9 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'mine_api',
+    'mine_api.apps.MineApiConfig',
     'tools_api',
     'nav_api',
+    'workshop_api',
     'uploads',
 ]
 

@@ -27,6 +27,7 @@ urlpatterns = [
     path("api/blog/", include("mine_api.urls")),
     path("api/tools/", include("tools_api.urls")),
     path("api/nav/", include("nav_api.urls")),
+    path("api/workshop/", include("workshop_api.urls")),
     path("api/uploads/", include("uploads.urls")),
 ]
 

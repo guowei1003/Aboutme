@@ -20,6 +20,34 @@ class ArticleListSerializer(serializers.ModelSerializer):
             "cornerite",
             "article_class",
             "article_lead",
+            "cover_image",
+            "read_time",
+            "author",
+            "publish_time",
+            "article_reads",
+            "article_likes",
+            "tag_list",
+        ]
+
+    def get_tag_list(self, obj):
+        return list(obj.article_tags.values_list("tag", flat=True))
+
+
+class ArticleDetailSerializer(serializers.ModelSerializer):
+    author = serializers.CharField(source="author.author_nickname", read_only=True)
+    tag_list = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Article
+        fields = [
+            "id",
+            "title",
+            "cornerite",
+            "article_class",
+            "article_lead",
+            "article_body",
+            "cover_image",
+            "read_time",
             "author",
             "publish_time",
             "article_reads",
@@ -36,5 +64,36 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ["title", "location", "quote", "article_class", "article_lead", "cornerite", "tags"]
+        fields = [
+            "title",
+            "location",
+            "quote",
+            "article_class",
+            "article_lead",
+            "article_body",
+            "cover_image",
+            "read_time",
+            "cornerite",
+            "tags",
+        ]
+
+
+class ArticleUpdateSerializer(serializers.ModelSerializer):
+    tags = serializers.ListField(child=serializers.CharField(), required=False, allow_empty=True)
+
+    class Meta:
+        model = Article
+        fields = [
+            "title",
+            "location",
+            "quote",
+            "article_class",
+            "article_lead",
+            "article_body",
+            "cover_image",
+            "read_time",
+            "cornerite",
+            "tags",
+            "is_avtive",
+        ]
 

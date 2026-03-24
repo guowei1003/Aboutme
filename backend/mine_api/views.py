@@ -3,8 +3,15 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+
 from .models import Article, Author, Tags
-from .serializers import ArticleCreateSerializer, ArticleListSerializer, TagsSerializer
+from .serializers import (
+    ArticleCreateSerializer,
+    ArticleDetailSerializer,
+    ArticleListSerializer,
+    ArticleUpdateSerializer,
+    TagsSerializer,
+)
 
 
 @api_view(["GET"])
@@ -18,16 +25,45 @@ def article_list(request):
     return Response({"results": serializer.data})
 
 
-@api_view(["GET"])
+@api_view(["GET", "PUT", "PATCH", "DELETE"])
 @permission_classes([AllowAny])
 def article_detail(request, pk):
+    if request.method == "GET":
+        try:
+            article = Article.objects.get(pk=pk, is_avtive=True)
+        except Article.DoesNotExist:
+            return Response({"detail": "not found"}, status=status.HTTP_404_NOT_FOUND)
+        Article.objects.filter(pk=pk).update(article_reads=F("article_reads") + 1)
+        article.refresh_from_db()
+        return Response(ArticleDetailSerializer(article).data)
+
+    if not (request.user and request.user.is_authenticated and request.user.is_staff):
+        return Response({"detail": "forbidden"}, status=status.HTTP_403_FORBIDDEN)
+
     try:
-        article = Article.objects.get(pk=pk, is_avtive=True)
+        article = Article.objects.get(pk=pk)
     except Article.DoesNotExist:
         return Response({"detail": "not found"}, status=status.HTTP_404_NOT_FOUND)
-    Article.objects.filter(pk=pk).update(article_reads=F("article_reads") + 1)
+
+    if request.method == "DELETE":
+        article.is_avtive = False
+        article.save(update_fields=["is_avtive"])
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    serializer = ArticleUpdateSerializer(article, data=request.data, partial=request.method == "PATCH")
+    serializer.is_valid(raise_exception=True)
+    data = serializer.validated_data
+    tags = data.pop("tags", None)
+    for key, value in data.items():
+        setattr(article, key, value)
+    article.save()
+    if tags is not None:
+        article.article_tags.clear()
+        for tag_name in tags:
+            tag, _ = Tags.objects.get_or_create(tag=tag_name)
+            article.article_tags.add(tag)
     article.refresh_from_db()
-    return Response(ArticleListSerializer(article).data)
+    return Response(ArticleDetailSerializer(article).data)
 
 
 @api_view(["GET"])
@@ -44,7 +80,11 @@ def article_search(request):
     if query_date:
         parts = query_date.split("-")
         if len(parts) == 3:
-            queryset = queryset.filter(create_time__year=parts[0], create_time__month=parts[1], create_time__day=parts[2])
+            queryset = queryset.filter(
+                create_time__year=parts[0],
+                create_time__month=parts[1],
+                create_time__day=parts[2],
+            )
     serializer = ArticleListSerializer(queryset.order_by("-create_time")[:50], many=True)
     return Response({"results": serializer.data})
 
@@ -89,16 +129,19 @@ def article_create(request):
             "permissions": Author.PermissionChoices.ADMIN,
         },
     )
+    data = serializer.validated_data
+    tags = data.pop("tags", [])
     article = Article.objects.create(
-        title=serializer.validated_data["title"],
+        title=data["title"],
         author=author,
-        location=serializer.validated_data.get("location", "北京"),
-        quote=serializer.validated_data.get("quote", "原创"),
-        article_class=serializer.validated_data.get("article_class", "python"),
-        article_lead=serializer.validated_data["article_lead"],
-        cornerite=serializer.validated_data.get("cornerite", ""),
+        location=data.get("location", "北京"),
+        quote=data.get("quote", "原创"),
+        article_class=data.get("article_class", "python"),
+        article_lead=data["article_lead"],
+        article_body=data.get("article_body", ""),
+        cornerite=data.get("cornerite", ""),
     )
-    for tag_name in serializer.validated_data.get("tags", []):
+    for tag_name in tags:
         tag, _ = Tags.objects.get_or_create(tag=tag_name)
         article.article_tags.add(tag)
-    return Response(ArticleListSerializer(article).data, status=status.HTTP_201_CREATED)
+    return Response(ArticleDetailSerializer(article).data, status=status.HTTP_201_CREATED)
