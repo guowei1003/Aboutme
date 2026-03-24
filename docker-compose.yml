@@ -77,7 +77,7 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    command: ["python", "service/worker.py"]
+    command: ["python", "-m", "service.worker"]
     depends_on:
       daily-service:
         condition: service_started
