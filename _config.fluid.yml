@@ -1,0 +1,129 @@
+# 导航菜单
+navbar:
+  blog_name: Kapibala
+  menu:
+    - { name: "博客", link: "/", icon: "icon-home" }
+    - { name: "AI 日报", link: "/categories/AI-Daily/", icon: "icon-calendar" }
+    - { name: "进化", link: "/evolution/", icon: "icon-star" }
+
+# 页脚配置
+footer:
+  content: 'Powered by <a href="https://hexo.io">Hexo</a> & <a href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a> | © 2024 Kapibala'
+
+# 首页配置
+index:
+  banner_img: /img/banner.jpg
+  banner_img_height: 80
+  banner_mask_alpha: 0.3
+  post_url_target: _self
+  post_meta:
+    date: true
+    category: true
+    tag: true
+
+# 文章页配置
+post:
+  banner_img: /img/banner.jpg
+  banner_img_height: 70
+  banner_mask_alpha: 0.3
+  default_index_img: /img/default-cover.jpg
+  meta:
+    author: true
+    date: true
+    category: true
+    tag: true
+  toc:
+    enable: true
+    headingSelector: h1,h2,h3,h4,h5,h6
+    collapseDepth: 0
+  copyright:
+    enable: true
+    content: '本文作者：Kapibala<br>本文链接：<a href="%s">%s</a><br>版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。转载请注明出处！'
+
+# 归档页配置
+archive:
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.3
+
+# 分类页配置
+category:
+  enable: true
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.3
+
+# 标签页配置
+tag:
+  enable: true
+  banner_img: /img/banner.jpg
+  banner_img_height: 60
+  banner_mask_alpha: 0.3
+
+# 关于页配置
+about:
+  enable: true
+  banner_img: /img/banner.jpg
+  banner_img_height: 80
+  banner_mask_alpha: 0.3
+
+# 评论系统 - Waline
+post_comments:
+  enable: true
+  type: waline
+
+waline:
+  enable: true
+  serverURL: https://kapibala.uno/comments
+  path: window.location.pathname
+  meta: ["nick", "mail", "link"]
+  requiredMeta: ["nick", "mail"]
+  login: enable
+  wordLimit: 0
+  pageSize: 10
+  imageUploader: false
+
+# 代码高亮
+code:
+  highlight:
+    enable: true
+    light: github
+    dark: github-dark
+
+# 搜索功能
+search:
+  enable: true
+  path: /local-search.xml
+  field: post
+  content: true
+
+# 网站图标
+favicon: /img/favicon.ico
+
+# 自定义 JS
+custom_js:
+  - /js/custom.js
+
+# 自定义 CSS
+custom_css:
+  - /css/custom.css
+
+# 页面加载动画
+loader:
+  enable: true
+  source: 1
+
+# 回到顶部按钮
+back2top:
+  enable: true
+
+# 图片懒加载
+lazyload:
+  enable: true
+  onlypost: false
+  loadingImg: /img/loading.gif
+
+# 夜间模式
+dark_mode:
+  enable: true
+  default: auto
