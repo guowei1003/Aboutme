@@ -12,7 +12,8 @@ mkdir -p ./public ./waline/data ./nginx
 # 3. 在服务器构建镜像（包含 Hexo 编译）
 # 默认强制无缓存重建，确保每次都执行 Dockerfile 中的 Hexo 编译步骤
 echo "🏗️ 开始构建镜像（强制重编译，显示详细构建日志）..."
-docker compose build --pull --no-cache --progress=plain
+docker compose --progress plain build --pull --no-cache
+echo "✅ 镜像构建完成（已在 Dockerfile 构建阶段执行 Hexo 编译）"
 
 # 4. 清理同名旧容器（避免名称冲突）
 if docker container inspect kapibala-web >/dev/null 2>&1; then
