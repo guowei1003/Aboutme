@@ -28,16 +28,18 @@ mkdir -p ./public ./waline/data ./nginx
 
 # 3. 在服务器构建镜像（包含 Hexo 编译）
 # 默认强制无缓存重建，确保每次都执行 Dockerfile 中的 Hexo 编译步骤
-log "🏗️ 开始构建镜像（强制重编译，显示详细构建日志）..."
-
-if ! awk '/^[[:space:]]*build:[[:space:]]*($|#)/{found=1} END{exit !found}' "$COMPOSE_FILE"; then
-  log "❌ 当前 compose 未检测到 build 配置，无法执行容器内编译。"
-  log "   请检查: $COMPOSE_FILE"
-  exit 1
-fi
+log "🏗️ 开始构建镜像（先 build 再 up，强制重编译）..."
 
 build_start_ms=$(date +%s%3N)
-docker compose --progress plain build --pull --no-cache
+if awk '/^[[:space:]]*build:[[:space:]]*/{found=1} END{exit !found}' "$COMPOSE_FILE"; then
+  docker compose --progress plain build --pull --no-cache
+elif [ -f "$DEPLOY_DIR/Dockerfile" ]; then
+  log "ℹ️ compose 未配置 build，回退使用 docker build 构建 kapibala-web:latest"
+  docker build --pull --no-cache -t kapibala-web:latest -f "$DEPLOY_DIR/Dockerfile" "$DEPLOY_DIR"
+else
+  log "❌ 既未检测到 compose build 配置，也未找到 Dockerfile，无法执行容器内编译。"
+  exit 1
+fi
 build_end_ms=$(date +%s%3N)
 build_elapsed_ms=$((build_end_ms - build_start_ms))
 log "⏱️ 镜像构建耗时: ${build_elapsed_ms}ms"
