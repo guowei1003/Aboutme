@@ -1,20 +1,20 @@
 # 导航菜单
 navbar:
-  blog_name: Kapibala
+  blog_name: AI下的牛马人生
   menu:
-    - { name: "博客", link: "/", icon: "icon-home" }
-    - { name: "AI 日报", link: "/categories/AI-Daily/", icon: "icon-calendar" }
-    - { name: "进化", link: "/evolution/", icon: "icon-star" }
+    - { name: "牛马日常", link: "/", icon: "icon-home" }
+    - { name: "提效战报", link: "/categories/AI-Daily/", icon: "icon-calendar" }
+    - { name: "进化记录", link: "/evolution/", icon: "icon-star" }
 
 # 页脚配置
 footer:
-  content: 'Powered by <a href="https://hexo.io">Hexo</a> & <a href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a> | © 2024 Kapibala'
+  content: 'Powered by <a href="https://hexo.io">Hexo</a> & <a href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a> | © 2026 AI下的牛马人生'
 
 # 首页配置
 index:
   banner_img: /img/banner.jpg
   banner_img_height: 80
-  banner_mask_alpha: 0.3
+  banner_mask_alpha: 0.38
   post_url_target: _self
   post_meta:
     date: true
@@ -25,7 +25,7 @@ index:
 post:
   banner_img: /img/banner.jpg
   banner_img_height: 70
-  banner_mask_alpha: 0.3
+  banner_mask_alpha: 0.38
   default_index_img: /img/default-cover.jpg
   meta:
     author: true
@@ -38,7 +38,7 @@ post:
     collapseDepth: 0
   copyright:
     enable: true
-    content: '本文作者：Kapibala<br>本文链接：<a href="%s">%s</a><br>版权声明：本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。转载请注明出处！'
+    content: '本文作者：牛马打工人<br>本文链接：<a href="%s">%s</a><br>版权声明：欢迎转载与交流，转载请注明来源与原文链接。'
 
 # 归档页配置
 archive:
