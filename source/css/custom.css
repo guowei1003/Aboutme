@@ -20,3 +20,10 @@ img {
 a {
   transition: color 0.3s ease;
 }
+
+/* 首页 SVG 横幅：铺满裁切，避免拉伸失真 */
+#banner .parallax-container img,
+#banner img {
+  object-fit: cover;
+  object-position: center;
+}
