@@ -35,3 +35,13 @@ jobs:
           TARGET: /data/aboutme/public
           SOURCE: "public/"
           ARGS: "-avz --delete"
+
+      - name: Deploy privacy static pages
+        uses: easingthemes/ssh-deploy@v4
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          TARGET: /data/aboutme/privacy
+          SOURCE: "privacy/"
+          ARGS: "-avz"

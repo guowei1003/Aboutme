@@ -10,3 +10,5 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./ssl:/etc/ssl/certs:ro
+      # 应用隐私/合规等独立 HTML，URL 前缀 /privacy
+      - ./privacy:/usr/share/nginx/privacy:ro

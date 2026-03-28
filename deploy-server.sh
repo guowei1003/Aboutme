@@ -24,7 +24,7 @@ fi
 cd "$DEPLOY_DIR"
 
 # 2. 创建必要目录
-mkdir -p ./public ./waline/data ./nginx
+mkdir -p ./public ./privacy ./waline/data ./nginx
 
 # 3. 在服务器构建镜像（包含 Hexo 编译）
 # 默认强制无缓存重建，确保每次都执行 Dockerfile 中的 Hexo 编译步骤
