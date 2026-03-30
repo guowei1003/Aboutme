@@ -1,14 +1,14 @@
 # 导航菜单
 navbar:
-  blog_name: AI下的牛马人生
+  blog_name: 芝士就是力量
   menu:
-    - { name: "牛马日常", link: "/", icon: "icon-home" }
-    - { name: "提效战报", link: "/categories/AI-Daily/", icon: "icon-calendar" }
+    - { name: "芝士主场", link: "/", icon: "icon-home" }
+    - { name: "力量速报", link: "/categories/AI-Daily/", icon: "icon-calendar" }
     - { name: "进化记录", link: "/evolution/", icon: "icon-star" }
 
 # 页脚配置
 footer:
-  content: 'Powered by <a href="https://hexo.io">Hexo</a> & <a href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a> | © 2026 AI下的牛马人生'
+  content: 'Powered by <a href="https://hexo.io">Hexo</a> & <a href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a> | © 2026 芝士就是力量'
 
 # 首页配置
 index:
@@ -38,7 +38,7 @@ post:
     collapseDepth: 0
   copyright:
     enable: true
-    content: '本文作者：牛马打工人<br>本文链接：<a href="%s">%s</a><br>版权声明：欢迎转载与交流，转载请注明来源与原文链接。'
+    content: '本文作者：芝士就是力量<br>本文链接：<a href="%s">%s</a><br>版权声明：欢迎转载与交流，转载请注明来源与原文链接。'
 
 # 归档页配置
 archive:
