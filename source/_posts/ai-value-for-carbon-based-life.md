@@ -3,7 +3,7 @@ title: AI 给碳基生命带来的价值
 date: 2026-03-28 10:00:00
 tags: [AI, 芝士力量, 科普]
 categories: [芝士力量]
-cover: /2026/03/28/ai-value-for-carbon-based-life/carbon-value-1.png
+cover: carbon-value-1.png
 ---
 
 我们是碳基生物：会饿、会累、会忘事，也会在重复劳动里磨损热情。AI 并不替代「活着」本身，却在许多维度上，把人类从低效与孤立里轻轻托举一把。下面分几块聊清这种价值——不是口号，而是贴近日常的判断框架。

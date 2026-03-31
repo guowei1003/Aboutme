@@ -3,7 +3,7 @@ title: 为何 AI「芝士」如此可口
 date: 2026-03-30 10:00:00
 tags: [AI, 随笔, 芝士力量]
 categories: [芝士力量]
-cover: /2026/03/30/why-ai-cheese-is-delicious/cheese-tasty-1.png
+cover: cheese-tasty-1.png
 ---
 
 用「可口」形容知识，并不轻浮：好的学习体验本来就带着**即时满足、层次与余味**。AI 时代的内容消费有一些独特之处，让它们格外「上头」——理解这一点，有助于我们享受好处，也警惕成瘾。

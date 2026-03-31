@@ -3,7 +3,7 @@ title: 人类如何驾驭好 AI 芝士
 date: 2026-03-29 10:00:00
 tags: [AI, 方法论, 芝士力量]
 categories: [芝士力量]
-cover: /2026/03/29/how-humans-harness-ai-cheese/harness-ai-1.png
+cover: harness-ai-1.png
 ---
 
 「芝士」在此喻指可被品尝、吸收、长到自己身上的 AI 知识。会吃不够，还要**会吃对、吃过不积食**——这就是驾驭：有方向、有边界、有复盘。下面是一套尽量短、尽量可执行的建议。
