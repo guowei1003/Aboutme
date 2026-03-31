@@ -77,7 +77,18 @@
     btn.style.transition = "opacity 240ms cubic-bezier(0.22, 1, 0.36, 1), transform 240ms cubic-bezier(0.22, 1, 0.36, 1)";
   }
 
+  function enforceBrandTitle() {
+    var brand = document.querySelector("#navbar .navbar-brand");
+    if (!brand) return;
+
+    var current = (brand.textContent || "").trim();
+    if (!current || current === "Fluid") {
+      brand.textContent = "AI芝士";
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    enforceBrandTitle();
     setupNavbarScrolledState();
     setupRevealAnimation();
     setupBackToTopEnhance();

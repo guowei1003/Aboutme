@@ -1,6 +1,7 @@
 # 导航菜单
 navbar:
-  blog_name: 芝士就是力量
+  blog_title: AI芝士
+  blog_name: AI芝士
   menu:
     - { name: "芝士主场", link: "/", icon: "icon-home" }
     - { name: "力量速报", link: "/categories/AI-Daily/", icon: "icon-calendar" }
