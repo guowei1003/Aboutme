@@ -15,6 +15,9 @@ index:
   banner_img: /img/banner-index-tech.svg
   banner_img_height: 92
   banner_mask_alpha: 0.32
+  slogan:
+    enable: true
+    text: AI 加持下的人类进化
   post_url_target: _self
   post_meta:
     date: true

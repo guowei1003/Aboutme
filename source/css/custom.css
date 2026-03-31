@@ -3,7 +3,7 @@
 /* Design Tokens */
 :root {
   --kb-bg: #f5f8fc;
-  --kb-bg-elevated: rgba(255, 255, 255, 0.7);
+  --kb-bg-elevated: rgba(8, 16, 28, 0.62);
   --kb-surface: #ffffff;
   --kb-text: #0b1220;
   --kb-text-muted: #5e6a7d;
@@ -28,7 +28,7 @@
 
 html[data-user-color-scheme="dark"] {
   --kb-bg: #08101b;
-  --kb-bg-elevated: rgba(13, 23, 39, 0.68);
+  --kb-bg-elevated: rgba(11, 22, 38, 0.82);
   --kb-surface: #0f1a2d;
   --kb-text: #edf4ff;
   --kb-text-muted: #9eb0ca;
@@ -120,13 +120,13 @@ blockquote {
 
 #navbar .navbar-brand {
   font-weight: 700;
-  color: var(--kb-text);
+  color: #f5f9ff;
   letter-spacing: 0.02em;
 }
 
 #navbar .nav-link {
   position: relative;
-  color: var(--kb-text-muted);
+  color: rgba(236, 244, 255, 0.86);
   transition: color var(--kb-duration-fast) var(--kb-ease);
 }
 
@@ -145,7 +145,11 @@ blockquote {
 
 #navbar .nav-link:hover,
 #navbar .nav-link.active {
-  color: var(--kb-text);
+  color: #ffffff;
+}
+
+#navbar.is-scrolled {
+  background: rgba(8, 16, 28, 0.88);
 }
 
 #navbar .nav-link:hover::after,
@@ -174,6 +178,11 @@ blockquote {
 #banner .banner-text .index-header {
   letter-spacing: 0.02em;
   text-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+#banner .banner-text .h2,
+#banner .banner-text .h1 {
+  color: #f6fbff;
 }
 
 /* Index / List style */
