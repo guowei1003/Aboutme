@@ -13,8 +13,8 @@ footer:
 # 首页配置
 index:
   banner_img: /img/banner-index-tech.svg
-  banner_img_height: 85
-  banner_mask_alpha: 0.28
+  banner_img_height: 92
+  banner_mask_alpha: 0.32
   post_url_target: _self
   post_meta:
     date: true
@@ -24,8 +24,8 @@ index:
 # 文章页配置
 post:
   banner_img: /img/banner-ai-worker-life.png
-  banner_img_height: 70
-  banner_mask_alpha: 0.38
+  banner_img_height: 72
+  banner_mask_alpha: 0.32
   default_index_img: /img/default-cover-ai-worker-life.png
   meta:
     author: true
@@ -43,29 +43,29 @@ post:
 # 归档页配置
 archive:
   banner_img: /img/banner-ai-worker-life.png
-  banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_img_height: 65
+  banner_mask_alpha: 0.32
 
 # 分类页配置
 category:
   enable: true
   banner_img: /img/banner-ai-worker-life.png
-  banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_img_height: 65
+  banner_mask_alpha: 0.32
 
 # 标签页配置
 tag:
   enable: true
   banner_img: /img/banner-ai-worker-life.png
-  banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_img_height: 65
+  banner_mask_alpha: 0.32
 
 # 关于页配置
 about:
   enable: true
   banner_img: /img/banner-ai-worker-life.png
-  banner_img_height: 80
-  banner_mask_alpha: 0.3
+  banner_img_height: 72
+  banner_mask_alpha: 0.32
 
 # 评论系统 - Waline
 post_comments:
