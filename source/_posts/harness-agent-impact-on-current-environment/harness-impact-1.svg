@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" role="img" aria-label="系统冲击地图">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121629"/>
+      <stop offset="60%" stop-color="#224f8f"/>
+      <stop offset="100%" stop-color="#4db8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1376" height="768" fill="url(#bg4)"/>
+  <text x="88" y="116" font-size="54" fill="#eff7ff" font-family="Arial, sans-serif" font-weight="700">Harness Agent 注入后的系统冲击地图</text>
+  <g font-family="Arial, sans-serif">
+    <circle cx="688" cy="378" r="92" fill="#ffffff" fill-opacity="0.2" stroke="#d8ebff"/>
+    <text x="622" y="386" font-size="34" fill="#f6fbff" font-weight="700">Agent</text>
+    <rect x="158" y="220" width="250" height="110" rx="18" fill="#ffffff" fill-opacity="0.16" stroke="#d4e9ff"/><text x="214" y="286" font-size="34" fill="#f6fbff">内容层</text>
+    <rect x="968" y="220" width="250" height="110" rx="18" fill="#ffffff" fill-opacity="0.16" stroke="#d4e9ff"/><text x="1024" y="286" font-size="34" fill="#f6fbff">主题层</text>
+    <rect x="158" y="460" width="250" height="110" rx="18" fill="#ffffff" fill-opacity="0.16" stroke="#d4e9ff"/><text x="214" y="526" font-size="34" fill="#f6fbff">部署层</text>
+    <rect x="968" y="460" width="250" height="110" rx="18" fill="#ffffff" fill-opacity="0.16" stroke="#d4e9ff"/><text x="1024" y="526" font-size="34" fill="#f6fbff">运营层</text>
+  </g>
+  <g stroke="#d3e9ff" stroke-width="4" stroke-dasharray="10 10" stroke-opacity="0.9">
+    <line x1="596" y1="328" x2="408" y2="275"/>
+    <line x1="780" y1="328" x2="968" y2="275"/>
+    <line x1="596" y1="430" x2="408" y2="515"/>
+    <line x1="780" y1="430" x2="968" y2="515"/>
+  </g>
+  <rect x="84" y="628" width="1208" height="98" rx="20" fill="#0b1730" fill-opacity="0.56" stroke="#c8e3ff" stroke-opacity="0.5"/>
+  <text x="124" y="690" font-size="31" fill="#e7f3ff" font-family="Arial, sans-serif">效率、质量、协作与风险会被同时重塑，必须按系统级能力评估</text>
+</svg>

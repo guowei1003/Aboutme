@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" role="img" aria-label="驾驭 Agents 协议框架">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1324"/>
+      <stop offset="55%" stop-color="#1f2f66"/>
+      <stop offset="100%" stop-color="#5b7cff"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+  <rect width="1376" height="768" fill="url(#bg1)"/>
+  <circle cx="1180" cy="90" r="200" fill="#8ec5ff" fill-opacity="0.18"/>
+  <circle cx="170" cy="110" r="140" fill="#c1d5ff" fill-opacity="0.14"/>
+  <text x="88" y="126" font-size="56" fill="#f4f7ff" font-family="Arial, sans-serif" font-weight="700">驾驭 Agents 的四类协议</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="88" y="180" width="280" height="210" rx="20" fill="url(#card)" stroke="#a8bbff" stroke-opacity="0.7"/>
+    <text x="120" y="236" font-size="34" fill="#f4f7ff" font-weight="700">目标协议</text>
+    <text x="120" y="280" font-size="24" fill="#dce5ff">成功标准</text>
+    <text x="120" y="314" font-size="24" fill="#dce5ff">优先级</text>
+    <rect x="398" y="180" width="280" height="210" rx="20" fill="url(#card)" stroke="#a8bbff" stroke-opacity="0.7"/>
+    <text x="430" y="236" font-size="34" fill="#f4f7ff" font-weight="700">输入协议</text>
+    <text x="430" y="280" font-size="24" fill="#dce5ff">上下文边界</text>
+    <text x="430" y="314" font-size="24" fill="#dce5ff">数据约束</text>
+    <rect x="708" y="180" width="280" height="210" rx="20" fill="url(#card)" stroke="#a8bbff" stroke-opacity="0.7"/>
+    <text x="740" y="236" font-size="34" fill="#f4f7ff" font-weight="700">输出协议</text>
+    <text x="740" y="280" font-size="24" fill="#dce5ff">交付格式</text>
+    <text x="740" y="314" font-size="24" fill="#dce5ff">验收口径</text>
+    <rect x="1018" y="180" width="270" height="210" rx="20" fill="url(#card)" stroke="#a8bbff" stroke-opacity="0.7"/>
+    <text x="1050" y="236" font-size="34" fill="#f4f7ff" font-weight="700">升级协议</text>
+    <text x="1050" y="280" font-size="24" fill="#dce5ff">自动执行阈值</text>
+    <text x="1050" y="314" font-size="24" fill="#dce5ff">人工确认点</text>
+  </g>
+  <line x1="228" y1="430" x2="1156" y2="430" stroke="#cad7ff" stroke-width="3" stroke-dasharray="12 10" stroke-opacity="0.7"/>
+  <rect x="88" y="472" width="1200" height="210" rx="24" fill="#0a0f1f" fill-opacity="0.5" stroke="#95acff" stroke-opacity="0.55"/>
+  <text x="124" y="548" font-size="40" fill="#f4f7ff" font-family="Arial, sans-serif" font-weight="700">先协议化，再提速</text>
+  <text x="124" y="598" font-size="28" fill="#d9e3ff" font-family="Arial, sans-serif">把人机协作从“灵感交互”变成“工程系统”</text>
+  <text x="124" y="642" font-size="24" fill="#b8c8ff" font-family="Arial, sans-serif">Kapibala · Agents Methodology</text>
+</svg>

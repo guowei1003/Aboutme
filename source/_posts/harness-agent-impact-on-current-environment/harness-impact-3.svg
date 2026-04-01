@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" role="img" aria-label="治理闭环">
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111829"/>
+      <stop offset="60%" stop-color="#1f3a57"/>
+      <stop offset="100%" stop-color="#2b8cab"/>
+    </linearGradient>
+  </defs>
+  <rect width="1376" height="768" fill="url(#bg6)"/>
+  <text x="88" y="112" font-size="54" fill="#eff9ff" font-family="Arial, sans-serif" font-weight="700">用治理闭环把冲击转化为长期复利</text>
+  <g fill="#ffffff" fill-opacity="0.16" stroke="#d3efff" stroke-width="2" font-family="Arial, sans-serif">
+    <rect x="188" y="270" width="220" height="120" rx="18"/><text x="236" y="340" font-size="34" fill="#f4fbff">分级授权</text>
+    <rect x="506" y="206" width="220" height="120" rx="18"/><text x="556" y="276" font-size="34" fill="#f4fbff">验收门</text>
+    <rect x="824" y="270" width="220" height="120" rx="18"/><text x="874" y="340" font-size="34" fill="#f4fbff">回滚预案</text>
+    <rect x="506" y="430" width="220" height="120" rx="18"/><text x="556" y="500" font-size="34" fill="#f4fbff">决策链</text>
+  </g>
+  <g fill="none" stroke="#cde9ff" stroke-width="7" stroke-linecap="round">
+    <path d="M418 330 C460 248 500 226 506 224"/>
+    <path d="M726 266 C790 248 828 272 834 278"/>
+    <path d="M930 392 C850 460 760 486 726 492"/>
+    <path d="M506 492 C420 470 360 430 322 390"/>
+  </g>
+  <polygon points="500,228 514,216 518,236" fill="#cde9ff"/>
+  <polygon points="838,272 848,288 826,286" fill="#cde9ff"/>
+  <polygon points="723,495 709,505 707,485" fill="#cde9ff"/>
+  <polygon points="318,386 310,370 330,374" fill="#cde9ff"/>
+  <rect x="120" y="628" width="1130" height="96" rx="18" fill="#0b1420" fill-opacity="0.55" stroke="#c9e8ff" stroke-opacity="0.45"/>
+  <text x="160" y="688" font-size="30" fill="#e6f6ff" font-family="Arial, sans-serif">边界清晰、可审计、可回滚，才能让 Agent 成为稳定生产力单元</text>
+</svg>
