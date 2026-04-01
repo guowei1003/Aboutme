@@ -258,6 +258,54 @@ code {
   background: var(--kb-bg-elevated);
 }
 
+/* Wide screens: widen post area and readable TOC */
+@media (min-width: 1200px) {
+  .container,
+  .container-fluid {
+    max-width: min(94vw, 1720px);
+  }
+
+  .post-container .row > .col-lg-8,
+  .post-container .row > .col-lg-9,
+  #board-ctn .row > .col-lg-8,
+  #board-ctn .row > .col-lg-9 {
+    flex: 0 0 67%;
+    max-width: 67%;
+  }
+
+  .post-container .row > .col-lg-3,
+  .post-container .row > .col-lg-4,
+  #board-ctn .row > .col-lg-3,
+  #board-ctn .row > .col-lg-4 {
+    flex: 0 0 31%;
+    max-width: 31%;
+  }
+
+  #toc,
+  #tocbot,
+  .toc-container {
+    min-width: 280px;
+    padding: 14px 16px;
+  }
+
+  .toc-header,
+  #tocbot .tocbot-list-menu,
+  #tocbot .tocbot-list-menu a,
+  #tocbot .toc-list-item > a,
+  #toc .toc-list-item > a {
+    color: rgba(240, 248, 255, 0.92);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  #toc .toc-list-item > a,
+  #tocbot .toc-list-item > a {
+    display: block;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
 /* Pagination / chips / back2top */
 .pagination .page-item .page-link,
 .post-meta .tag,
