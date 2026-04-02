@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="AI芝士 favicon">
+  <rect width="256" height="256" rx="56" fill="#2c2118" />
+  <rect x="34" y="34" width="188" height="188" rx="42" fill="#f0d49d" opacity="0.14" />
+  <path d="M72 160c10-36 44-70 90-82 20-6 30 3 30 18 0 48-44 90-92 90-24 0-34-10-28-26Z" fill="#d9a340" />
+  <circle cx="132" cy="128" r="8" fill="#f6eccf" />
+  <circle cx="160" cy="146" r="10" fill="#f6eccf" opacity="0.76" />
+  <circle cx="118" cy="154" r="7" fill="#f6eccf" opacity="0.82" />
+  <text x="42" y="60" fill="#f6ecdb" font-size="26" font-family="Georgia, serif" letter-spacing="4">AI</text>
+</svg>

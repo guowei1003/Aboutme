@@ -1,0 +1,25 @@
+<%
+const lab = site.data.lab || {}
+page.layout = "tags"
+page.title = '标签导览'
+page.subtitle = '按议题浏览实验室索引'
+page.banner_img = theme.tag.banner_img
+page.banner_img_height = theme.tag.banner_img_height
+page.banner_mask_alpha = theme.tag.banner_mask_alpha
+%>
+
+<section class="lab-section lab-listing">
+  <div class="lab-section-heading">
+    <p class="lab-kicker">标签导览</p>
+    <h2>从议题索引进入不同样本</h2>
+    <p><%= lab.tag_intro || '' %></p>
+  </div>
+  <div class="lab-tag-grid">
+    <% site.tags.sort('name').each(function(tag) { %>
+      <a class="lab-tag-card" href="<%= url_for(tag.path) %>">
+        <span class="lab-tag-card-name">#<%= tag.name %></span>
+        <span class="lab-tag-card-count"><%= tag.length %> 篇</span>
+      </a>
+    <% }) %>
+  </div>
+</section>

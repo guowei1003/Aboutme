@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title id="title">AI芝士加载占位图</title>
+  <rect width="96" height="96" rx="24" fill="#f6f0e6"/>
+  <g fill="none" stroke="#d6c6af" stroke-width="2">
+    <path d="M16 32H80"/>
+    <path d="M16 48H80"/>
+    <path d="M16 64H80"/>
+    <path d="M32 16V80"/>
+    <path d="M48 16V80"/>
+    <path d="M64 16V80"/>
+  </g>
+  <circle cx="48" cy="48" r="12" fill="#c88b2d" fill-opacity="0.16" stroke="#c88b2d" stroke-width="2"/>
+</svg>

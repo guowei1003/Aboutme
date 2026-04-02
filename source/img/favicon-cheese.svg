@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">AI芝士图标</title>
+  <rect width="64" height="64" rx="16" fill="#201812"/>
+  <path d="M17 44C17 27 27 18 42 18C47 18 50 19 54 21V46C51 48 46 50 38 50C25 50 17 48 17 44Z" fill="#d39b3f"/>
+  <circle cx="29" cy="30" r="3.4" fill="#201812" fill-opacity="0.22"/>
+  <circle cx="38" cy="38" r="2.8" fill="#201812" fill-opacity="0.22"/>
+  <circle cx="46" cy="28" r="2.5" fill="#201812" fill-opacity="0.22"/>
+</svg>

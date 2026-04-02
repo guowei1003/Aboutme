@@ -1,0 +1,38 @@
+nav_labels:
+  home: 首页
+  category: 观点与方法
+  evolution: 进化记录
+  privacy: 隐私文档
+
+hero:
+  title: 慢慢熟成的知识实验室
+  summary: 记录人类如何在 AI 时代试验、筛选、沉淀真正值得长期食用的认知样本。
+  primary_cta:
+    label: 阅读观点与方法
+    href: /categories/芝士力量/
+  secondary_cta:
+    label: 阅读实验室宣言
+    href: /evolution/
+
+featured_post: /2026/04/01/how-to-better-master-agents/
+
+reading_paths:
+  - title: 从方法开始熟成
+    intro: 适合第一次进入实验室的人，从可执行的方法论开始理解人与 Agent 的协作秩序。
+    post_urls:
+      - /2026/04/01/how-to-better-master-agents/
+      - /2026/03/29/how-humans-harness-ai-cheese/
+  - title: 从价值判断开始
+    intro: 适合想先看“为什么值得”的读者，从价值、认知与长期复利切入。
+    post_urls:
+      - /2026/03/28/ai-value-for-carbon-based-life/
+      - /2026/03/30/why-ai-cheese-is-delicious/
+  - title: 从治理与风险开始
+    intro: 适合已经在真实项目里使用 AI 的人，从冲击、边界和治理动作开始建立秩序。
+    post_urls:
+      - /2026/04/01/harness-agent-impact-on-current-environment/
+      - /2026/04/01/how-to-better-master-agents/
+
+archive_intro: 这些样本不是一次性输出，而是在时间里逐渐熟成的观察记录。沿着时间线回看，你能看到实验室的关注点如何演变。
+category_intro: 这里收纳的是已经整理成型的长期内容。它们不是速报，而是值得反复回看的观点、方法与实验结果。
+tag_intro: 标签是实验室里的索引卡，帮助你按议题、方法和对象进入不同样本。

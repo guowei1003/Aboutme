@@ -1,0 +1,124 @@
+<%
+const lab = site.data.lab || {}
+const posts = page.posts && page.posts.data ? page.posts.data : []
+const featuredPath = lab.featured_post || ''
+let featuredPost = null
+let recentPosts = []
+
+for (const post of posts) {
+  if (!featuredPost && featuredPath && url_for(post.path) === featuredPath) {
+    featuredPost = post
+  } else {
+    recentPosts.push(post)
+  }
+}
+
+if (!featuredPost && posts.length > 0) {
+  featuredPost = posts[0]
+  recentPosts = posts.slice(1)
+}
+
+page.subtitle = theme.index.slogan.text || config.subtitle || ''
+page.banner_img = theme.index.banner_img
+page.banner_img_height = theme.index.banner_img_height
+page.banner_mask_alpha = theme.index.banner_mask_alpha
+%>
+
+<h1 style="display: none"><%= config.title %></h1>
+
+<section class="lab-section lab-section--featured">
+  <div class="lab-section-heading">
+    <p class="lab-kicker">本期熟成样本</p>
+    <h2>从一块真正值得细读的样本开始</h2>
+  </div>
+  <% if (featuredPost) { %>
+    <% const featuredUrl = url_for(featuredPost.path) %>
+    <% const featuredImg = featuredPost.index_img || theme.post.default_index_img %>
+    <% const featuredExcerpt = strip_html(featuredPost.description || featuredPost.excerpt || featuredPost.content || '').substring(0, 220).trim().replace(/\n/g, ' ') %>
+    <article class="lab-featured">
+      <div class="lab-featured-media">
+        <a href="<%= featuredUrl %>" target="<%- theme.index.post_url_target %>">
+          <img src="<%= url_for(featuredImg) %>" alt="<%= featuredPost.title %>">
+        </a>
+      </div>
+      <div class="lab-featured-content">
+        <p class="lab-featured-date"><%= date(featuredPost.date, 'YYYY.MM.DD') %></p>
+        <h3><a href="<%= featuredUrl %>" target="<%- theme.index.post_url_target %>"><%= featuredPost.title %></a></h3>
+        <p class="lab-featured-excerpt"><%= featuredExcerpt %></p>
+        <div class="lab-meta-row">
+          <% if (featuredPost.categories.length > 0) { %>
+            <span class="lab-chip"><%= featuredPost.categories.data[0].name %></span>
+          <% } %>
+          <% featuredPost.tags.each(function(tag){ %>
+            <a class="lab-chip lab-chip--link" href="<%= url_for(tag.path) %>">#<%- tag.name %></a>
+          <% }) %>
+        </div>
+      </div>
+    </article>
+  <% } %>
+</section>
+
+<section class="lab-section lab-section--paths">
+  <div class="lab-section-heading">
+    <p class="lab-kicker">阅读路径</p>
+    <h2>按你的进入方式来选样本</h2>
+  </div>
+  <div class="lab-path-grid">
+    <% (lab.reading_paths || []).forEach(function(pathItem) { %>
+      <article class="lab-path">
+        <h3><%= pathItem.title %></h3>
+        <p><%= pathItem.intro %></p>
+        <ul class="lab-path-links">
+          <% (pathItem.post_urls || []).forEach(function(postUrl) { %>
+            <% const matched = (site.posts.data || []).find(post => url_for(post.path) === postUrl) %>
+            <% if (matched) { %>
+              <li><a href="<%= url_for(matched.path) %>"><%= matched.title %></a></li>
+            <% } %>
+          <% }) %>
+        </ul>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<section class="lab-section lab-section--recent">
+  <div class="lab-section-heading">
+    <p class="lab-kicker">最近上架</p>
+    <h2>近期完成熟成的观察与方法</h2>
+  </div>
+  <div class="lab-recent-list">
+    <% recentPosts.forEach(function(post) { %>
+      <% const postUrl = url_for(post.path) %>
+      <% const indexImg = post.index_img || theme.post.default_index_img %>
+      <% const excerpt = strip_html(post.description || post.excerpt || post.content || '').substring(0, 150).trim().replace(/\n/g, ' ') %>
+      <article class="lab-post-item">
+        <a class="lab-post-item-media" href="<%= postUrl %>" target="<%- theme.index.post_url_target %>">
+          <img src="<%= url_for(indexImg) %>" alt="<%= post.title %>">
+        </a>
+        <div class="lab-post-item-content">
+          <div class="lab-post-item-meta">
+            <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+            <% if (post.categories.length > 0) { %>
+              <span><%= post.categories.data[0].name %></span>
+            <% } %>
+          </div>
+          <h3><a href="<%= postUrl %>" target="<%- theme.index.post_url_target %>"><%= post.title %></a></h3>
+          <p><%= excerpt %></p>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<section class="lab-section lab-section--about">
+  <div class="lab-section-heading">
+    <p class="lab-kicker">实验室说明</p>
+    <h2>这里不是资讯流，而是认知被慢慢熟成的地方</h2>
+  </div>
+  <div class="lab-about-grid">
+    <p><%= config.description %></p>
+    <a class="lab-inline-link" href="<%= url_for('/evolution/') %>">查看实验室宣言</a>
+  </div>
+</section>
+
+<%- partial('_partials/paginator') %>

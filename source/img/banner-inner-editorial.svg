@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 720" role="img" aria-labelledby="title desc">
+  <title id="title">AI芝士内页主视觉</title>
+  <desc id="desc">温暖的纸张与理性网格交织的内页横幅。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#231916"/>
+      <stop offset="48%" stop-color="#57392a"/>
+      <stop offset="100%" stop-color="#173131"/>
+    </linearGradient>
+    <radialGradient id="warm" cx="18%" cy="18%" r="36%">
+      <stop offset="0%" stop-color="#efc66f" stop-opacity="0.58"/>
+      <stop offset="70%" stop-color="#efc66f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cool" cx="82%" cy="24%" r="38%">
+      <stop offset="0%" stop-color="#75b8af" stop-opacity="0.36"/>
+      <stop offset="76%" stop-color="#75b8af" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="720" fill="url(#bg)"/>
+  <rect width="1920" height="720" fill="url(#warm)"/>
+  <rect width="1920" height="720" fill="url(#cool)"/>
+
+  <g opacity="0.24" fill="none" stroke="#f5e3bc">
+    <path d="M0 540H1920"/>
+    <path d="M0 580H1920"/>
+    <path d="M220 720L620 210"/>
+    <path d="M520 720L920 210"/>
+    <path d="M820 720L1220 210"/>
+    <path d="M1120 720L1520 210"/>
+  </g>
+
+  <g opacity="0.82" fill="none" stroke-linecap="round">
+    <path d="M250 496C430 438 582 356 736 290C906 218 1074 174 1344 170C1508 168 1658 194 1920 256" stroke="#f0bf63" stroke-width="5"/>
+    <path d="M300 554C496 516 670 516 848 548C1002 576 1122 628 1288 648C1488 672 1666 638 1920 556" stroke="#f5e3bc" stroke-opacity="0.8" stroke-width="3"/>
+    <path d="M276 440C468 356 602 250 744 180C918 94 1104 58 1308 72C1522 86 1702 150 1920 274" stroke="#75b8af" stroke-width="3"/>
+  </g>
+
+  <g fill="#f5e3bc">
+    <circle cx="756" cy="286" r="8"/>
+    <circle cx="922" cy="220" r="7"/>
+    <circle cx="1092" cy="182" r="8"/>
+    <circle cx="1270" cy="174" r="7"/>
+  </g>
+</svg>

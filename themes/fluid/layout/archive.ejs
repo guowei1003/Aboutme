@@ -1,0 +1,21 @@
+<%
+const lab = site.data.lab || {}
+page.layout = "archive"
+page.title = '熟成时间线'
+page.subtitle = '按时间回看样本如何形成'
+page.banner_img = theme.archive.banner_img
+page.banner_img_height = theme.archive.banner_img_height
+page.banner_mask_alpha = theme.archive.banner_mask_alpha
+%>
+
+<section class="lab-section lab-listing lab-listing--timeline">
+  <div class="lab-section-heading">
+    <p class="lab-kicker">时间索引</p>
+    <h2>沿着时间回看实验室的熟成过程</h2>
+    <p><%= lab.archive_intro || '' %></p>
+    <div class="lab-meta-row">
+      <span class="lab-chip"><%= site.posts.length %> 篇样本</span>
+    </div>
+  </div>
+  <%- partial('_partials/archive-list.ejs', { params: { key: page.layout, postTotal: site.posts.length } }) %>
+</section>

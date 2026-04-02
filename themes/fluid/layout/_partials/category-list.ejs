@@ -1,0 +1,49 @@
+<% if (params.type === 'post') { %>
+  <div class="lab-category-sidebar">
+    <% curCats.each(function(cat) { %>
+      <section class="lab-category-sidebar-group">
+        <div class="lab-category-sidebar-title">
+          <span><%= cat.name.trim() %></span>
+          <span><%= cat.posts.length %></span>
+        </div>
+        <div class="lab-category-sidebar-posts">
+          <% var posts = cat.posts.sort(params.postOrderBy || '-date') %>
+          <% for (var idx = 0; idx < posts.length; idx++) { %>
+            <% var post = posts.data[idx] %>
+            <% if (idx && params.postLimit && idx >= params.postLimit) { break } %>
+            <a href="<%= url_for(post.path) %>" class="<%= (params.filterIds || []).includes(post._id) ? 'is-active' : '' %>">
+              <span><%= post.title %></span>
+            </a>
+          <% } %>
+        </div>
+      </section>
+    <% }) %>
+  </div>
+<% } else { %>
+  <div class="lab-category-grid">
+    <% curCats.each(function(cat) { %>
+      <% var posts = cat.posts.sort(params.postOrderBy || '-date') %>
+      <article class="lab-category-card">
+        <div class="lab-category-card-head">
+          <div>
+            <p class="lab-kicker">栏目索引</p>
+            <h3><%= cat.name.trim() %></h3>
+          </div>
+          <span class="lab-chip"><%= cat.posts.length %> 篇</span>
+        </div>
+        <p class="lab-category-card-copy">围绕 <%= cat.name.trim() %> 的方法、判断与实验记录。</p>
+        <div class="lab-category-card-posts">
+          <% for (var idx = 0; idx < posts.length; idx++) { %>
+            <% var post = posts.data[idx] %>
+            <% if (idx && params.postLimit && idx >= params.postLimit) { break } %>
+            <a href="<%= url_for(post.path) %>">
+              <span><%= post.title %></span>
+              <time><%= date(post.date, 'MM.DD') %></time>
+            </a>
+          <% } %>
+        </div>
+        <a class="lab-inline-link" href="<%= url_for(cat.path) %>">进入这个栏目</a>
+      </article>
+    <% }) %>
+  </div>
+<% } %>

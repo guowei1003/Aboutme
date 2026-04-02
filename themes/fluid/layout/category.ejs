@@ -1,0 +1,46 @@
+<%
+const lab = site.data.lab || {}
+page.layout = "category"
+page.title = page.category
+page.subtitle = '观点与方法'
+page.banner_img = theme.category.banner_img
+page.banner_img_height = theme.category.banner_img_height
+page.banner_mask_alpha = theme.category.banner_mask_alpha
+
+var cat = site.categories.find({name: page.category}).filter(cat => cat.length).data[0]
+%>
+
+<section class="lab-section lab-listing">
+  <div class="lab-section-heading">
+    <p class="lab-kicker">样本架</p>
+    <h2><%= page.category %></h2>
+    <p><%= lab.category_intro || '' %></p>
+    <% if (cat) { %>
+      <div class="lab-meta-row">
+        <span class="lab-chip"><%= cat.posts.length %> 篇样本</span>
+      </div>
+    <% } %>
+  </div>
+  <div class="lab-recent-list">
+    <% if (cat) { %>
+      <% cat.posts.sort('-date').each(function(post) { %>
+        <% const postUrl = url_for(post.path) %>
+        <% const indexImg = post.index_img || theme.post.default_index_img %>
+        <% const excerpt = strip_html(post.description || post.excerpt || post.content || '').substring(0, 150).trim().replace(/\n/g, ' ') %>
+        <article class="lab-post-item">
+          <a class="lab-post-item-media" href="<%= postUrl %>">
+            <img src="<%= url_for(indexImg) %>" alt="<%= post.title %>">
+          </a>
+          <div class="lab-post-item-content">
+            <div class="lab-post-item-meta">
+              <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+              <span><%= page.category %></span>
+            </div>
+            <h3><a href="<%= postUrl %>"><%= post.title %></a></h3>
+            <p><%= excerpt %></p>
+          </div>
+        </article>
+      <% }) %>
+    <% } %>
+  </div>
+</section>

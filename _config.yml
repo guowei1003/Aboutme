@@ -24,6 +24,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - privacy/**/*
 
 # 文章设置
 new_post_name: :title.md

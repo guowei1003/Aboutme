@@ -1,11 +1,10 @@
-// Kapibala 全站动效与交互增强
 (function () {
   function prefersReducedMotion() {
     return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
   function throttle(fn, wait) {
-    let ticking = false;
+    var ticking = false;
     return function throttled() {
       if (ticking) return;
       ticking = true;
@@ -38,7 +37,7 @@
     if (prefersReducedMotion()) return;
 
     var targets = document.querySelectorAll(
-      ".post-content h2, .post-content h3, .post-content p, .post-preview, .index-card, .evolution-container .item, .evolution-container .philosophy"
+      ".lab-section, .lab-featured, .lab-path, .lab-post-item, .lab-timeline-item, .evolution-stage, .evolution-point, .evolution-principles"
     );
 
     if (!targets.length) return;
@@ -63,7 +62,7 @@
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -5% 0px" }
+      { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
     );
 
     targets.forEach(function (el) {
@@ -74,21 +73,10 @@
   function setupBackToTopEnhance() {
     var btn = document.getElementById("scroll-top-button") || document.getElementById("scroll-top");
     if (!btn) return;
-    btn.style.transition = "opacity 240ms cubic-bezier(0.22, 1, 0.36, 1), transform 240ms cubic-bezier(0.22, 1, 0.36, 1)";
-  }
-
-  function enforceBrandTitle() {
-    var brand = document.querySelector("#navbar .navbar-brand");
-    if (!brand) return;
-
-    var current = (brand.textContent || "").trim();
-    if (!current || current === "Fluid") {
-      brand.textContent = "AI芝士";
-    }
+    btn.style.transition = "opacity 220ms cubic-bezier(0.22, 1, 0.36, 1), transform 220ms cubic-bezier(0.22, 1, 0.36, 1)";
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    enforceBrandTitle();
     setupNavbarScrolledState();
     setupRevealAnimation();
     setupBackToTopEnhance();

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="AI芝士知识熟成实验室首页主视觉">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#241a15" />
+      <stop offset="42%" stop-color="#4d3a29" />
+      <stop offset="100%" stop-color="#9f733a" />
+    </linearGradient>
+    <radialGradient id="light" cx="26%" cy="22%" r="48%">
+      <stop offset="0%" stop-color="#f3d6a7" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#f3d6a7" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="desk" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6c5136" />
+      <stop offset="100%" stop-color="#3a2b1f" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <rect width="1600" height="900" fill="url(#light)" />
+  <circle cx="1250" cy="160" r="170" fill="#f2dcb2" fill-opacity="0.08" />
+  <path d="M0 620C186 565 354 544 521 557C693 571 883 651 1096 638C1285 626 1446 558 1600 506V900H0V620Z" fill="#1b1410" fill-opacity="0.36" />
+  <rect x="180" y="504" width="1240" height="236" rx="28" fill="url(#desk)" />
+  <rect x="356" y="280" width="452" height="248" rx="28" fill="#f1e0c4" fill-opacity="0.96" />
+  <rect x="842" y="238" width="406" height="288" rx="32" fill="#211914" fill-opacity="0.84" stroke="#d7b27a" stroke-opacity="0.32" />
+  <rect x="876" y="276" width="214" height="26" rx="13" fill="#a47439" fill-opacity="0.8" />
+  <rect x="876" y="332" width="284" height="18" rx="9" fill="#dbc3a1" fill-opacity="0.16" />
+  <rect x="876" y="372" width="230" height="18" rx="9" fill="#dbc3a1" fill-opacity="0.12" />
+  <rect x="876" y="412" width="264" height="18" rx="9" fill="#dbc3a1" fill-opacity="0.1" />
+  <rect x="936" y="468" width="164" height="12" rx="6" fill="#d4a24f" fill-opacity="0.44" />
+  <rect x="420" y="346" width="228" height="18" rx="9" fill="#76573a" fill-opacity="0.36" />
+  <rect x="420" y="386" width="286" height="18" rx="9" fill="#76573a" fill-opacity="0.28" />
+  <rect x="420" y="426" width="264" height="18" rx="9" fill="#76573a" fill-opacity="0.22" />
+  <ellipse cx="1188" cy="630" rx="102" ry="56" fill="#e5bf67" fill-opacity="0.92" />
+  <circle cx="1160" cy="616" r="9" fill="#f6eccf" fill-opacity="0.88" />
+  <circle cx="1212" cy="648" r="12" fill="#f6eccf" fill-opacity="0.72" />
+  <circle cx="1238" cy="610" r="7" fill="#f6eccf" fill-opacity="0.82" />
+  <rect x="862" y="588" width="168" height="70" rx="16" fill="#efe4cf" fill-opacity="0.94" />
+  <rect x="892" y="604" width="108" height="10" rx="5" fill="#8c6a44" fill-opacity="0.32" />
+  <rect x="892" y="626" width="86" height="10" rx="5" fill="#8c6a44" fill-opacity="0.24" />
+  <rect x="892" y="648" width="94" height="10" rx="5" fill="#8c6a44" fill-opacity="0.18" />
+  <rect x="1080" y="578" width="20" height="106" rx="10" fill="#1d1713" fill-opacity="0.48" />
+  <circle cx="1090" cy="560" r="36" fill="#f0c572" fill-opacity="0.26" />
+  <circle cx="1090" cy="560" r="18" fill="#f8d999" fill-opacity="0.66" />
+  <text x="212" y="154" fill="#f8ebd6" font-size="40" font-family="Georgia, 'Times New Roman', serif" letter-spacing="9">AI CHEESE LAB</text>
+  <text x="212" y="206" fill="#f0c981" font-size="18" font-family="Arial, sans-serif" letter-spacing="6">AGED KNOWLEDGE / HUMAN EVOLUTION / CAREFUL SYSTEMS</text>
+</svg>

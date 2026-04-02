@@ -1,0 +1,25 @@
+<div class="lab-timeline">
+  <% var yearCursor %>
+  <% page.posts.each(function (post) { %>
+    <% if (date(post.date, "YYYY") !== yearCursor) { %>
+      <% yearCursor = date(post.date, "YYYY") %>
+      <div class="lab-timeline-year"><span><%= yearCursor %></span></div>
+    <% } %>
+    <article class="lab-timeline-item">
+      <time><%= date(post.date, "MM.DD") %></time>
+      <div class="lab-timeline-entry">
+        <a href="<%= url_for(post.path) %>"><%= post.title %></a>
+        <div class="lab-timeline-tags">
+          <% if (post.categories.length > 0) { %>
+            <span class="lab-chip"><%= post.categories.data[0].name %></span>
+          <% } %>
+          <% post.tags.limit(2).each(function(tag) { %>
+            <a class="lab-chip lab-chip--link" href="<%= url_for(tag.path) %>">#<%= tag.name %></a>
+          <% }) %>
+        </div>
+      </div>
+    </article>
+  <% }) %>
+</div>
+
+<%- partial('_partials/paginator') %>
