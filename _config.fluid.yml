@@ -22,7 +22,7 @@ footer:
 index:
   banner_img: /img/banner-home-editorial.svg
   banner_img_height: 100
-  banner_mask_alpha: 0.18
+  banner_mask_alpha: 0.26
   slogan:
     enable: true
     text: 慢慢熟成的知识实验室

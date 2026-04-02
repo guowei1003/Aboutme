@@ -25,6 +25,7 @@ var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_
 var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)
 var subtitle = page.subtitle || page.title
 var lab = site.data.lab || {}
+var labBrand = lab.brand || {}
 var labHero = lab.hero || {}
 %>
 
@@ -35,7 +36,7 @@ var labHero = lab.hero || {}
       <div class="banner-text fade-in-up <%= is_home() ? 'banner-text--home text-left' : 'text-center' %>">
         <% if (is_home()) { %>
           <div class="lab-hero">
-            <p class="lab-hero-eyebrow"><%= config.title %></p>
+            <p class="lab-hero-eyebrow"><%= labBrand.title || config.title %></p>
             <h1 class="lab-hero-title"><%= labHero.title || subtitle %></h1>
             <p class="lab-hero-summary"><%= labHero.summary || config.description %></p>
             <div class="lab-hero-actions">

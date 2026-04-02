@@ -1,11 +1,12 @@
 <% const lab = site.data.lab || {} %>
+<% const labBrand = lab.brand || {} %>
 <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand lab-brand" href="<%= url_for() %>">
-      <span class="lab-brand-mark">AI芝士</span>
+      <span class="lab-brand-mark"><%= labBrand.mark || 'AI' %></span>
       <span class="lab-brand-copy">
-        <strong><%= theme.navbar.blog_title || config.title %></strong>
-        <small><%= (lab.hero && lab.hero.title) || config.subtitle || '知识熟成实验室' %></small>
+        <strong><%= labBrand.title || theme.navbar.blog_title || config.title %></strong>
+        <small><%= labBrand.subtitle || (lab.hero && lab.hero.title) || config.subtitle || '知识熟成实验室' %></small>
       </span>
     </a>
 
