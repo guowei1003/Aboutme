@@ -23,6 +23,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install Fluid Theme
+        run: npm install hexo-theme-fluid --no-save
+
       - name: Generate Static Files
         run: npx hexo clean && npx hexo generate
 

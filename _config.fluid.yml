@@ -10,6 +10,12 @@ navbar:
 # 页脚配置
 footer:
   content: 'Powered by <a href="https://hexo.io">Hexo</a> & <a href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid</a> | © 2026 芝士就是力量'
+  beian:
+    enable: true
+    icp_text: 京ICP备2025110112号-4
+    police_text: ""
+    police_code: ""
+    police_icon: ""
 
 # 首页配置
 index:

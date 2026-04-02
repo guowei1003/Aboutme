@@ -4,11 +4,11 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # 复制依赖文件
-COPY package.json package-lock.json ./
-RUN npm ci --registry=https://registry.npmmirror.com
+COPY package.json ./
+RUN npm install --registry=https://registry.npmmirror.com
 
 # 安装主题
-RUN npm install hexo-theme-fluid --save --registry=https://registry.npmmirror.com && \
+RUN npm install hexo-theme-fluid --no-save --registry=https://registry.npmmirror.com && \
     mkdir -p themes && \
     cp -r node_modules/hexo-theme-fluid themes/fluid
 
