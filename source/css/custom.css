@@ -860,27 +860,148 @@ html[data-user-color-scheme="dark"] .lab-tag-card {
   margin-bottom: 0;
 }
 
-.evolution-timeline-list {
-  display: grid;
-  gap: 1rem;
+.evolution-timeline-header {
+  max-width: 42rem;
+  margin-bottom: 2rem;
 }
 
-.evolution-point {
-  display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  gap: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--lab-border);
+.evolution-timeline-header > p:last-child {
+  margin-bottom: 0;
 }
 
-.evolution-point:last-child {
+.evolution-history {
+  display: grid;
+  gap: 2rem;
+}
+
+.evolution-era {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.evolution-era + .evolution-era {
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--lab-border);
+}
+
+.evolution-era-label {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.evolution-era-label span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 2rem;
+  padding: 0 0.8rem;
+  border-radius: 999px;
+  background: var(--lab-amber-soft);
+  color: var(--lab-amber);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.evolution-era-label h4 {
+  margin: 0;
+  color: var(--lab-ink);
+  font-family: var(--lab-serif);
+  font-size: 1.5rem;
+}
+
+.evolution-era-items {
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+  padding-left: 1.6rem;
+}
+
+.evolution-era-items::before {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  left: 0.35rem;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(197, 138, 42, 0.1), rgba(197, 138, 42, 0.34), rgba(74, 56, 39, 0.14));
+}
+
+.evolution-milestone {
+  position: relative;
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.evolution-milestone::before {
+  content: "";
+  position: absolute;
+  top: 0.55rem;
+  left: -1.33rem;
+  width: 0.82rem;
+  height: 0.82rem;
+  border-radius: 50%;
+  background: var(--lab-amber);
+  box-shadow: 0 0 0 5px var(--lab-amber-soft);
+}
+
+.evolution-milestone-date {
+  color: var(--lab-amber);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.evolution-milestone-body {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.05rem 0 1.15rem;
+  border-bottom: 1px solid rgba(74, 56, 39, 0.1);
+}
+
+.evolution-milestone:last-child .evolution-milestone-body {
   padding-bottom: 0;
   border-bottom: 0;
 }
 
-.evolution-point .date {
-  color: var(--lab-amber);
-  font-weight: 700;
+.evolution-milestone-title {
+  margin: 0;
+  color: var(--lab-ink);
+  font-family: var(--lab-serif);
+  font-size: 1.22rem;
+  line-height: 1.2;
+}
+
+.evolution-milestone-summary {
+  margin: 0;
+  color: var(--lab-muted);
+}
+
+.evolution-outlook {
+  margin-top: 0.2rem;
+  padding: 1.5rem;
+  border-radius: var(--lab-radius-md);
+  border: 1px solid rgba(197, 138, 42, 0.24);
+  background: linear-gradient(135deg, rgba(197, 138, 42, 0.08), rgba(255, 255, 255, 0.26));
+  box-shadow: var(--lab-shadow);
+}
+
+.evolution-outlook h4 {
+  margin: 0 0 0.7rem;
+  color: var(--lab-ink);
+  font-family: var(--lab-serif);
+  font-size: 1.35rem;
+}
+
+.evolution-outlook p {
+  margin: 0;
+}
+
+html[data-user-color-scheme="dark"] .evolution-outlook {
+  background: linear-gradient(135deg, rgba(197, 138, 42, 0.1), rgba(42, 33, 27, 0.78));
+  border-color: rgba(197, 138, 42, 0.26);
 }
 
 .evolution-principles ul {
@@ -1128,7 +1249,7 @@ textarea:focus-visible {
   }
 
   .lab-post-item,
-  .evolution-point,
+  .evolution-milestone,
   .lab-timeline-item {
     grid-template-columns: 1fr;
   }
@@ -1155,6 +1276,27 @@ textarea:focus-visible {
   .lab-post-item {
     gap: 1rem;
     padding: 1rem;
+  }
+
+  .evolution-era-items {
+    padding-left: 1.2rem;
+  }
+
+  .evolution-milestone {
+    gap: 0.45rem;
+  }
+
+  .evolution-milestone-date {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 1.8rem;
+    padding: 0 0.65rem;
+    border-radius: 999px;
+    background: var(--lab-amber-soft);
+  }
+
+  .evolution-milestone-body {
+    padding-bottom: 1rem;
   }
 
   .lab-category-card-posts a,
@@ -1196,6 +1338,18 @@ textarea:focus-visible {
   .lab-post-item {
     padding: 0.95rem;
     border-radius: 24px;
+  }
+
+  .evolution-era {
+    gap: 0.9rem;
+  }
+
+  .evolution-era-label h4 {
+    font-size: 1.28rem;
+  }
+
+  .evolution-outlook {
+    padding: 1.2rem;
   }
 
   .lab-hero-summary,

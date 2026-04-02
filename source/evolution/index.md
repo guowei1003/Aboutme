@@ -27,27 +27,128 @@ layout: page
     </div>
   </section>
 
-  <section class="evolution-timeline">
-    <h3>进化时间线</h3>
-    <div class="evolution-timeline-list">
-      <div class="evolution-point">
-        <span class="date">2024.01</span>
-        <p>网站上线，确定“AI 加持下的人类进化”作为长期观察主轴。</p>
+<section class="evolution-timeline">
+  <div class="evolution-timeline-header">
+    <p class="lab-kicker">AI 历史</p>
+    <h3>人工智能关键跃迁</h3>
+    <p>这条时间线只保留那些真正改变研究范式、技术路径和系统能力边界的关键节点。</p>
+  </div>
+  <div class="evolution-history">
+    <section class="evolution-era">
+      <div class="evolution-era-label">
+        <span>1956-1958</span>
+        <h4>命名与早期神经网络</h4>
       </div>
-      <div class="evolution-point">
-        <span class="date">2024.02</span>
-        <p>开始把 AI 工作流、文章写作和站点发布流程纳入同一个实验环境。</p>
+      <div class="evolution-era-items">
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">1956</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">达特茅斯会议</h4>
+            <p class="evolution-milestone-summary">人工智能被正式命名为独立研究方向，AI 学科由此诞生。</p>
+          </div>
+        </article>
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">1958</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">感知机（Perceptron）</h4>
+            <p class="evolution-milestone-summary">神经网络路线首次进入主流视野，机器“学习”开始有可计算模型。</p>
+          </div>
+        </article>
       </div>
-      <div class="evolution-point">
-        <span class="date">2024.03</span>
-        <p>从零散记录转向系统化表达，逐步形成“价值、方法、治理”三条内容主线。</p>
+    </section>
+    <section class="evolution-era">
+      <div class="evolution-era-label">
+        <span>1986-1997</span>
+        <h4>可训练深层网络与符号路线高峰</h4>
       </div>
-      <div class="evolution-point">
-        <span class="date">未来</span>
-        <p>继续把实验结果沉淀成可回看、可复用、可长期熟成的知识样本。</p>
+      <div class="evolution-era-items">
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">1986</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">反向传播</h4>
+            <p class="evolution-milestone-summary">多层神经网络获得有效训练方法，深层学习第一次有了坚实技术基础。</p>
+          </div>
+        </article>
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">1997</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">Deep Blue</h4>
+            <p class="evolution-milestone-summary">基于搜索与规则的智能系统在复杂博弈中击败世界冠军，符号主义路线达到公众认知高点。</p>
+          </div>
+        </article>
       </div>
+    </section>
+    <section class="evolution-era">
+      <div class="evolution-era-label">
+        <span>2012-2016</span>
+        <h4>深度学习复兴</h4>
+      </div>
+      <div class="evolution-era-items">
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">2012</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">AlexNet</h4>
+            <p class="evolution-milestone-summary">在 ImageNet 上显著刷新结果，深度学习从边缘路线跃升为主流范式。</p>
+          </div>
+        </article>
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">2014</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">神经机器翻译</h4>
+            <p class="evolution-milestone-summary">端到端序列建模开始取代传统 NLP 管线，统一建模思路走向成熟。</p>
+          </div>
+        </article>
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">2016</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">AlphaGo</h4>
+            <p class="evolution-milestone-summary">深度学习与强化学习结合完成历史性验证，AI 不再只是在感知任务中领先。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="evolution-era">
+      <div class="evolution-era-label">
+        <span>2017-2022</span>
+        <h4>基础模型时代</h4>
+      </div>
+      <div class="evolution-era-items">
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">2017</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">Transformer</h4>
+            <p class="evolution-milestone-summary">现代大语言模型的核心架构被建立，后续生成式 AI 基本都沿这条路线展开。</p>
+          </div>
+        </article>
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">2018</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">BERT</h4>
+            <p class="evolution-milestone-summary">预训练语言模型成为 NLP 主范式，语言理解开始进入“先大规模预训练，再微调”的时代。</p>
+          </div>
+        </article>
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">2020</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">GPT-3</h4>
+            <p class="evolution-milestone-summary">超大规模语言模型展示出少样本学习与通用生成能力，基础模型逻辑成形。</p>
+          </div>
+        </article>
+        <article class="evolution-milestone">
+          <span class="evolution-milestone-date">2022</span>
+          <div class="evolution-milestone-body">
+            <h4 class="evolution-milestone-title">ChatGPT</h4>
+            <p class="evolution-milestone-summary">生成式 AI 从研究与开发者圈层进入大众与产业主流，AI 进入全民使用阶段。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <div class="evolution-outlook">
+      <h4>下一阶段</h4>
+      <p>AI 的下一次跃迁，可能不只来自更大的模型，也来自更强的可验证性、工具调用、长期记忆与多智能体协作能力。</p>
     </div>
-  </section>
+  </div>
+</section>
 
   <section class="evolution-principles">
     <h3>工作原则</h3>
