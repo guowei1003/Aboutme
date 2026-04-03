@@ -4,6 +4,9 @@
     <span>章节导览</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
+  <div class="toc-footer">
+    <button class="toc-action" id="toc-toggle-all" type="button" aria-expanded="false">展开细节</button>
+  </div>
 </div>
 
 <%
@@ -63,28 +66,70 @@ import_script(`
       if (!isExpandAllEnabled()) { return; }
       jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
     }
+    function getChildLists() {
+      return jQuery('#toc-body .toc-list-item > ol');
+    }
     function updateTocToggle($li, $childList) {
       var $toggle = $li.children('.toc-toggle');
       if ($toggle.length === 0) { return; }
       var collapsed = $childList.hasClass('tocbot-is-collapsed');
       $toggle
         .toggleClass('toc-toggle-collapsed', collapsed)
-        .toggleClass('toc-toggle-expanded', !collapsed);
+        .toggleClass('toc-toggle-expanded', !collapsed)
+        .attr('aria-expanded', String(!collapsed))
+        .attr('aria-label', collapsed ? '展开子章节' : '折叠子章节');
+    }
+    function syncToggleState() {
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        updateTocToggle($li, $childList);
+      });
+    }
+    function expandActivePath() {
+      var $activeLinks = jQuery('#toc-body .tocbot-active-link');
+      if ($activeLinks.length === 0) { return; }
+      $activeLinks.each(function() {
+        jQuery(this).parents('ol').removeClass('tocbot-is-collapsed');
+      });
+    }
+    function updateToggleAllButton() {
+      var $toggleAll = jQuery('#toc-toggle-all');
+      if ($toggleAll.length === 0) { return; }
+      var hasCollapsed = getChildLists().filter('.tocbot-is-collapsed').length > 0;
+      $toggleAll
+        .text(hasCollapsed ? '展开细节' : '收起细节')
+        .attr('aria-expanded', String(!hasCollapsed));
+    }
+    function applyInitialCollapse() {
+      var $childLists = getChildLists();
+      if ($childLists.length === 0) {
+        updateToggleAllButton();
+        return;
+      }
+      if (isExpandAllEnabled()) {
+        $childLists.removeClass('tocbot-is-collapsed');
+      } else {
+        $childLists.addClass('tocbot-is-collapsed');
+        expandActivePath();
+      }
+      syncToggleState();
+      updateToggleAllButton();
     }
     function bindTocToggle() {
-      if (!isExpandAllEnabled()) { return; }
       jQuery('#toc-body .toc-list-item').each(function() {
         var $li = jQuery(this);
         var $childList = $li.children('ol');
         if ($childList.length === 0) {
           if ($li.children('.toc-toggle').length === 0) {
-            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true"></span>');
           }
           return;
         }
 
         if ($li.children('.toc-toggle').length === 0) {
-          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+          $li.prepend('<button class="toc-toggle toc-toggle-expanded" type="button" aria-label="折叠子章节" aria-expanded="true">›</button>');
         }
         updateTocToggle($li, $childList);
       });
@@ -96,6 +141,7 @@ import_script(`
         if ($childList.length === 0) { return; }
         $childList.toggleClass('tocbot-is-collapsed');
         updateTocToggle($li, $childList);
+        updateToggleAllButton();
       });
       if (!window.__tocToggleObserver) {
         window.__tocToggleObserver = new MutationObserver(function(mutations) {
@@ -105,12 +151,45 @@ import_script(`
             var $li = $list.parent('.toc-list-item');
             if ($li.length === 0) { return; }
             updateTocToggle($li, $list);
+            updateToggleAllButton();
           });
         });
-        jQuery('#toc-body ol').each(function() {
-          window.__tocToggleObserver.observe(this, { attributes: true });
+      }
+      window.__tocToggleObserver.disconnect();
+      jQuery('#toc-body ol').each(function() {
+        window.__tocToggleObserver.observe(this, { attributes: true });
+      });
+    }
+    function bindToggleAllButton() {
+      jQuery('#toc-toggle-all').off('click').on('click', function() {
+        var $childLists = getChildLists();
+        if ($childLists.length === 0) { return; }
+        var hasCollapsed = $childLists.filter('.tocbot-is-collapsed').length > 0;
+        if (hasCollapsed) {
+          $childLists.removeClass('tocbot-is-collapsed');
+        } else {
+          $childLists.addClass('tocbot-is-collapsed');
+          expandActivePath();
+        }
+        syncToggleState();
+        updateToggleAllButton();
+      });
+    }
+    function bindActivePathObserver() {
+      if (!window.__tocActiveLinkObserver) {
+        window.__tocActiveLinkObserver = new MutationObserver(function() {
+          expandActivePath();
+          syncToggleState();
         });
       }
+      var tocBody = document.getElementById('toc-body');
+      if (!tocBody) { return; }
+      window.__tocActiveLinkObserver.disconnect();
+      window.__tocActiveLinkObserver.observe(tocBody, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class']
+      });
     }
     var tocConfig = Object.assign({
       tocSelector     : '#toc-body',
@@ -134,8 +213,11 @@ import_script(`
     } else {
       buildFallbackToc();
     }
-    expandAllToc();
     bindTocToggle();
+    bindToggleAllButton();
+    expandAllToc();
+    applyInitialCollapse();
+    bindActivePathObserver();
 
     Fluid.events.registerRefreshCallback(function() {
       if ('tocbot' in window) {
@@ -149,8 +231,11 @@ import_script(`
         } else {
           buildFallbackToc();
         }
-        expandAllToc();
         bindTocToggle();
+        bindToggleAllButton();
+        expandAllToc();
+        applyInitialCollapse();
+        bindActivePathObserver();
       }
     });
   });
