@@ -3,6 +3,8 @@ title: 最新“龙虾”养殖方法：普通人也能跑通的 OpenClaw 一条
 date: 2026-04-03 20:00:00
 tags: [OpenClaw, Agents, 部署指南, 新手入门, AI 工具]
 categories: [芝士力量]
+description: 面向新手梳理 OpenClaw 的定位、部署路线、模型入口与首轮验证流程，帮助普通人尽快跑通一套可用的自托管 Agent 系统。
+keywords: [OpenClaw 部署, OpenClaw 教程, Agent 部署指南, Qwen Portal, Ollama, 自托管 Agent]
 cover: /img/posts/latest-openclaw-lobster-guide/lobster-guide-cover.svg
 index_img: /img/posts/latest-openclaw-lobster-guide/lobster-guide-cover.svg
 ---

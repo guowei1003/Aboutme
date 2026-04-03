@@ -3,6 +3,8 @@ title: 人类如何驾驭好 AI 芝士
 date: 2026-03-29 10:00:00
 tags: [AI, 方法论, 芝士力量, Agents]
 categories: [芝士力量]
+description: 围绕任务合同、双环路工作流与风险前置机制，说明人类如何真正驾驭 AI，而不是只把 AI 当作即时问答工具。
+keywords: [AI 方法论, 人机协作, 任务合同, AI 工作流, 风险控制]
 cover: harness-ai-1.png
 index_img: /2026/03/29/how-humans-harness-ai-cheese/harness-ai-1.png
 ---

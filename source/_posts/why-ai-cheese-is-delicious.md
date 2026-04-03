@@ -3,6 +3,8 @@ title: 为何 AI「芝士」如此可口
 date: 2026-03-30 10:00:00
 tags: [AI, 认知科学, 随笔, 芝士力量]
 categories: [芝士力量]
+description: 从低摩擦入口、即时反馈和个性化表达三个维度，解释为什么 AI 知识体验对人类如此有吸引力。
+keywords: [AI 学习体验, 认知科学, AI 使用方法, 个性化学习, AI 方法论]
 cover: cheese-tasty-1.png
 index_img: /2026/03/30/why-ai-cheese-is-delicious/cheese-tasty-1.png
 ---

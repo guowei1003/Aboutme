@@ -3,6 +3,8 @@ title: 如何更好地驾驭 Agents：一套可落地的人机协作方法
 date: 2026-04-01 12:30:00
 tags: [Agents, 方法论, 协作, 工程实践]
 categories: [芝士力量]
+description: 从协作协议、任务拆分、反馈回路与质量闸门出发，给出一套可落地的人机协作方法，帮助团队真正驾驭 Agents。
+keywords: [Agents 方法论, 人机协作, Agent 协议, 工程实践, AI 工作流]
 cover: master-agents-1.svg
 index_img: /2026/04/01/how-to-better-master-agents/master-agents-1.svg
 ---

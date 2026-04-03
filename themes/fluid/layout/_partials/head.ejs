@@ -5,10 +5,9 @@ var keywords = page.keywords || config.keywords
 if (keywords instanceof Array) {
   keywords = keywords.join(',')
 }
-var description = page.description || page.excerpt || (is_post() && page.content) || config.description
-if (description) {
-  description = strip_html(description).substring(0, 200).trim().replace(/\n/g, ' ')
-}
+var description = page.description || page.excerpt || (is_post() && page.content) || config.description || config.subtitle || config.title
+description = strip_html(description).substring(0, 200).trim().replace(/\n/g, ' ')
+var robots = page.robots || ''
 var ogImage = page.og_img || page.index_img
 var ogConfig = Object.assign({ image: ogImage && url_for(ogImage) }, theme.open_graph)
 %>
@@ -18,7 +17,7 @@ var ogConfig = Object.assign({ image: ogImage && url_for(ogImage) }, theme.open_
 
   <link rel="apple-touch-icon" sizes="76x76" href="<%= url_for(theme.apple_touch_icon) %>">
   <link rel="icon" href="<%= url_for(theme.favicon) %>">
-  <% if (theme.canonical.enable) { %>
+  <% if (theme.canonical.enable && page.canonical_path) { %>
     <link rel="canonical" href="<%= url_join(config.url, page.canonical_path.replace('index.html', '')) %>"/>
   <% } %>
 
@@ -29,11 +28,15 @@ var ogConfig = Object.assign({ image: ogImage && url_for(ogImage) }, theme.open_
   <% } %>
   <meta name="theme-color" content="<%= theme.color.navbar_bg_color %>">
   <meta name="author" content="<%= page.author || config.author %>">
-  <meta name="keywords" content="<%= keywords %>">
+  <meta name="description" content="<%= description %>">
+  <% if (keywords) { %>
+    <meta name="keywords" content="<%= keywords %>">
+  <% } %>
+  <% if (robots) { %>
+    <meta name="robots" content="<%= robots %>">
+  <% } %>
   <% if (theme.open_graph.enable) { %>
     <%- open_graph(ogConfig) %>
-  <% } else { %>
-    <meta name="description" content="<%= description %>">
   <% } %>
   <% if ((theme.post.meta.views.enable && theme.post.meta.views.source === 'busuanzi')
     || (theme.footer.statistics.enable && theme.footer.statistics.source === 'busuanzi')) { %>

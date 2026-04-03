@@ -3,6 +3,8 @@ title: AI 给碳基生命带来的价值
 date: 2026-03-28 10:00:00
 tags: [AI, 芝士力量, 生产力, 决策]
 categories: [芝士力量]
+description: 从时间结构、认知扩容、组织协作与决策质量四个角度，分析 AI 如何为普通人和团队带来长期可复利的真实价值。
+keywords: [AI 价值, 人机协作, 生产力提升, 决策质量, AI 方法论]
 cover: carbon-value-1.png
 index_img: /2026/03/28/ai-value-for-carbon-based-life/carbon-value-1.png
 ---

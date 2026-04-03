@@ -6,6 +6,8 @@ page.subtitle = '按栏目浏览观点、方法与实验样本'
 page.banner_img = theme.category.banner_img
 page.banner_img_height = theme.category.banner_img_height
 page.banner_mask_alpha = theme.category.banner_mask_alpha
+page.description = '按栏目浏览 AI芝士已经成型的观点、方法与实验样本，快速进入 AI 方法论、Agent 协作与治理主题。'
+page.keywords = ['AI 栏目', 'AI 方法论', 'Agents', '部署指南', 'AI 治理']
 var orderBy = theme.category.order_by || 'name'
 var curCats = site.categories.find({ parent: { $exists: false } }).sort(orderBy).filter(cat => cat.length)
 %>

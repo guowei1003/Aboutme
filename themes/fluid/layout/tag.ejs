@@ -6,6 +6,8 @@ page.subtitle = '标签导览'
 page.banner_img = theme.tag.banner_img
 page.banner_img_height = theme.tag.banner_img_height
 page.banner_mask_alpha = theme.tag.banner_mask_alpha
+page.description = `查看 AI芝士中与 ${page.tag} 相关的文章、方法与实践样本。`
+page.keywords = [page.tag, 'AI芝士', 'AI 文章', 'AI 方法论', 'Agents']
 
 var tag = site.tags.find({name: page.tag}).filter(tag => tag.length).data[0]
 %>

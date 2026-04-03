@@ -6,6 +6,8 @@ page.subtitle = '观点与方法'
 page.banner_img = theme.category.banner_img
 page.banner_img_height = theme.category.banner_img_height
 page.banner_mask_alpha = theme.category.banner_mask_alpha
+page.description = `${page.category}栏目收录 AI芝士关于 AI 方法论、Agent 协作、部署实践与治理的长期内容。`
+page.keywords = [page.category, 'AI芝士', 'AI 方法论', 'Agents', 'AI 治理']
 
 var cat = site.categories.find({name: page.category}).filter(cat => cat.length).data[0]
 %>

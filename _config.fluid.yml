@@ -118,6 +118,10 @@ search:
 favicon: /img/favicon-cheese.svg
 apple_touch_icon: /img/favicon-cheese.svg
 
+# Canonical
+canonical:
+  enable: true
+
 # 自定义 JS
 custom_js:
   - /js/custom.js

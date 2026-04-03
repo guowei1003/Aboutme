@@ -1,6 +1,8 @@
 ---
 title: 进化
 layout: page
+description: AI芝士进化页面梳理人工智能关键跃迁、实验室主张与长期工作原则，帮助读者理解 AI 时代的人机协作方向。
+keywords: [人工智能历史, AI 演进, AI 方法论, 人机协作, AI芝士]
 ---
 
 <div class="evolution-container">

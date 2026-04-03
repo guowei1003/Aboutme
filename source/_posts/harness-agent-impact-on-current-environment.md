@@ -3,6 +3,8 @@ title: Harness Agent 对当前环境的冲击：效率红利与系统性风险
 date: 2026-04-01 11:30:00
 tags: [Harness, Agent, 工程治理, 风险评估]
 categories: [芝士力量]
+description: 结合当前 Hexo 博客工程，分析 Harness Agent 引入后在效率、协作、部署与治理层面的红利和系统性风险。
+keywords: [Harness Agent, Agent 治理, 工程治理, 风险评估, Hexo 博客]
 cover: harness-impact-1.svg
 index_img: /2026/04/01/harness-agent-impact-on-current-environment/harness-impact-1.svg
 ---
