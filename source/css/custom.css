@@ -18,6 +18,7 @@
   --lab-post-shell: 1360px;
   --lab-post-reading: 940px;
   --lab-post-aside: 250px;
+  --lab-post-toc-top: 5.4rem;
   --lab-post-gap: clamp(2rem, 4vw, 4rem);
   --lab-post-overlap: clamp(3.4rem, 7vw, 5.8rem);
   --lab-serif: "Noto Serif SC", "Songti SC", "STSong", "Source Han Serif SC", serif;
@@ -1293,24 +1294,17 @@ body.page-post .lab-post-divider {
 }
 
 body.page-post .lab-post-rail {
-  position: fixed;
-  top: clamp(12rem, 24vh, 17rem);
-  right: max(1.25rem, calc(50% - (var(--lab-post-reading) / 2) - var(--lab-post-aside) - 1.75rem));
+  grid-column: 3;
+  align-self: start;
+  justify-self: start;
+  margin-left: 1.75rem;
   min-width: 0;
-  width: min(100%, 13rem);
-  z-index: 5;
+  width: min(100%, var(--lab-post-aside));
 }
 
 body.page-post .lab-post-sidebar {
   position: static;
   padding: 0;
-}
-
-body.page-post .lab-post-rail #toc,
-body.page-post .lab-post-rail #tocbot,
-body.page-post .lab-post-rail .toc-container {
-  position: static;
-  top: auto;
 }
 
 body.page-post .lab-seo-header {
@@ -1542,7 +1536,7 @@ body.page-post #toc,
 body.page-post #tocbot,
 body.page-post .toc-container {
   position: sticky;
-  top: 0;
+  top: var(--lab-post-toc-top);
   visibility: visible;
   padding: 0.95rem 0.85rem 0.95rem;
   border-radius: 1.15rem;
@@ -1755,7 +1749,10 @@ textarea:focus-visible {
   body.page-post .lab-post-rail {
     position: static;
     order: -1;
+    grid-column: auto;
+    align-self: auto;
     justify-self: stretch;
+    margin-left: 0;
     width: 100%;
     right: auto;
     top: auto;
