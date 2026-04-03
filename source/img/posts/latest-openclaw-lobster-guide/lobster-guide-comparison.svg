@@ -1,0 +1,50 @@
+<svg width="1600" height="980" viewBox="0 0 1600 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1D2B"/>
+      <stop offset="1" stop-color="#102F44"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 44px "Helvetica Neue", Arial, sans-serif; fill: #F5F8FB; }
+      .axis { font: 600 22px "Helvetica Neue", Arial, sans-serif; fill: #C6DAE8; }
+      .dot { font: 700 20px "Helvetica Neue", Arial, sans-serif; fill: #0B2131; }
+      .cap { font: 500 18px "Helvetica Neue", Arial, sans-serif; fill: #D2E4EF; }
+    </style>
+  </defs>
+  <rect width="1600" height="980" fill="url(#bg)"/>
+  <text x="90" y="120" class="title">Platform map: cloud publishing vs self-hosting</text>
+  <line x1="180" y1="800" x2="1420" y2="800" stroke="#7AA0B7" stroke-width="4"/>
+  <line x1="180" y1="180" x2="180" y2="800" stroke="#7AA0B7" stroke-width="4"/>
+  <text x="1250" y="850" class="axis">More self-hosted</text>
+  <text x="215" y="850" class="axis">More cloud-published</text>
+  <text x="30" y="280" transform="rotate(-90 30 280)" class="axis">More ops work</text>
+  <text x="60" y="720" transform="rotate(-90 60 720)" class="axis">Lighter setup</text>
+
+  <circle cx="1160" cy="330" r="64" fill="#6BE7C8"/>
+  <text x="1106" y="338" class="dot">OpenClaw</text>
+
+  <circle cx="410" cy="610" r="62" fill="#F5BE62"/>
+  <text x="376" y="618" class="dot">Coze</text>
+
+  <circle cx="520" cy="585" r="62" fill="#CDE4FF"/>
+  <text x="462" y="592" class="dot">Yuanqi</text>
+
+  <circle cx="700" cy="430" r="68" fill="#FFD7E4"/>
+  <text x="646" y="438" class="dot">ADP</text>
+
+  <circle cx="620" cy="520" r="64" fill="#E8FFE2"/>
+  <text x="565" y="528" class="dot">Bailian</text>
+
+  <circle cx="980" cy="390" r="64" fill="#D6F7F0"/>
+  <text x="914" y="398" class="dot">Coze Studio</text>
+
+  <circle cx="860" cy="660" r="60" fill="#FFF0C4"/>
+  <text x="815" y="668" class="dot">Ark</text>
+
+  <circle cx="1030" cy="520" r="60" fill="#DDE8F4"/>
+  <text x="978" y="528" class="dot">ArkClaw</text>
+
+  <text x="960" y="210" class="cap">Self-hosting teaches the real system shape.</text>
+  <text x="260" y="760" class="cap">Cloud platforms win when your first goal is sharing or publishing.</text>
+  <text x="890" y="730" class="cap">Model platforms and hosted derivatives sit in between.</text>
+</svg>

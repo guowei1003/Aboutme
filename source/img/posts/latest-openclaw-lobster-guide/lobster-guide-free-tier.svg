@@ -1,0 +1,42 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#102131"/>
+      <stop offset="1" stop-color="#163B4D"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 44px "Helvetica Neue", Arial, sans-serif; fill: #F4F7FB; }
+      .head { font: 700 24px "Helvetica Neue", Arial, sans-serif; fill: #0C2232; }
+      .body { font: 500 18px "Helvetica Neue", Arial, sans-serif; fill: #193343; }
+      .note { font: 500 20px "Helvetica Neue", Arial, sans-serif; fill: #D6E8F3; }
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="90" y="110" class="title">Free entry points are not measured in one unit</text>
+
+  <rect x="110" y="180" width="320" height="520" rx="28" fill="#D8FFF3"/>
+  <text x="170" y="240" class="head">requests / day</text>
+  <text x="150" y="320" class="body">Qwen Portal</text>
+  <text x="150" y="355" class="body">2,000 requests/day</text>
+  <text x="150" y="420" class="body">Best for first OpenClaw run</text>
+
+  <rect x="450" y="180" width="320" height="520" rx="28" fill="#FFF1D5"/>
+  <text x="560" y="240" class="head">tokens</text>
+  <text x="490" y="320" class="body">Bailian: 70M+ free tokens</text>
+  <text x="490" y="375" class="body">Yuanqi: 1M token / month</text>
+  <text x="490" y="430" class="body">Ark: 500K token trial</text>
+
+  <rect x="790" y="180" width="320" height="520" rx="28" fill="#E7EEF7"/>
+  <text x="920" y="240" class="head">PU</text>
+  <text x="830" y="320" class="body">Tencent Cloud ADP</text>
+  <text x="830" y="355" class="body">15,000 PU / month</text>
+  <text x="830" y="420" class="body">Not equal to free OpenClaw deploy</text>
+
+  <rect x="1130" y="180" width="320" height="520" rx="28" fill="#D9E6F5"/>
+  <text x="1185" y="240" class="head">subscription / local</text>
+  <text x="1170" y="320" class="body">Ollama: near $0 model cost</text>
+  <text x="1170" y="375" class="body">OpenAI OAuth: reuse subscription</text>
+  <text x="1170" y="430" class="body">Coze: free start, quota less clear</text>
+
+  <text x="400" y="790" class="note">Never compare requests, tokens, PU, and subscription access as if they were the same thing.</text>
+</svg>
