@@ -205,8 +205,8 @@ html[data-user-color-scheme="dark"] #board {
   color: #fff;
 }
 
-body.page-home #banner,
-body.page-home .banner {
+#banner,
+.banner {
   min-height: calc(100svh - 1px);
 }
 
@@ -1503,8 +1503,8 @@ textarea:focus-visible {
 }
 
 @media (max-width: 768px) {
-  body.page-home #banner,
-  body.page-home .banner {
+  #banner,
+  .banner {
     min-height: 86svh;
   }
 
