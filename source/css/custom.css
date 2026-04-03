@@ -273,52 +273,50 @@ html[data-user-color-scheme="dark"] #board {
 }
 
 .lab-post-hero {
-  width: min(100%, 62rem);
+  width: min(100%, 56rem);
   margin: 0 auto;
-  padding: clamp(0.5rem, 2vw, 1rem) 1.5rem 0;
+  padding: clamp(0.3rem, 1.5vw, 0.8rem) 1.5rem 0;
   text-align: left;
 }
 
 .lab-post-hero-kicker {
-  margin: 0 0 1rem;
-  color: rgba(255, 238, 212, 0.72);
-  font-size: 0.78rem;
+  margin: 0 0 0.9rem;
+  color: rgba(255, 238, 212, 0.68);
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 560ms var(--lab-ease), transform 560ms var(--lab-ease);
+  transform: translateY(8px);
+  transition: opacity 440ms var(--lab-ease), transform 440ms var(--lab-ease);
 }
 
 .lab-post-hero-title {
   margin: 0;
   color: #fff8f1;
-  max-width: 13ch;
-  font-size: clamp(2.7rem, 5vw, 4.9rem);
-  line-height: 1.02;
-  letter-spacing: 0.01em;
+  max-width: 10.6ch;
+  font-size: clamp(2.45rem, 4.4vw, 4.15rem);
+  line-height: 1.08;
+  letter-spacing: 0;
   text-wrap: balance;
-  text-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
   opacity: 0;
-  transform: translateY(18px) scale(0.985);
-  filter: blur(10px);
+  transform: translateY(12px);
   transition:
-    opacity 700ms var(--lab-ease),
-    transform 700ms var(--lab-ease),
-    filter 700ms var(--lab-ease),
-    letter-spacing 700ms var(--lab-ease);
+    opacity 520ms var(--lab-ease),
+    transform 520ms var(--lab-ease),
+    text-shadow 520ms var(--lab-ease);
 }
 
 .lab-post-hero-dek {
-  max-width: 36rem;
-  margin: 1rem 0 0;
-  color: rgba(255, 244, 232, 0.82);
-  font-size: 0.98rem;
-  line-height: 1.82;
+  max-width: 29rem;
+  margin: 1.15rem 0 0;
+  color: rgba(255, 244, 232, 0.8);
+  font-size: 0.94rem;
+  line-height: 1.72;
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 620ms var(--lab-ease), transform 620ms var(--lab-ease);
+  transform: translateY(10px);
+  transition: opacity 500ms var(--lab-ease), transform 500ms var(--lab-ease);
 }
 
 body.page-post .banner-text,
@@ -330,11 +328,11 @@ body.page-post .lab-post-hero-dek {
 }
 
 body.page-post .lab-post-hero-kicker {
-  color: rgba(255, 238, 212, 0.78);
+  color: rgba(255, 238, 212, 0.72);
 }
 
 body.page-post .lab-post-hero-dek {
-  color: rgba(255, 244, 232, 0.86);
+  color: rgba(255, 244, 232, 0.82);
 }
 
 body.page-post .lab-post-hero.is-ready .lab-post-hero-kicker,
@@ -345,9 +343,8 @@ body.page-post .lab-post-hero.is-ready .lab-post-hero-dek {
 
 body.page-post .lab-post-hero.is-ready .lab-post-hero-title {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
-  letter-spacing: 0;
+  transform: translateY(0);
+  text-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
 }
 
 .lab-hero-actions {
@@ -1330,37 +1327,40 @@ body.page-post .lab-seo-header {
   color: var(--lab-ink);
 }
 
-body.page-post .markdown-body pre,
-body.page-post .markdown-body .hljs,
-body.page-post .markdown-body figure.highlight {
+body.page-post .markdown-body figure.highlight,
+body.page-post .markdown-body > pre {
   position: relative;
   margin: 1.6rem 0 1.9rem;
-  border: 1px solid rgba(63, 49, 37, 0.16);
-  border-radius: 1.15rem;
-  background: linear-gradient(180deg, #1f1914 0%, #17120f 100%);
-  box-shadow: 0 18px 40px rgba(24, 18, 14, 0.12);
+  border: 1px solid rgba(54, 42, 32, 0.2);
+  border-radius: 0.95rem;
+  background: linear-gradient(180deg, #231c16 0%, #19130f 100%);
+  box-shadow: 0 14px 28px rgba(24, 18, 14, 0.08);
   overflow: hidden;
 }
 
-body.page-post .markdown-body pre::before,
-body.page-post .markdown-body figure.highlight::before {
+body.page-post .markdown-body figure.highlight::before,
+body.page-post .markdown-body > pre::before {
   content: "";
   display: block;
-  height: 2.35rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 2.1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-body.page-post .markdown-body pre::after,
-body.page-post .markdown-body figure.highlight::after {
-  content: "BASH";
+body.page-post .markdown-body figure.highlight::after,
+body.page-post .markdown-body > pre::after {
+  content: "CODE";
   position: absolute;
-  top: 0.62rem;
-  right: 0.95rem;
-  color: rgba(255, 244, 232, 0.55);
-  font-size: 0.72rem;
+  top: 0.52rem;
+  right: 0.9rem;
+  color: rgba(255, 244, 232, 0.52);
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
+}
+
+body.page-post .markdown-body figure.highlight.bash::after {
+  content: "BASH";
 }
 
 .markdown-body pre,
@@ -1370,46 +1370,52 @@ body.page-post .markdown-body figure.highlight::after {
   background: rgba(34, 26, 21, 0.95);
 }
 
-body.page-post .markdown-body pre,
-body.page-post .markdown-body .hljs {
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+body.page-post .markdown-body > pre {
+  padding: 2.95rem 1.05rem 1rem;
 }
 
-body.page-post .markdown-body pre code,
-body.page-post .markdown-body .hljs code,
-body.page-post .markdown-body pre code.hljs {
+body.page-post .markdown-body > pre code,
+body.page-post .markdown-body > pre code.hljs {
   display: block;
-  padding: 1rem 1.15rem 1.2rem;
+  overflow-x: auto;
   background: transparent;
-  color: #f7f1e7;
-  font-size: 0.97rem;
-  line-height: 1.8;
+  color: #f3ebdf;
+  font-size: 0.95rem;
+  line-height: 1.75;
   white-space: pre;
 }
 
-body.page-post .markdown-body pre code {
-  overflow-x: auto;
+body.page-post .markdown-body figure.highlight {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 body.page-post .markdown-body figure.highlight table {
   width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+body.page-post .markdown-body figure.highlight td {
+  border: 0;
+  padding: 0;
 }
 
 body.page-post .markdown-body figure.highlight td.gutter {
-  width: 3rem;
-  min-width: 3rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  width: 3.2rem;
+  min-width: 3.2rem;
+  background: rgba(255, 255, 255, 0.025);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: top;
 }
 
 body.page-post .markdown-body figure.highlight td.gutter pre {
   margin: 0;
-  padding: 1rem 0.65rem 1.2rem;
+  padding: 2.95rem 0.7rem 1rem;
   background: transparent;
   box-shadow: none;
+  border: 0;
+  border-radius: 0;
 }
 
 body.page-post .markdown-body figure.highlight td.gutter pre::before,
@@ -1418,36 +1424,41 @@ body.page-post .markdown-body figure.highlight td.gutter pre::after {
 }
 
 body.page-post .markdown-body figure.highlight td.gutter pre span.line {
-  color: rgba(255, 244, 232, 0.42);
+  color: rgba(255, 244, 232, 0.36);
+  font-size: 0.82rem;
 }
 
 body.page-post .markdown-body figure.highlight td.code > pre {
   margin: 0;
-  padding: 1rem 1.15rem 1.2rem;
+  padding: 2.95rem 1.1rem 1rem;
   overflow-x: auto;
-  color: #f7f1e7;
+  background: transparent;
+  color: #f3ebdf;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 body.page-post .markdown-body figure.highlight td.code > pre .line,
 body.page-post .markdown-body .hljs,
 body.page-post .markdown-body .hljs span {
-  color: inherit;
+  color: #f3ebdf;
 }
 
-body.page-post .markdown-body pre::-webkit-scrollbar,
+body.page-post .markdown-body > pre code::-webkit-scrollbar,
 body.page-post .markdown-body figure.highlight td.code > pre::-webkit-scrollbar {
-  height: 10px;
+  height: 8px;
 }
 
-body.page-post .markdown-body pre::-webkit-scrollbar-thumb,
+body.page-post .markdown-body > pre code::-webkit-scrollbar-thumb,
 body.page-post .markdown-body figure.highlight td.code > pre::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgba(255, 244, 232, 0.24);
+  background: rgba(255, 244, 232, 0.18);
 }
 
-body.page-post .markdown-body pre::-webkit-scrollbar-track,
+body.page-post .markdown-body > pre code::-webkit-scrollbar-track,
 body.page-post .markdown-body figure.highlight td.code > pre::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .markdown-body img {

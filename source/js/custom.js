@@ -88,7 +88,7 @@
     window.requestAnimationFrame(function () {
       window.setTimeout(function () {
         hero.classList.add("is-ready");
-      }, 80);
+      }, 40);
     });
   }
 
