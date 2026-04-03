@@ -1238,16 +1238,18 @@ body.page-post #updated-time {
 
 body.page-post .lab-post-body-layout {
   display: grid;
-  width: min(100%, calc(var(--lab-post-reading) + var(--lab-post-aside) + var(--lab-post-gap)));
-  margin: 0 auto;
-  grid-template-columns: minmax(0, 1fr) minmax(14rem, var(--lab-post-aside));
+  width: 100%;
+  margin: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(0, var(--lab-post-reading)) minmax(14rem, var(--lab-post-aside)) minmax(0, 1fr);
   gap: clamp(1.6rem, 2.6vw, 2.4rem);
   align-items: start;
 }
 
 body.page-post .lab-post-main {
+  grid-column: 2;
   min-width: 0;
   width: min(100%, var(--lab-post-reading));
+  justify-self: center;
 }
 
 body.page-post .lab-post-paper {
@@ -1291,9 +1293,10 @@ body.page-post .lab-post-divider {
 }
 
 body.page-post .lab-post-rail {
+  grid-column: 3;
   min-width: 0;
   width: min(100%, var(--lab-post-aside));
-  justify-self: end;
+  justify-self: start;
 }
 
 body.page-post .lab-post-sidebar {
@@ -1356,10 +1359,10 @@ body.page-post .markdown-body figure.highlight,
 body.page-post .markdown-body > pre {
   position: relative;
   margin: 1.55rem 0 1.85rem;
-  border: 1px solid rgba(54, 42, 32, 0.18);
-  border-radius: 1.05rem;
-  background: linear-gradient(180deg, #201914 0%, #17120e 100%);
-  box-shadow: 0 12px 26px rgba(24, 18, 14, 0.09);
+  border: 1px solid rgba(74, 56, 39, 0.14);
+  border-radius: 0.9rem;
+  background: linear-gradient(180deg, #221b15 0%, #1a140f 100%);
+  box-shadow: 0 10px 22px rgba(24, 18, 14, 0.07);
   overflow: hidden;
 }
 
@@ -1367,25 +1370,25 @@ body.page-post .markdown-body figure.highlight::before,
 body.page-post .markdown-body > pre::before {
   content: "";
   display: block;
-  height: 2.35rem;
+  height: 2rem;
   background:
-    radial-gradient(circle at 1rem 50%, rgba(255, 226, 181, 0.55) 0 0.18rem, transparent 0.2rem),
-    radial-gradient(circle at 1.75rem 50%, rgba(255, 226, 181, 0.28) 0 0.18rem, transparent 0.2rem),
-    radial-gradient(circle at 2.5rem 50%, rgba(255, 226, 181, 0.14) 0 0.18rem, transparent 0.2rem),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    radial-gradient(circle at 0.95rem 50%, rgba(255, 226, 181, 0.38) 0 0.15rem, transparent 0.17rem),
+    radial-gradient(circle at 1.55rem 50%, rgba(255, 226, 181, 0.22) 0 0.15rem, transparent 0.17rem),
+    radial-gradient(circle at 2.15rem 50%, rgba(255, 226, 181, 0.1) 0 0.15rem, transparent 0.17rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 body.page-post .markdown-body figure.highlight::after,
 body.page-post .markdown-body > pre::after {
   content: "SNIPPET";
   position: absolute;
-  top: 0.58rem;
-  right: 0.9rem;
-  color: rgba(255, 244, 232, 0.48);
-  font-size: 0.68rem;
+  top: 0.46rem;
+  right: 0.82rem;
+  color: rgba(255, 244, 232, 0.42);
+  font-size: 0.64rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
 }
 
 body.page-post .markdown-body figure.highlight.bash::after {
@@ -1408,11 +1411,11 @@ body.page-post .markdown-body > pre code.hljs {
   display: block;
   overflow-x: auto;
   background: transparent;
-  color: #f5ede0;
-  font-size: 0.95rem;
-  line-height: 1.72;
+  color: #f6eee3;
+  font-size: 0.93rem;
+  line-height: 1.7;
   white-space: pre;
-  padding: 1rem 1.15rem 1.1rem;
+  padding: 0.95rem 1.05rem 1rem;
 }
 
 body.page-post .markdown-body figure.highlight {
@@ -1432,16 +1435,16 @@ body.page-post .markdown-body figure.highlight td {
 }
 
 body.page-post .markdown-body figure.highlight td.gutter {
-  width: 2.8rem;
-  min-width: 2.8rem;
-  background: rgba(255, 255, 255, 0.028);
+  width: 2.45rem;
+  min-width: 2.45rem;
+  background: rgba(255, 255, 255, 0.022);
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   vertical-align: top;
 }
 
 body.page-post .markdown-body figure.highlight td.gutter pre {
   margin: 0;
-  padding: 1rem 0.55rem 1.1rem;
+  padding: 0.95rem 0.45rem 1rem;
   background: transparent;
   box-shadow: none;
   border: 0;
@@ -1455,15 +1458,15 @@ body.page-post .markdown-body figure.highlight td.gutter pre::after {
 
 body.page-post .markdown-body figure.highlight td.gutter pre span.line {
   color: rgba(255, 244, 232, 0.36);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
 }
 
 body.page-post .markdown-body figure.highlight td.code > pre {
   margin: 0;
-  padding: 1rem 1.1rem 1.1rem;
+  padding: 0.95rem 1.05rem 1rem;
   overflow-x: auto;
   background: transparent;
-  color: #f5ede0;
+  color: #f6eee3;
   border: 0;
   border-radius: 0;
   box-shadow: none;
@@ -1477,20 +1480,20 @@ body.page-post .markdown-body .hljs span {
 
 body.page-post .markdown-body .hljs-comment,
 body.page-post .markdown-body .hljs-quote {
-  color: rgba(255, 244, 232, 0.42);
+  color: rgba(255, 244, 232, 0.38);
 }
 
 body.page-post .markdown-body .hljs-keyword,
 body.page-post .markdown-body .hljs-selector-tag,
 body.page-post .markdown-body .hljs-literal {
-  color: #efc17b;
+  color: #f1c98b;
 }
 
 body.page-post .markdown-body .hljs-string,
 body.page-post .markdown-body .hljs-number,
 body.page-post .markdown-body .hljs-variable,
 body.page-post .markdown-body .hljs-template-variable {
-  color: #f7dbc0;
+  color: #f4dcc1;
 }
 
 body.page-post .markdown-body .hljs-title,
@@ -1502,7 +1505,7 @@ body.page-post .markdown-body .hljs-name {
 
 body.page-post .markdown-body .hljs-operator,
 body.page-post .markdown-body .hljs-punctuation {
-  color: rgba(255, 244, 232, 0.78);
+  color: rgba(255, 244, 232, 0.72);
 }
 
 body.page-post .markdown-body > pre code::-webkit-scrollbar,
@@ -1513,7 +1516,7 @@ body.page-post .markdown-body figure.highlight td.code > pre::-webkit-scrollbar 
 body.page-post .markdown-body > pre code::-webkit-scrollbar-thumb,
 body.page-post .markdown-body figure.highlight td.code > pre::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgba(255, 244, 232, 0.18);
+  background: rgba(255, 244, 232, 0.14);
 }
 
 body.page-post .markdown-body > pre code::-webkit-scrollbar-track,
@@ -1735,10 +1738,16 @@ textarea:focus-visible {
     gap: 1.4rem;
   }
 
+  body.page-post .lab-post-main {
+    grid-column: auto;
+    width: 100%;
+  }
+
   body.page-post .lab-post-rail {
     order: -1;
     justify-self: stretch;
     width: 100%;
+    grid-column: auto;
   }
 
   body.page-post #toc,
