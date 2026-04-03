@@ -273,14 +273,28 @@ html[data-user-color-scheme="dark"] #board {
 }
 
 .lab-post-hero {
-  width: min(100%, 56rem);
+  position: relative;
+  width: min(100%, 70rem);
   margin: 0 auto;
-  padding: clamp(0.3rem, 1.5vw, 0.8rem) 1.5rem 0;
+  padding: clamp(0.5rem, 1.8vw, 1rem) 1.5rem 0;
   text-align: left;
 }
 
+.lab-post-hero::before {
+  content: "";
+  position: absolute;
+  top: 3.8rem;
+  right: 8%;
+  width: clamp(10rem, 18vw, 16rem);
+  height: clamp(10rem, 18vw, 16rem);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 219, 168, 0.14), transparent 72%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
 .lab-post-hero-kicker {
-  margin: 0 0 0.9rem;
+  margin: 0 0 1rem;
   color: rgba(255, 238, 212, 0.68);
   font-size: 0.74rem;
   font-weight: 700;
@@ -294,26 +308,28 @@ html[data-user-color-scheme="dark"] #board {
 .lab-post-hero-title {
   margin: 0;
   color: #fff8f1;
-  max-width: 10.6ch;
-  font-size: clamp(2.45rem, 4.4vw, 4.15rem);
-  line-height: 1.08;
-  letter-spacing: 0;
+  max-width: 16.5ch;
+  font-size: clamp(2.7rem, 4.8vw, 4.7rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
   text-wrap: balance;
-  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+  text-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(14px);
+  filter: blur(8px);
   transition:
     opacity 520ms var(--lab-ease),
     transform 520ms var(--lab-ease),
+    filter 520ms var(--lab-ease),
     text-shadow 520ms var(--lab-ease);
 }
 
 .lab-post-hero-dek {
-  max-width: 29rem;
-  margin: 1.15rem 0 0;
-  color: rgba(255, 244, 232, 0.8);
-  font-size: 0.94rem;
-  line-height: 1.72;
+  max-width: 34rem;
+  margin: 1.05rem 0 0;
+  color: rgba(255, 244, 232, 0.78);
+  font-size: 0.98rem;
+  line-height: 1.78;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 500ms var(--lab-ease), transform 500ms var(--lab-ease);
@@ -344,7 +360,8 @@ body.page-post .lab-post-hero.is-ready .lab-post-hero-dek {
 body.page-post .lab-post-hero.is-ready .lab-post-hero-title {
   opacity: 1;
   transform: translateY(0);
-  text-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+  filter: blur(0);
+  text-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
 }
 
 .lab-hero-actions {
@@ -1137,15 +1154,15 @@ body.page-post .post-content {
 body.page-post .lab-post-intro {
   position: relative;
   z-index: 2;
-  width: min(100%, calc(var(--lab-post-reading) + 1rem));
-  margin: 0 0 2rem;
-  padding: clamp(1.35rem, 2.8vw, 2rem);
-  border-radius: 2rem;
+  width: min(100%, 43rem);
+  margin: -0.9rem 0 1.8rem 1.2rem;
+  padding: 1.05rem 1.2rem 1.15rem;
+  border-radius: 1.45rem;
   border: 1px solid rgba(74, 56, 39, 0.12);
   background:
-    linear-gradient(135deg, rgba(255, 252, 247, 0.84), rgba(244, 235, 221, 0.92)),
+    linear-gradient(135deg, rgba(255, 252, 247, 0.88), rgba(244, 235, 221, 0.94)),
     url("/img/lab/texture-grain.svg");
-  box-shadow: 0 18px 50px rgba(32, 24, 18, 0.08);
+  box-shadow: 0 16px 36px rgba(32, 24, 18, 0.08);
   backdrop-filter: blur(14px);
 }
 
@@ -1179,11 +1196,11 @@ html[data-user-color-scheme="dark"] .page-post .lab-post-intro {
 }
 
 body.page-post .lab-post-summary {
-  max-width: 50rem;
-  margin-top: 1rem;
+  max-width: 34rem;
+  margin-top: 0.85rem;
   color: var(--lab-ink);
-  font-size: 1.08rem;
-  line-height: 1.92;
+  font-size: 0.98rem;
+  line-height: 1.8;
 }
 
 body.page-post .post-metas.my-3 {
@@ -1330,11 +1347,11 @@ body.page-post .lab-seo-header {
 body.page-post .markdown-body figure.highlight,
 body.page-post .markdown-body > pre {
   position: relative;
-  margin: 1.6rem 0 1.9rem;
-  border: 1px solid rgba(54, 42, 32, 0.2);
-  border-radius: 0.95rem;
-  background: linear-gradient(180deg, #231c16 0%, #19130f 100%);
-  box-shadow: 0 14px 28px rgba(24, 18, 14, 0.08);
+  margin: 1.55rem 0 1.85rem;
+  border: 1px solid rgba(54, 42, 32, 0.18);
+  border-radius: 1.05rem;
+  background: linear-gradient(180deg, #201914 0%, #17120e 100%);
+  box-shadow: 0 12px 26px rgba(24, 18, 14, 0.09);
   overflow: hidden;
 }
 
@@ -1342,18 +1359,22 @@ body.page-post .markdown-body figure.highlight::before,
 body.page-post .markdown-body > pre::before {
   content: "";
   display: block;
-  height: 2.1rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  height: 2.35rem;
+  background:
+    radial-gradient(circle at 1rem 50%, rgba(255, 226, 181, 0.55) 0 0.18rem, transparent 0.2rem),
+    radial-gradient(circle at 1.75rem 50%, rgba(255, 226, 181, 0.28) 0 0.18rem, transparent 0.2rem),
+    radial-gradient(circle at 2.5rem 50%, rgba(255, 226, 181, 0.14) 0 0.18rem, transparent 0.2rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 body.page-post .markdown-body figure.highlight::after,
 body.page-post .markdown-body > pre::after {
-  content: "CODE";
+  content: "SNIPPET";
   position: absolute;
-  top: 0.52rem;
+  top: 0.58rem;
   right: 0.9rem;
-  color: rgba(255, 244, 232, 0.52);
+  color: rgba(255, 244, 232, 0.48);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -1371,7 +1392,7 @@ body.page-post .markdown-body figure.highlight.bash::after {
 }
 
 body.page-post .markdown-body > pre {
-  padding: 2.95rem 1.05rem 1rem;
+  padding: 0;
 }
 
 body.page-post .markdown-body > pre code,
@@ -1379,10 +1400,11 @@ body.page-post .markdown-body > pre code.hljs {
   display: block;
   overflow-x: auto;
   background: transparent;
-  color: #f3ebdf;
+  color: #f5ede0;
   font-size: 0.95rem;
-  line-height: 1.75;
+  line-height: 1.72;
   white-space: pre;
+  padding: 1rem 1.15rem 1.1rem;
 }
 
 body.page-post .markdown-body figure.highlight {
@@ -1402,16 +1424,16 @@ body.page-post .markdown-body figure.highlight td {
 }
 
 body.page-post .markdown-body figure.highlight td.gutter {
-  width: 3.2rem;
-  min-width: 3.2rem;
-  background: rgba(255, 255, 255, 0.025);
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  width: 2.8rem;
+  min-width: 2.8rem;
+  background: rgba(255, 255, 255, 0.028);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
   vertical-align: top;
 }
 
 body.page-post .markdown-body figure.highlight td.gutter pre {
   margin: 0;
-  padding: 2.95rem 0.7rem 1rem;
+  padding: 1rem 0.55rem 1.1rem;
   background: transparent;
   box-shadow: none;
   border: 0;
@@ -1425,15 +1447,15 @@ body.page-post .markdown-body figure.highlight td.gutter pre::after {
 
 body.page-post .markdown-body figure.highlight td.gutter pre span.line {
   color: rgba(255, 244, 232, 0.36);
-  font-size: 0.82rem;
+  font-size: 0.76rem;
 }
 
 body.page-post .markdown-body figure.highlight td.code > pre {
   margin: 0;
-  padding: 2.95rem 1.1rem 1rem;
+  padding: 1rem 1.1rem 1.1rem;
   overflow-x: auto;
   background: transparent;
-  color: #f3ebdf;
+  color: #f5ede0;
   border: 0;
   border-radius: 0;
   box-shadow: none;
@@ -1442,7 +1464,37 @@ body.page-post .markdown-body figure.highlight td.code > pre {
 body.page-post .markdown-body figure.highlight td.code > pre .line,
 body.page-post .markdown-body .hljs,
 body.page-post .markdown-body .hljs span {
-  color: #f3ebdf;
+  color: inherit;
+}
+
+body.page-post .markdown-body .hljs-comment,
+body.page-post .markdown-body .hljs-quote {
+  color: rgba(255, 244, 232, 0.42);
+}
+
+body.page-post .markdown-body .hljs-keyword,
+body.page-post .markdown-body .hljs-selector-tag,
+body.page-post .markdown-body .hljs-literal {
+  color: #efc17b;
+}
+
+body.page-post .markdown-body .hljs-string,
+body.page-post .markdown-body .hljs-number,
+body.page-post .markdown-body .hljs-variable,
+body.page-post .markdown-body .hljs-template-variable {
+  color: #f7dbc0;
+}
+
+body.page-post .markdown-body .hljs-title,
+body.page-post .markdown-body .hljs-built_in,
+body.page-post .markdown-body .hljs-function,
+body.page-post .markdown-body .hljs-name {
+  color: #f5efe3;
+}
+
+body.page-post .markdown-body .hljs-operator,
+body.page-post .markdown-body .hljs-punctuation {
+  color: rgba(255, 244, 232, 0.78);
 }
 
 body.page-post .markdown-body > pre code::-webkit-scrollbar,
@@ -1799,13 +1851,18 @@ textarea:focus-visible {
     padding: 1.25rem;
   }
 
+  body.page-post .lab-post-intro {
+    width: min(100%, 40rem);
+    margin: -0.5rem 0 1.6rem;
+  }
+
   body.page-post .lab-post-hero-title {
-    max-width: 11ch;
-    font-size: clamp(2.35rem, 8vw, 3.65rem);
+    max-width: 14ch;
+    font-size: clamp(2.3rem, 7vw, 3.8rem);
   }
 
   body.page-post .lab-post-hero-dek {
-    max-width: 28rem;
+    max-width: 30rem;
     font-size: 0.94rem;
   }
 }
@@ -1874,9 +1931,9 @@ textarea:focus-visible {
   }
 
   body.page-post .lab-post-hero-title {
-    max-width: 10ch;
-    font-size: 2.1rem;
-    line-height: 1.05;
+    max-width: 12ch;
+    font-size: 2rem;
+    line-height: 1.06;
   }
 
   body.page-post .lab-post-hero-dek,
@@ -1890,6 +1947,11 @@ textarea:focus-visible {
   body.page-post #tocbot,
   body.page-post .toc-container {
     padding: 1.05rem;
+  }
+
+  body.page-post .lab-post-intro {
+    width: 100%;
+    margin: -0.15rem 0 1.25rem;
   }
 }
 
