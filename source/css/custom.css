@@ -1242,8 +1242,8 @@ body.page-post .lab-post-body-layout {
   width: 100%;
   max-width: calc(var(--lab-post-reading) + var(--lab-post-aside) + var(--lab-post-gap));
   margin: 0 auto;
-  grid-template-columns: minmax(0, 1fr) minmax(14.5rem, var(--lab-post-aside));
-  gap: clamp(1.5rem, 2.4vw, 2.25rem);
+  grid-template-columns: minmax(0, 1fr) minmax(17.2rem, var(--lab-post-aside));
+  gap: clamp(1.2rem, 2vw, 1.85rem);
   align-items: start;
 }
 
@@ -1295,13 +1295,15 @@ body.page-post .lab-post-divider {
 }
 
 body.page-post .lab-post-rail {
+  position: -webkit-sticky;
   position: sticky;
   top: var(--lab-post-toc-top);
   grid-column: 2;
   align-self: start;
   justify-self: stretch;
   margin-left: 0;
-  min-width: 14.5rem;
+  min-width: 17.2rem;
+  height: fit-content;
   width: 100%;
   z-index: 4;
 }
@@ -1598,9 +1600,9 @@ body.page-post #toc .toc-body {
 body.page-post #toc .toc-list-item {
   display: grid;
   grid-template-columns: 1rem minmax(0, 1fr);
-  gap: 0.34rem;
+  gap: 0.26rem;
   align-items: start;
-  padding: 0.02rem 0;
+  padding: 0;
   overflow: visible;
   -webkit-line-clamp: initial;
 }
@@ -1608,24 +1610,24 @@ body.page-post #toc .toc-list-item {
 body.page-post #toc .tocbot-link {
   display: block;
   grid-column: 2;
-  padding: 0.28rem 0.45rem 0.28rem 0.58rem;
+  padding: 0.2rem 0.42rem 0.2rem 0.54rem;
   border-left: 2px solid transparent;
   border-radius: 0.42rem;
   font-size: 0.79rem;
-  line-height: 1.36;
+  line-height: 1.28;
   word-break: break-word;
   transition: color var(--lab-fast) var(--lab-ease), background var(--lab-fast) var(--lab-ease), border-color var(--lab-fast) var(--lab-ease);
 }
 
 body.page-post #toc .tocbot-list ol {
   grid-column: 2;
-  padding-left: 0.52rem;
-  margin: 0.05rem 0 0.16rem;
+  padding-left: 0.42rem;
+  margin: 0.02rem 0 0.06rem;
 }
 
 body.page-post #toc .tocbot-list ol .tocbot-link {
   font-size: 0.74rem;
-  line-height: 1.34;
+  line-height: 1.24;
   opacity: 0.86;
 }
 
@@ -1649,16 +1651,21 @@ body.page-post #toc .toc-list-item.is-active-li > .tocbot-link {
 }
 
 body.page-post #toc .toc-toggle {
+  -webkit-appearance: none;
+  appearance: none;
   grid-column: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 1rem;
   height: 1rem;
+  padding: 0;
   margin-top: 0.27rem;
-  border: 0;
+  border: 0 !important;
   border-radius: 999px;
-  background: transparent;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none;
   color: rgba(74, 56, 39, 0.7);
   font-size: 0.68rem;
   line-height: 1;
@@ -1692,11 +1699,14 @@ body.page-post #toc .toc-footer {
 }
 
 body.page-post #toc .toc-action {
+  -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   min-height: 1.9rem;
   border: 1px solid rgba(74, 56, 39, 0.16);
   border-radius: 0.58rem;
   background: rgba(255, 252, 247, 0.92);
+  box-shadow: none;
   color: var(--lab-muted);
   font-size: 0.74rem;
   letter-spacing: 0.03em;
