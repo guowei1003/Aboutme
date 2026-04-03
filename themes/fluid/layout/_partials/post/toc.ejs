@@ -1,7 +1,7 @@
 <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span><%- __('post.toc') %></span>
+    <span>章节导览</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -12,8 +12,8 @@ import_script(`
   Fluid.utils.createScript('${url_join(theme.static_prefix.tocbot, 'tocbot.min.js')}', function() {
     var toc = jQuery('#toc');
     if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
+    var navbarHeight = jQuery('#navbar').outerHeight() || 0;
+    var readingOffset = navbarHeight + 28;
 
     function isExpandAllEnabled() {
       return CONFIG.toc && CONFIG.toc.expand_all === true;
@@ -80,8 +80,9 @@ import_script(`
       isCollapsedClass: 'tocbot-is-collapsed',
       collapsibleClass: 'tocbot-is-collapsible',
       scrollSmooth    : true,
+      scrollSmoothOffset: -readingOffset,
       includeTitleTags: true,
-      headingsOffset  : -boardTop,
+      headingsOffset  : -readingOffset,
     }, CONFIG.toc);
     if (isExpandAllEnabled()) {
       tocConfig.collapseDepth = 6;

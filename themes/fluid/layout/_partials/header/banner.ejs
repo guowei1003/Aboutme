@@ -24,6 +24,7 @@ if (random_banner_attr) {
 var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)
 var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)
 var subtitle = page.subtitle || page.title
+var postSummary = strip_html(page.description || page.excerpt || page.content || '').substring(0, 120).trim().replace(/\n/g, ' ')
 var lab = site.data.lab || {}
 var labBrand = lab.brand || {}
 var labHero = lab.hero || {}
@@ -49,13 +50,21 @@ var labHero = lab.hero || {}
             </div>
           </div>
         <% } else { %>
-          <div class="h2">
-            <% if(theme.fun_features.typing.enable && in_scope(theme.fun_features.typing.scope) && !is_post()) { %>
-              <span id="subtitle" data-typed-text="<%= subtitle %>"></span>
-            <% } else { %>
-              <span id="subtitle"><%- subtitle %></span>
-            <% } %>
-          </div>
+          <% if (is_post()) { %>
+            <div class="lab-post-hero">
+              <p class="lab-post-hero-kicker">熟成特刊 / Future Editorial</p>
+              <h1 class="lab-post-hero-title"><%- subtitle %></h1>
+              <p class="lab-post-hero-dek"><%= postSummary || '围绕 AI 工具、部署方法与认知演化展开的一期专题导读。' %></p>
+            </div>
+          <% } else { %>
+            <div class="h2">
+              <% if(theme.fun_features.typing.enable && in_scope(theme.fun_features.typing.scope) && !is_post()) { %>
+                <span id="subtitle" data-typed-text="<%= subtitle %>"></span>
+              <% } else { %>
+                <span id="subtitle"><%- subtitle %></span>
+              <% } %>
+            </div>
+          <% } %>
         <% } %>
       </div>
 

@@ -45,7 +45,8 @@ post:
     tag: true
   toc:
     enable: true
-    headingSelector: h1,h2,h3,h4,h5,h6
+    placement: right
+    headingSelector: h2,h3,h4
     collapseDepth: 0
   copyright:
     enable: true

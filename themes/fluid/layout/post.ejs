@@ -2,73 +2,82 @@
 page.banner_img = page.banner_img || theme.post.banner_img
 page.banner_img_height = page.banner_img_height || theme.post.banner_img_height
 page.banner_mask_alpha = page.banner_mask_alpha || theme.post.banner_mask_alpha
+const hasLeftSidebar = (theme.post.toc.enable && theme.post.toc.placement === 'left' && page.toc !== false)
+  || (theme.post.category_bar.enable && theme.post.category_bar.placement !== 'right' && !page.hide
+    && (!theme.post.category_bar.specific || (theme.post.category_bar.specific && page.category_bar)))
+const hasRightSidebar = (theme.post.toc.enable && theme.post.toc.placement !== 'left' && page.toc !== false)
+  || (theme.post.category_bar.enable && theme.post.category_bar.placement === 'right' && !page.hide
+    && (!theme.post.category_bar.specific || (theme.post.category_bar.specific && page.category_bar)))
+const hasPostRail = hasLeftSidebar || hasRightSidebar
+const postSummary = strip_html(page.description || page.excerpt || page.content || '').substring(0, 140).trim().replace(/\n/g, ' ')
 %>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      <%- inject_point('postLeft') %>
-    </div>
+<div class="container-fluid nopadding-x lab-post-layout">
+  <div class="container nopadding-x-md" id="board-ctn">
+    <div id="board">
+      <article class="post-content mx-auto lab-post-shell">
+        <h1 id="seo-header" class="lab-seo-header"><%= page.subtitle || page.title %></h1>
 
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header"><%= page.subtitle || page.title %></h1>
-            <% const postSummary = strip_html(page.description || page.excerpt || page.content || '').substring(0, 140).trim().replace(/\n/g, ' ') %>
-            <header class="lab-post-header">
-              <p class="lab-kicker">熟成样本</p>
-              <div class="lab-post-header-meta">
-                <div class="lab-post-meta-line">
-                  <span class="post-meta">
-                    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                    <time datetime="<%= full_date(page.date, 'YYYY-MM-DD HH:mm') %>" pubdate><%= full_date(page.date, 'YYYY-MM-DD') %></time>
-                  </span>
-                  <% if ((page.author || config.author)) { %>
-                    <span class="post-meta">
-                      <i class="iconfont icon-author" aria-hidden="true"></i>
-                      <%= page.author || config.author %>
-                    </span>
-                  <% } %>
-                </div>
-                <%- partial('_partials/post/meta-bottom.ejs') %>
-              </div>
-              <p class="lab-post-summary"><%= postSummary %></p>
-            </header>
-            <% if (theme.post.updated.enable && theme.post.updated && compare_date(page.date, page.updated)) { %>
-              <p id="updated-time" class="note note-<%= theme.post.updated.note_class || 'info' %>" style="<%= theme.post.updated.relative ? 'display: none' : '' %>">
-                <% if (theme.post.updated.relative) { %>
-                  <% if (theme.post.updated.content) { %>
-                    <!-- compatible with older versions-->
-                    <%- theme.post.updated.content %><%- date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ') %>
-                  <% } else { %>
-                    <%- __('post.updated', date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ')) %>
-                  <% } %>
-                  <%- partial('_partials/plugins/moment.ejs') %>
-                <% } else { %>
-                  <% if (theme.post.updated.content) { %>
-                    <!-- compatible with older versions-->
-                    <%- theme.post.updated.content %><%- date(page.updated, theme.post.updated.date_format) %>
-                  <% } else { %>
-                    <%- __('post.updated', date(page.updated, theme.post.updated.date_format)) %>
-                  <% } %>
-                <% } %>
-              </p>
-            <% } %>
-            <% if (page.encrypt === true) { %>
-              <%- inject_point('postMarkdownBegin') %>
-              <%- page.content %>
-              <%- partial('_partials/plugins/encrypt') %>
-              <%- inject_point('postMarkdownEnd') %>
+        <header class="lab-post-header lab-post-intro">
+          <p class="lab-kicker">专题导读</p>
+          <div class="lab-post-header-meta">
+            <div class="lab-post-meta-line">
+              <span class="post-meta">
+                <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                <time datetime="<%= full_date(page.date, 'YYYY-MM-DD HH:mm') %>" pubdate><%= full_date(page.date, 'YYYY-MM-DD') %></time>
+              </span>
+              <% if ((page.author || config.author)) { %>
+                <span class="post-meta">
+                  <i class="iconfont icon-author" aria-hidden="true"></i>
+                  <%= page.author || config.author %>
+                </span>
+              <% } %>
+            </div>
+            <%- partial('_partials/post/meta-bottom.ejs') %>
+          </div>
+          <p class="lab-post-summary"><%= postSummary %></p>
+        </header>
+
+        <% if (theme.post.updated.enable && theme.post.updated && compare_date(page.date, page.updated)) { %>
+          <p id="updated-time" class="note note-<%= theme.post.updated.note_class || 'info' %>" style="<%= theme.post.updated.relative ? 'display: none' : '' %>">
+            <% if (theme.post.updated.relative) { %>
+              <% if (theme.post.updated.content) { %>
+                <!-- compatible with older versions-->
+                <%- theme.post.updated.content %><%- date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ') %>
+              <% } else { %>
+                <%- __('post.updated', date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ')) %>
+              <% } %>
+              <%- partial('_partials/plugins/moment.ejs') %>
             <% } else { %>
-              <div class="markdown-body">
+              <% if (theme.post.updated.content) { %>
+                <!-- compatible with older versions-->
+                <%- theme.post.updated.content %><%- date(page.updated, theme.post.updated.date_format) %>
+              <% } else { %>
+                <%- __('post.updated', date(page.updated, theme.post.updated.date_format)) %>
+              <% } %>
+            <% } %>
+          </p>
+        <% } %>
+
+        <div class="lab-post-body-layout">
+          <div class="lab-post-main">
+            <div class="lab-post-paper">
+              <% if (page.encrypt === true) { %>
                 <%- inject_point('postMarkdownBegin') %>
                 <%- page.content %>
+                <%- partial('_partials/plugins/encrypt') %>
                 <%- inject_point('postMarkdownEnd') %>
-              </div>
-            <% } %>
-            <hr/>
-            <div>
+              <% } else { %>
+                <div class="markdown-body">
+                  <%- inject_point('postMarkdownBegin') %>
+                  <%- page.content %>
+                  <%- inject_point('postMarkdownEnd') %>
+                </div>
+              <% } %>
+            </div>
+
+            <div class="lab-post-tail">
+              <hr class="lab-post-divider"/>
               <%- inject_point('postCopyright') %>
 
               <% if (theme.post.prev_next.enable && !page.hide) { %>
@@ -95,16 +104,19 @@ page.banner_mask_alpha = page.banner_mask_alpha || theme.post.banner_mask_alpha
                   </article>
                 </div>
               <% } %>
+
+              <%- inject_point('postComments') %>
             </div>
+          </div>
 
-            <%- inject_point('postComments') %>
-          </article>
+          <% if (hasPostRail) { %>
+            <div class="lab-post-rail">
+              <%- inject_point('postLeft') %>
+              <%- inject_point('postRight') %>
+            </div>
+          <% } %>
         </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      <%- inject_point('postRight') %>
+      </article>
     </div>
   </div>
 </div>
