@@ -15,7 +15,7 @@ index_img: /2026/04/03/how-to-better-master-agents/master-agents-1.svg
 
 换句话说，很多团队以为自己在“搭 Agent”，实际上只是把模型接上了几个工具；真正能把 Agent 从“会回答”变成“能执行、能协作、能受控”的，是 Harness 这层执行与治理底座。
 
-{% asset_img master-agents-1.svg 驾驭 Agents 的关键，不是多写几个 Prompt，而是先拥有 Harness 这层执行底座 %}
+{% asset_img master-agents-1.svg 再快的 Agent，没有 Harness 这副“马具”，也跑不成可控系统 %}
 
 ## 一、什么是 `agent harness`
 
@@ -101,7 +101,7 @@ Human
 | Approval Gate | 高风险动作请求 | 允许 / 拒绝 / 人工确认 | 缺少审批会把自动化变成事故源 |
 | Tracing / Evaluation | 任务日志、输入输出、失败记录 | 运行轨迹、质量反馈、复盘依据 | 不可观测就不可治理 |
 
-{% asset_img master-agents-2.svg 多 Agent 真正能稳定工作，不靠“人海战术”，而靠 Harness 提供分工、边界与回收机制 %}
+{% asset_img master-agents-2.svg 一套可用的 Agent 系统，更像一个分工清楚的编辑部，而不是一个全能个体硬扛所有工作 %}
 
 ## 五、这套架构到底怎么运行
 
@@ -188,7 +188,7 @@ Agent 数量不是生产力本身。没有清晰分工和中间产物时，多�
 
 真正值得追求的，不是“我有更多 Agent”，而是“我有一套更好的 Harness”：它知道怎么拆任务，知道怎么管理上下文，知道什么该自动做，什么必须人工确认，也知道出了问题该从哪里查起。
 
-{% asset_img master-agents-3.svg 人类决策、Agent 分工与 Harness 治理应该形成闭环，而不是彼此失控 %}
+{% asset_img master-agents-3.svg 成熟的 Harness 像一面复盘墙：结果、流程和规则会一起回流到下一轮协作 %}
 
 当你开始这样理解 Agents，你就会发现，所谓“正确驾驭”，从来不是更花哨地调模型，而是更认真地搭底座。先把 Harness 建好，Agent 才真正有资格进入生产。
 

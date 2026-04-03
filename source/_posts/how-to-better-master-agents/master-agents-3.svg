@@ -1,30 +1,89 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" role="img" aria-label="复利闭环">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" role="img" aria-label="复盘墙闭环，比喻成熟的 agent harness 会把结果、流程和规则更新带回下一轮协作">
+  <title>好系统，会复盘再出发</title>
   <defs>
-    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1d1226"/>
-      <stop offset="60%" stop-color="#4e2565"/>
-      <stop offset="100%" stop-color="#8f48bf"/>
+    <linearGradient id="bg-wall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#efe4d4"/>
+      <stop offset="100%" stop-color="#d6b891"/>
     </linearGradient>
+    <style>
+      .title { font: 700 56px Georgia, "Times New Roman", serif; fill: #2f241a; }
+      .subtitle { font: 500 23px "Helvetica Neue", Arial, sans-serif; fill: #5f4d3b; }
+      .label { font: 700 28px "Helvetica Neue", Arial, sans-serif; fill: #2f241a; }
+      .small { font: 600 18px "Helvetica Neue", Arial, sans-serif; fill: #4f4034; }
+      .tiny { font: 700 16px "Helvetica Neue", Arial, sans-serif; fill: #4f4034; }
+    </style>
   </defs>
-  <rect width="1376" height="768" fill="url(#bg3)"/>
-  <text x="88" y="120" font-size="56" fill="#f9edff" font-family="Arial, sans-serif" font-weight="700">结果反馈 + 流程反馈 = 能力复利</text>
-  <g fill="none" stroke="#e8b9ff" stroke-width="16" stroke-linecap="round">
-    <path d="M280 360 C280 250 360 190 470 190 C600 190 670 280 670 360"/>
-    <path d="M1090 360 C1090 470 1010 530 900 530 C770 530 700 440 700 360"/>
-  </g>
-  <polygon points="664,334 700,360 664,386" fill="#e8b9ff"/>
-  <polygon points="706,334 670,360 706,386" fill="#e8b9ff"/>
-  <g font-family="Arial, sans-serif">
-    <rect x="150" y="280" width="360" height="170" rx="20" fill="#ffffff" fill-opacity="0.16" stroke="#f2d6ff"/>
-    <text x="186" y="344" font-size="38" fill="#fff1ff" font-weight="700">结果反馈</text>
-    <text x="186" y="388" font-size="24" fill="#f7e5ff">目标是否达成</text>
-    <text x="186" y="420" font-size="24" fill="#f7e5ff">价值是否显现</text>
-    <rect x="866" y="280" width="360" height="170" rx="20" fill="#ffffff" fill-opacity="0.16" stroke="#f2d6ff"/>
-    <text x="902" y="344" font-size="38" fill="#fff1ff" font-weight="700">流程反馈</text>
-    <text x="902" y="388" font-size="24" fill="#f7e5ff">提示模板是否有效</text>
-    <text x="902" y="420" font-size="24" fill="#f7e5ff">步骤哪里最易出错</text>
-  </g>
-  <rect x="328" y="528" width="720" height="134" rx="24" fill="#1c1024" fill-opacity="0.58" stroke="#efcfff" stroke-opacity="0.55"/>
-  <text x="392" y="590" font-size="34" fill="#fff1ff" font-family="Arial, sans-serif" font-weight="700">沉淀模板库，让协作从随机走向稳定</text>
-  <text x="392" y="628" font-size="24" fill="#f0d8ff" font-family="Arial, sans-serif">Kapibala · Agent Governance Loop</text>
+
+  <rect width="1376" height="768" fill="url(#bg-wall)"/>
+  <rect x="58" y="62" width="1260" height="644" rx="34" fill="#f9f4ec" stroke="#d7b894" stroke-width="2"/>
+
+  <text x="96" y="130" class="title">好系统，会复盘再出发</text>
+  <text x="98" y="170" class="subtitle">结果不只用来庆祝，流程不只用来抱怨，规则也要跟着一起更新。</text>
+
+  <rect x="104" y="214" width="1168" height="406" rx="26" fill="#c79f73" stroke="#8f6d49" stroke-width="4"/>
+  <circle cx="140" cy="248" r="10" fill="#a77d57"/>
+  <circle cx="1236" cy="248" r="10" fill="#a77d57"/>
+  <circle cx="140" cy="586" r="10" fill="#a77d57"/>
+  <circle cx="1236" cy="586" r="10" fill="#a77d57"/>
+
+  <rect x="186" y="254" width="320" height="214" rx="12" fill="#fff9f1" stroke="#8d6e4f" stroke-width="3" transform="rotate(-3 346 361)"/>
+  <rect x="228" y="228" width="164" height="38" rx="18" fill="#fff0cf" stroke="#8d6e4f" stroke-width="2"/>
+  <text x="254" y="253" class="tiny">结果反馈</text>
+  <text x="236" y="328" class="label">已发布稿件</text>
+  <line x1="238" y1="358" x2="426" y2="358" stroke="#70533a" stroke-width="4"/>
+  <line x1="238" y1="382" x2="442" y2="382" stroke="#70533a" stroke-width="4"/>
+  <line x1="238" y1="406" x2="396" y2="406" stroke="#70533a" stroke-width="4"/>
+  <circle cx="434" cy="316" r="26" fill="#d7f0d7" stroke="#5e8a5f" stroke-width="3"/>
+  <path d="M422 316 L432 326 L448 306" fill="none" stroke="#5e8a5f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="434" cy="392" r="26" fill="#d7f0d7" stroke="#5e8a5f" stroke-width="3"/>
+  <path d="M422 392 L432 402 L448 382" fill="none" stroke="#5e8a5f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="802" y="252" width="334" height="236" rx="16" fill="#f7ead0" stroke="#8d6e4f" stroke-width="3"/>
+  <rect x="838" y="228" width="164" height="38" rx="18" fill="#ffe2a6" stroke="#8d6e4f" stroke-width="2"/>
+  <text x="864" y="253" class="tiny">流程反馈</text>
+  <rect x="832" y="292" width="114" height="84" rx="12" fill="#f8c9a8" stroke="#9d674c" stroke-width="2" transform="rotate(-4 889 334)"/>
+  <rect x="960" y="296" width="126" height="88" rx="12" fill="#f6f0a9" stroke="#8b8050" stroke-width="2" transform="rotate(3 1023 340)"/>
+  <rect x="850" y="394" width="118" height="86" rx="12" fill="#d1e7f0" stroke="#627d88" stroke-width="2" transform="rotate(5 909 437)"/>
+  <rect x="986" y="404" width="126" height="78" rx="12" fill="#f0d2dd" stroke="#8b5a6e" stroke-width="2" transform="rotate(-5 1049 443)"/>
+  <text x="850" y="328" class="tiny">哪里卡住？</text>
+  <text x="972" y="334" class="tiny">哪步多余？</text>
+  <text x="866" y="432" class="tiny">哪类上下文太长？</text>
+  <text x="998" y="444" class="tiny">哪里最易出错？</text>
+
+  <rect x="488" y="500" width="394" height="114" rx="24" fill="#d4b390" stroke="#7a5e43" stroke-width="3"/>
+  <rect x="536" y="470" width="164" height="38" rx="18" fill="#fff0cf" stroke="#8d6e4f" stroke-width="2"/>
+  <text x="562" y="495" class="tiny">规则更新</text>
+  <rect x="542" y="530" width="88" height="54" rx="10" fill="#6e8391" stroke="#42525d" stroke-width="3"/>
+  <rect x="648" y="530" width="88" height="54" rx="10" fill="#c9d7c1" stroke="#687e64" stroke-width="3"/>
+  <rect x="754" y="530" width="88" height="54" rx="10" fill="#e8d8b4" stroke="#8d7a4f" stroke-width="3"/>
+  <text x="560" y="564" class="tiny" fill="#f8fbfd">手册</text>
+  <text x="666" y="564" class="tiny">模板</text>
+  <text x="774" y="564" class="tiny">规则</text>
+
+  <path d="M496 360 C620 330 724 320 832 330" fill="none" stroke="#b94d40" stroke-width="4" stroke-linecap="round"/>
+  <path d="M972 488 C930 528 854 550 782 556" fill="none" stroke="#b94d40" stroke-width="4" stroke-linecap="round"/>
+  <path d="M588 530 C500 502 410 458 344 426" fill="none" stroke="#b94d40" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="822,324 836,330 824,340" fill="#b94d40"/>
+  <polygon points="776,548 790,554 778,564" fill="#b94d40"/>
+  <polygon points="348,418 336,426 350,434" fill="#b94d40"/>
+
+  <circle cx="486" cy="356" r="10" fill="#d8c1a4"/>
+  <circle cx="832" cy="330" r="10" fill="#d8c1a4"/>
+  <circle cx="972" cy="488" r="10" fill="#d8c1a4"/>
+  <circle cx="588" cy="530" r="10" fill="#d8c1a4"/>
+
+  <circle cx="520" cy="650" r="12" fill="#2f241a"/>
+  <circle cx="688" cy="650" r="12" fill="#2f241a"/>
+  <circle cx="856" cy="650" r="12" fill="#2f241a"/>
+  <line x1="520" y1="664" x2="520" y2="696" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="688" y1="664" x2="688" y2="696" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="856" y1="664" x2="856" y2="696" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="520" y1="678" x2="504" y2="700" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="520" y1="678" x2="536" y2="700" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="688" y1="678" x2="672" y2="700" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="688" y1="678" x2="704" y2="700" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="856" y1="678" x2="840" y2="700" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+  <line x1="856" y1="678" x2="872" y2="700" stroke="#2f241a" stroke-width="5" stroke-linecap="round"/>
+
+  <text x="96" y="716" class="subtitle">成熟的 Harness 会把结果、流程问题和规则更新一起钉回墙上，带到下一轮协作。</text>
 </svg>

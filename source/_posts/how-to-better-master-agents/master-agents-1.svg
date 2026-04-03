@@ -1,40 +1,93 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" role="img" aria-label="驾驭 Agents 协议框架">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" role="img" aria-label="快马与马具，比喻 agent harness 让强大的 Agent 变得可控">
+  <title>再快的马，也要有马具</title>
   <defs>
-    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0e1324"/>
-      <stop offset="55%" stop-color="#1f2f66"/>
-      <stop offset="100%" stop-color="#5b7cff"/>
+    <linearGradient id="bg-horse" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6efe5"/>
+      <stop offset="100%" stop-color="#e7d3b9"/>
     </linearGradient>
-    <linearGradient id="card" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.08"/>
+    <linearGradient id="paper-horse" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffaf3"/>
+      <stop offset="100%" stop-color="#f1e4d2"/>
     </linearGradient>
+    <style>
+      .title { font: 700 58px Georgia, "Times New Roman", serif; fill: #2f241a; }
+      .subtitle { font: 500 24px "Helvetica Neue", Arial, sans-serif; fill: #5d4c3d; }
+      .label { font: 700 24px "Helvetica Neue", Arial, sans-serif; fill: #2f241a; }
+      .small { font: 600 19px "Helvetica Neue", Arial, sans-serif; fill: #4f3f32; }
+      .tag { font: 700 20px "Helvetica Neue", Arial, sans-serif; fill: #2f241a; }
+    </style>
   </defs>
-  <rect width="1376" height="768" fill="url(#bg1)"/>
-  <circle cx="1180" cy="90" r="200" fill="#8ec5ff" fill-opacity="0.18"/>
-  <circle cx="170" cy="110" r="140" fill="#c1d5ff" fill-opacity="0.14"/>
-  <text x="88" y="126" font-size="56" fill="#f4f7ff" font-family="Arial, sans-serif" font-weight="700">驾驭 Agents 的四类协议</text>
-  <g font-family="Arial, sans-serif">
-    <rect x="88" y="180" width="280" height="210" rx="20" fill="url(#card)" stroke="#a8bbff" stroke-opacity="0.7"/>
-    <text x="120" y="236" font-size="34" fill="#f4f7ff" font-weight="700">目标协议</text>
-    <text x="120" y="280" font-size="24" fill="#dce5ff">成功标准</text>
-    <text x="120" y="314" font-size="24" fill="#dce5ff">优先级</text>
-    <rect x="398" y="180" width="280" height="210" rx="20" fill="url(#card)" stroke="#a8bbff" stroke-opacity="0.7"/>
-    <text x="430" y="236" font-size="34" fill="#f4f7ff" font-weight="700">输入协议</text>
-    <text x="430" y="280" font-size="24" fill="#dce5ff">上下文边界</text>
-    <text x="430" y="314" font-size="24" fill="#dce5ff">数据约束</text>
-    <rect x="708" y="180" width="280" height="210" rx="20" fill="url(#card)" stroke="#a8bbff" stroke-opacity="0.7"/>
-    <text x="740" y="236" font-size="34" fill="#f4f7ff" font-weight="700">输出协议</text>
-    <text x="740" y="280" font-size="24" fill="#dce5ff">交付格式</text>
-    <text x="740" y="314" font-size="24" fill="#dce5ff">验收口径</text>
-    <rect x="1018" y="180" width="270" height="210" rx="20" fill="url(#card)" stroke="#a8bbff" stroke-opacity="0.7"/>
-    <text x="1050" y="236" font-size="34" fill="#f4f7ff" font-weight="700">升级协议</text>
-    <text x="1050" y="280" font-size="24" fill="#dce5ff">自动执行阈值</text>
-    <text x="1050" y="314" font-size="24" fill="#dce5ff">人工确认点</text>
-  </g>
-  <line x1="228" y1="430" x2="1156" y2="430" stroke="#cad7ff" stroke-width="3" stroke-dasharray="12 10" stroke-opacity="0.7"/>
-  <rect x="88" y="472" width="1200" height="210" rx="24" fill="#0a0f1f" fill-opacity="0.5" stroke="#95acff" stroke-opacity="0.55"/>
-  <text x="124" y="548" font-size="40" fill="#f4f7ff" font-family="Arial, sans-serif" font-weight="700">先协议化，再提速</text>
-  <text x="124" y="598" font-size="28" fill="#d9e3ff" font-family="Arial, sans-serif">把人机协作从“灵感交互”变成“工程系统”</text>
-  <text x="124" y="642" font-size="24" fill="#b8c8ff" font-family="Arial, sans-serif">Kapibala · Agents Methodology</text>
+
+  <rect width="1376" height="768" fill="url(#bg-horse)"/>
+  <circle cx="1180" cy="110" r="150" fill="#d8b98f" fill-opacity="0.35"/>
+  <circle cx="190" cy="640" r="180" fill="#f3dcc0" fill-opacity="0.55"/>
+  <rect x="60" y="62" width="1256" height="644" rx="34" fill="url(#paper-horse)" stroke="#d7b894" stroke-width="2"/>
+
+  <text x="96" y="132" class="title">再快的马，也要有马具</text>
+  <text x="98" y="174" class="subtitle">模型很强，只是起点；真正让它能拉车上路的，是 Harness 这副装备。</text>
+
+  <rect x="192" y="360" width="350" height="170" rx="24" fill="#c79a68" stroke="#6b4a2e" stroke-width="5"/>
+  <rect x="232" y="314" width="120" height="40" rx="12" fill="#9f7352" stroke="#6b4a2e" stroke-width="4"/>
+  <rect x="262" y="256" width="92" height="56" rx="18" fill="#ae7f58" stroke="#6b4a2e" stroke-width="4"/>
+  <circle cx="300" cy="566" r="46" fill="#3a2b20" stroke="#a98059" stroke-width="8"/>
+  <circle cx="472" cy="566" r="46" fill="#3a2b20" stroke="#a98059" stroke-width="8"/>
+  <rect x="232" y="382" width="74" height="92" rx="10" fill="#5b7180" stroke="#2f241a" stroke-width="3"/>
+  <line x1="254" y1="402" x2="284" y2="402" stroke="#e9f2f5" stroke-width="3"/>
+  <line x1="254" y1="418" x2="284" y2="418" stroke="#e9f2f5" stroke-width="3"/>
+  <line x1="254" y1="434" x2="278" y2="434" stroke="#e9f2f5" stroke-width="3"/>
+  <rect x="206" y="446" width="24" height="60" rx="8" fill="#cb5f43" stroke="#7b2f20" stroke-width="3"/>
+  <polygon points="168,434 208,408 248,434 238,478 178,478" fill="#cb5f43" stroke="#7b2f20" stroke-width="4"/>
+  <text x="189" y="451" class="small" fill="#fff7f0">停</text>
+
+  <circle cx="324" cy="242" r="16" fill="#2f241a"/>
+  <line x1="324" y1="258" x2="324" y2="300" stroke="#2f241a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="324" y1="274" x2="304" y2="296" stroke="#2f241a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="324" y1="274" x2="346" y2="296" stroke="#2f241a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="324" y1="300" x2="308" y2="330" stroke="#2f241a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="324" y1="300" x2="340" y2="330" stroke="#2f241a" stroke-width="6" stroke-linecap="round"/>
+
+  <ellipse cx="870" cy="432" rx="170" ry="100" fill="#6f503a"/>
+  <path d="M752 374 C764 304 834 262 892 280 C922 288 940 306 954 338 L956 390 L786 404 Z" fill="#7c5a42"/>
+  <ellipse cx="1008" cy="322" rx="66" ry="56" fill="#76533d"/>
+  <ellipse cx="1052" cy="338" rx="34" ry="26" fill="#a68060"/>
+  <polygon points="972,264 990,226 1010,268" fill="#5e412f"/>
+  <polygon points="1008,262 1030,224 1046,270" fill="#5e412f"/>
+  <circle cx="1026" cy="318" r="6" fill="#2d2219"/>
+  <path d="M782 298 C748 252 736 230 726 202" fill="none" stroke="#4b3224" stroke-width="18" stroke-linecap="round"/>
+  <path d="M718 418 C688 448 678 488 674 558" fill="none" stroke="#4b3224" stroke-width="10" stroke-linecap="round"/>
+  <path d="M774 422 C750 454 742 494 736 560" fill="none" stroke="#4b3224" stroke-width="10" stroke-linecap="round"/>
+  <path d="M930 432 C922 470 924 506 926 564" fill="none" stroke="#4b3224" stroke-width="10" stroke-linecap="round"/>
+  <path d="M992 430 C994 468 1000 510 1010 564" fill="none" stroke="#4b3224" stroke-width="10" stroke-linecap="round"/>
+  <path d="M700 458 C660 454 634 430 620 410" fill="none" stroke="#5c3b2b" stroke-width="12" stroke-linecap="round"/>
+
+  <path d="M962 320 C916 360 878 390 832 430" fill="none" stroke="#f2e1c5" stroke-width="10" stroke-linecap="round"/>
+  <path d="M940 300 C888 330 852 364 804 410" fill="none" stroke="#573c2f" stroke-width="6" stroke-linecap="round"/>
+  <path d="M956 348 C930 376 886 394 824 402" fill="none" stroke="#573c2f" stroke-width="6" stroke-linecap="round"/>
+  <path d="M350 288 C468 288 566 296 666 320 C768 344 860 356 956 322" fill="none" stroke="#8c5c3a" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 12"/>
+
+  <rect x="112" y="220" width="104" height="40" rx="18" fill="#fff3df" stroke="#8f6d49" stroke-width="2"/>
+  <text x="138" y="246" class="tag">工具</text>
+  <line x1="216" y1="240" x2="270" y2="322" stroke="#8f6d49" stroke-width="3"/>
+
+  <rect x="124" y="280" width="104" height="40" rx="18" fill="#fff3df" stroke="#8f6d49" stroke-width="2"/>
+  <text x="150" y="306" class="tag">记录</text>
+  <line x1="228" y1="300" x2="262" y2="382" stroke="#8f6d49" stroke-width="3"/>
+
+  <rect x="208" y="148" width="104" height="40" rx="18" fill="#fff3df" stroke="#8f6d49" stroke-width="2"/>
+  <text x="234" y="174" class="tag">审批</text>
+  <line x1="260" y1="188" x2="210" y2="430" stroke="#8f6d49" stroke-width="3"/>
+
+  <rect x="434" y="198" width="104" height="40" rx="18" fill="#fff3df" stroke="#8f6d49" stroke-width="2"/>
+  <text x="460" y="224" class="tag">人类</text>
+  <line x1="486" y1="238" x2="332" y2="244" stroke="#8f6d49" stroke-width="3"/>
+
+  <rect x="640" y="212" width="116" height="40" rx="18" fill="#fff3df" stroke="#8f6d49" stroke-width="2"/>
+  <text x="666" y="238" class="tag">上下文</text>
+  <line x1="698" y1="252" x2="704" y2="308" stroke="#8f6d49" stroke-width="3"/>
+
+  <rect x="1088" y="212" width="104" height="40" rx="18" fill="#fff3df" stroke="#8f6d49" stroke-width="2"/>
+  <text x="1114" y="238" class="tag">模型</text>
+  <line x1="1140" y1="252" x2="1018" y2="298" stroke="#8f6d49" stroke-width="3"/>
+
+  <text x="96" y="668" class="subtitle">快马代表模型能力，真正把它变成“可驾驭系统”的，是缰绳、车架、刹车、记录和车夫。</text>
 </svg>
