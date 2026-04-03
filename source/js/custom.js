@@ -76,9 +76,26 @@
     btn.style.transition = "opacity 220ms cubic-bezier(0.22, 1, 0.36, 1), transform 220ms cubic-bezier(0.22, 1, 0.36, 1)";
   }
 
+  function setupPostHeroReveal() {
+    var hero = document.querySelector(".page-post .lab-post-hero");
+    if (!hero) return;
+
+    if (prefersReducedMotion()) {
+      hero.classList.add("is-ready");
+      return;
+    }
+
+    window.requestAnimationFrame(function () {
+      window.setTimeout(function () {
+        hero.classList.add("is-ready");
+      }, 80);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     setupNavbarScrolledState();
     setupRevealAnimation();
     setupBackToTopEnhance();
+    setupPostHeroReveal();
   });
 })();
