@@ -274,31 +274,34 @@ html[data-user-color-scheme="dark"] #board {
 
 .lab-post-hero {
   position: relative;
-  width: min(100%, 70rem);
+  display: grid;
+  justify-items: center;
+  width: min(100%, 74rem);
   margin: 0 auto;
-  padding: clamp(0.5rem, 1.8vw, 1rem) 1.5rem 0;
-  text-align: left;
+  padding: clamp(0.8rem, 2vw, 1.4rem) 1.5rem 0;
+  text-align: center;
 }
 
 .lab-post-hero::before {
   content: "";
   position: absolute;
-  top: 3.8rem;
-  right: 8%;
-  width: clamp(10rem, 18vw, 16rem);
-  height: clamp(10rem, 18vw, 16rem);
+  top: 3.2rem;
+  left: 50%;
+  width: clamp(12rem, 20vw, 18rem);
+  height: clamp(12rem, 20vw, 18rem);
+  transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(244, 219, 168, 0.14), transparent 72%);
-  filter: blur(8px);
+  background: radial-gradient(circle, rgba(244, 219, 168, 0.16), transparent 74%);
+  filter: blur(14px);
   pointer-events: none;
 }
 
 .lab-post-hero-kicker {
-  margin: 0 0 1rem;
+  margin: 0 0 1.15rem;
   color: rgba(255, 238, 212, 0.68);
   font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.36em;
   text-transform: uppercase;
   opacity: 0;
   transform: translateY(8px);
@@ -308,9 +311,9 @@ html[data-user-color-scheme="dark"] #board {
 .lab-post-hero-title {
   margin: 0;
   color: #fff8f1;
-  max-width: 16.5ch;
-  font-size: clamp(2.7rem, 4.8vw, 4.7rem);
-  line-height: 1.02;
+  max-width: 18.5ch;
+  font-size: clamp(2.9rem, 5vw, 4.95rem);
+  line-height: 1.06;
   letter-spacing: -0.01em;
   text-wrap: balance;
   text-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
@@ -325,11 +328,11 @@ html[data-user-color-scheme="dark"] #board {
 }
 
 .lab-post-hero-dek {
-  max-width: 34rem;
-  margin: 1.05rem 0 0;
+  max-width: 31rem;
+  margin: 1.35rem auto 0;
   color: rgba(255, 244, 232, 0.78);
-  font-size: 0.98rem;
-  line-height: 1.78;
+  font-size: 0.94rem;
+  line-height: 1.74;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 500ms var(--lab-ease), transform 500ms var(--lab-ease);
@@ -1127,9 +1130,9 @@ body.page-post #banner .mask {
 }
 
 body.page-post .banner-text {
-  width: min(100%, var(--lab-post-shell));
+  width: min(100%, calc(var(--lab-post-reading) + 10rem));
   margin: 0 auto;
-  padding: clamp(7rem, 14vw, 10rem) 1.5rem clamp(8rem, 16vw, 11rem);
+  padding: clamp(6.6rem, 11vw, 8.6rem) 1.5rem clamp(5.4rem, 9vw, 7.6rem);
 }
 
 body.page-post #board {
@@ -1154,15 +1157,15 @@ body.page-post .post-content {
 body.page-post .lab-post-intro {
   position: relative;
   z-index: 2;
-  width: min(100%, 43rem);
-  margin: -0.9rem 0 1.8rem 1.2rem;
-  padding: 1.05rem 1.2rem 1.15rem;
-  border-radius: 1.45rem;
-  border: 1px solid rgba(74, 56, 39, 0.12);
+  width: min(100%, calc(var(--lab-post-reading) - 1.75rem));
+  margin: 0 auto 2.1rem;
+  padding: 0.95rem 1.15rem 1.05rem;
+  border-radius: 1.3rem;
+  border: 1px solid rgba(74, 56, 39, 0.1);
   background:
-    linear-gradient(135deg, rgba(255, 252, 247, 0.88), rgba(244, 235, 221, 0.94)),
+    linear-gradient(135deg, rgba(255, 252, 247, 0.8), rgba(244, 235, 221, 0.9)),
     url("/img/lab/texture-grain.svg");
-  box-shadow: 0 16px 36px rgba(32, 24, 18, 0.08);
+  box-shadow: 0 10px 24px rgba(32, 24, 18, 0.06);
   backdrop-filter: blur(14px);
 }
 
@@ -1196,11 +1199,11 @@ html[data-user-color-scheme="dark"] .page-post .lab-post-intro {
 }
 
 body.page-post .lab-post-summary {
-  max-width: 34rem;
-  margin-top: 0.85rem;
+  max-width: 33rem;
+  margin-top: 0.7rem;
   color: var(--lab-ink);
-  font-size: 0.98rem;
-  line-height: 1.8;
+  font-size: 0.94rem;
+  line-height: 1.72;
 }
 
 body.page-post .post-metas.my-3 {
@@ -1235,13 +1238,16 @@ body.page-post #updated-time {
 
 body.page-post .lab-post-body-layout {
   display: grid;
-  grid-template-columns: minmax(0, var(--lab-post-reading)) minmax(220px, var(--lab-post-aside));
-  gap: var(--lab-post-gap);
+  width: min(100%, calc(var(--lab-post-reading) + var(--lab-post-aside) + var(--lab-post-gap)));
+  margin: 0 auto;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, var(--lab-post-aside));
+  gap: clamp(1.6rem, 2.6vw, 2.4rem);
   align-items: start;
 }
 
 body.page-post .lab-post-main {
   min-width: 0;
+  width: min(100%, var(--lab-post-reading));
 }
 
 body.page-post .lab-post-paper {
@@ -1286,6 +1292,8 @@ body.page-post .lab-post-divider {
 
 body.page-post .lab-post-rail {
   min-width: 0;
+  width: min(100%, var(--lab-post-aside));
+  justify-self: end;
 }
 
 body.page-post .lab-post-sidebar {
@@ -1522,25 +1530,32 @@ body.page-post #toc,
 body.page-post #tocbot,
 body.page-post .toc-container {
   position: sticky;
-  top: 6rem;
+  top: 6.3rem;
   visibility: visible;
-  padding: 1.35rem 1.2rem 1.4rem;
-  border-radius: 1.6rem;
-  border: 1px solid rgba(74, 56, 39, 0.12);
-  background: rgba(251, 247, 240, 0.58);
-  box-shadow: none;
+  padding: 1rem 0.95rem 1.05rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(74, 56, 39, 0.08);
+  background: rgba(251, 247, 240, 0.44);
+  box-shadow: 0 8px 22px rgba(32, 24, 18, 0.04);
   backdrop-filter: blur(12px);
 }
 
 body.page-post #toc .toc-header {
-  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(74, 56, 39, 0.08);
   color: var(--lab-ink);
   font-family: var(--lab-serif);
   font-weight: 700;
 }
 
 body.page-post #toc .toc-header span {
-  letter-spacing: 0.08em;
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 body.page-post #toc a,
@@ -1558,45 +1573,46 @@ body.page-post .tocbot-active-link {
 
 body.page-post #toc .toc-body {
   max-height: calc(100vh - 9rem);
-  padding-right: 0.2rem;
+  padding-right: 0.1rem;
 }
 
 body.page-post #toc .toc-list-item {
   display: block;
-  padding: 0.22rem 0;
+  padding: 0.12rem 0;
   overflow: visible;
   -webkit-line-clamp: initial;
 }
 
 body.page-post #toc .tocbot-link {
   display: block;
-  padding: 0.15rem 0 0.15rem 0.8rem;
-  border-left: 1px solid transparent;
-  font-size: 0.95rem;
-  line-height: 1.55;
+  padding: 0.38rem 0 0.38rem 0.75rem;
+  border-left: 1.5px solid transparent;
+  font-size: 0.86rem;
+  line-height: 1.58;
 }
 
 body.page-post #toc .tocbot-list ol {
-  padding-left: 0.95rem;
+  padding-left: 0.78rem;
 }
 
 body.page-post #toc .tocbot-list ol .tocbot-link {
-  font-size: 0.88rem;
-  opacity: 0.88;
+  font-size: 0.8rem;
+  opacity: 0.82;
 }
 
 body.page-post #toc .toc-fallback-item.toc-level-3 .tocbot-link {
-  padding-left: 1.3rem;
+  padding-left: 1.15rem;
 }
 
 body.page-post #toc .toc-fallback-item.toc-level-4 .tocbot-link {
-  padding-left: 1.8rem;
+  padding-left: 1.55rem;
 }
 
 body.page-post #toc .tocbot-active-link {
   border-left-color: rgba(197, 138, 42, 0.8);
   color: var(--lab-ink) !important;
   font-weight: 700;
+  background: linear-gradient(90deg, rgba(197, 138, 42, 0.1), transparent 72%);
 }
 
 body.page-post #toc .toc-list-item::before {
@@ -1721,6 +1737,8 @@ textarea:focus-visible {
 
   body.page-post .lab-post-rail {
     order: -1;
+    justify-self: stretch;
+    width: 100%;
   }
 
   body.page-post #toc,
@@ -1831,7 +1849,7 @@ textarea:focus-visible {
   }
 
   body.page-post .banner-text {
-    padding: 6.2rem 1rem 6.4rem;
+    padding: 5.8rem 1rem 4.8rem;
   }
 
   body.page-post #board {
@@ -1853,17 +1871,17 @@ textarea:focus-visible {
 
   body.page-post .lab-post-intro {
     width: min(100%, 40rem);
-    margin: -0.5rem 0 1.6rem;
+    margin: 0 auto 1.6rem;
   }
 
   body.page-post .lab-post-hero-title {
-    max-width: 14ch;
-    font-size: clamp(2.3rem, 7vw, 3.8rem);
+    max-width: 14.5ch;
+    font-size: clamp(2.45rem, 7.2vw, 4rem);
   }
 
   body.page-post .lab-post-hero-dek {
-    max-width: 30rem;
-    font-size: 0.94rem;
+    max-width: 28rem;
+    font-size: 0.92rem;
   }
 }
 
@@ -1927,13 +1945,13 @@ textarea:focus-visible {
   }
 
   body.page-post .banner-text {
-    padding: 5.8rem 1rem 5.3rem;
+    padding: 5.2rem 1rem 4.2rem;
   }
 
   body.page-post .lab-post-hero-title {
-    max-width: 12ch;
-    font-size: 2rem;
-    line-height: 1.06;
+    max-width: 13ch;
+    font-size: 2.18rem;
+    line-height: 1.08;
   }
 
   body.page-post .lab-post-hero-dek,
@@ -1951,7 +1969,7 @@ textarea:focus-visible {
 
   body.page-post .lab-post-intro {
     width: 100%;
-    margin: -0.15rem 0 1.25rem;
+    margin: 0 auto 1.25rem;
   }
 }
 
