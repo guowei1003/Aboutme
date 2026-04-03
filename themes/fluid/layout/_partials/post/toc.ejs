@@ -9,6 +9,47 @@
 <%
 import_script(`
 <script>
+  function buildFallbackToc() {
+    var toc = jQuery('#toc');
+    var tocBody = jQuery('#toc-body');
+    var content = document.querySelector('.markdown-body');
+    if (toc.length === 0 || tocBody.length === 0 || !content) { return false; }
+    if (tocBody.children().length > 0) { return true; }
+
+    var headingSelector = (CONFIG.toc && CONFIG.toc.headingSelector) || 'h2,h3,h4';
+    var headings = content.querySelectorAll(headingSelector);
+    if (!headings.length) { return false; }
+
+    var list = document.createElement('ol');
+    list.className = 'tocbot-list';
+
+    Array.prototype.forEach.call(headings, function(heading) {
+      if (!heading.id) { return; }
+      var tagLevel = parseInt(heading.tagName.replace('H', ''), 10) || 2;
+      var item = document.createElement('li');
+      item.className = 'toc-list-item toc-fallback-item toc-level-' + tagLevel;
+
+      var link = document.createElement('a');
+      link.className = 'tocbot-link';
+      link.href = '#' + heading.id;
+      link.textContent = heading.textContent.trim();
+
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+
+    if (!list.children.length) { return false; }
+    tocBody.empty().append(list);
+    toc.css('visibility', 'visible');
+    return true;
+  }
+
+  Fluid.utils.listenDOMLoaded(function() {
+    window.setTimeout(function() {
+      buildFallbackToc();
+    }, 120);
+  });
+
   Fluid.utils.createScript('${url_join(theme.static_prefix.tocbot, 'tocbot.min.js')}', function() {
     var toc = jQuery('#toc');
     if (toc.length === 0 || !window.tocbot) { return; }
@@ -90,6 +131,8 @@ import_script(`
     window.tocbot.init(tocConfig);
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
+    } else {
+      buildFallbackToc();
     }
     expandAllToc();
     bindTocToggle();
@@ -103,6 +146,8 @@ import_script(`
         }
         if (toc.find('.toc-list-item').length > 0) {
           toc.css('visibility', 'visible');
+        } else {
+          buildFallbackToc();
         }
         expandAllToc();
         bindTocToggle();

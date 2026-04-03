@@ -306,6 +306,22 @@ html[data-user-color-scheme="dark"] #board {
   line-height: 1.9;
 }
 
+body.page-post .banner-text,
+body.page-post .lab-post-hero,
+body.page-post .lab-post-hero-kicker,
+body.page-post .lab-post-hero-title,
+body.page-post .lab-post-hero-dek {
+  color: #fff8f1;
+}
+
+body.page-post .lab-post-hero-kicker {
+  color: rgba(255, 238, 212, 0.78);
+}
+
+body.page-post .lab-post-hero-dek {
+  color: rgba(255, 244, 232, 0.86);
+}
+
 .lab-hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1303,6 +1319,7 @@ body.page-post #tocbot,
 body.page-post .toc-container {
   position: sticky;
   top: 6rem;
+  visibility: visible;
   padding: 1.35rem 1.2rem 1.4rem;
   border-radius: 1.6rem;
   border: 1px solid rgba(74, 56, 39, 0.12);
@@ -1362,6 +1379,14 @@ body.page-post #toc .tocbot-list ol {
 body.page-post #toc .tocbot-list ol .tocbot-link {
   font-size: 0.88rem;
   opacity: 0.88;
+}
+
+body.page-post #toc .toc-fallback-item.toc-level-3 .tocbot-link {
+  padding-left: 1.3rem;
+}
+
+body.page-post #toc .toc-fallback-item.toc-level-4 .tocbot-link {
+  padding-left: 1.8rem;
 }
 
 body.page-post #toc .tocbot-active-link {
