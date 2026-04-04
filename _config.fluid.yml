@@ -116,8 +116,8 @@ search:
   content: true
 
 # 网站图标
-favicon: /img/favicon-cheese.svg
-apple_touch_icon: /img/favicon-cheese.svg
+favicon: /img/logo-ai-pioneer.svg
+apple_touch_icon: /img/logo-ai-pioneer.svg
 
 # Canonical
 canonical:
