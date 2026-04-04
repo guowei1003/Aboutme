@@ -312,9 +312,9 @@ html[data-user-color-scheme="dark"] #board {
 .lab-post-hero-title {
   margin: 0;
   color: #fff8f1;
-  max-width: 18.5ch;
-  font-size: clamp(2.9rem, 5vw, 4.95rem);
-  line-height: 1.06;
+  max-width: 17ch;
+  font-size: clamp(2.35rem, 4vw, 3.9rem);
+  line-height: 1.1;
   letter-spacing: -0.01em;
   text-wrap: balance;
   text-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
@@ -2032,8 +2032,9 @@ textarea:focus-visible {
   }
 
   body.page-post .lab-post-hero-title {
-    max-width: 14.5ch;
-    font-size: clamp(2.45rem, 7.2vw, 4rem);
+    max-width: 13.6ch;
+    font-size: clamp(2rem, 5.8vw, 3.2rem);
+    line-height: 1.11;
   }
 
   body.page-post .lab-post-hero-dek {
@@ -2106,9 +2107,9 @@ textarea:focus-visible {
   }
 
   body.page-post .lab-post-hero-title {
-    max-width: 13ch;
-    font-size: 2.18rem;
-    line-height: 1.08;
+    max-width: 12.2ch;
+    font-size: 1.82rem;
+    line-height: 1.13;
   }
 
   body.page-post .lab-post-hero-dek,
