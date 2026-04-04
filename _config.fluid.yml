@@ -7,7 +7,6 @@ navbar:
     - { name: "AI 日报", link: "/categories/AI-Daily/", icon: "icon-bookmark" }
     - { name: "观点与方法", link: "/categories/芝士力量/", icon: "icon-calendar" }
     - { name: "进化记录", link: "/evolution/", icon: "icon-star" }
-    - { name: "隐私文档", link: "/privacy/", icon: "icon-document" }
 
 # 页脚配置
 footer:
