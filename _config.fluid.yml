@@ -4,6 +4,7 @@ navbar:
   blog_name: AI芝士
   menu:
     - { name: "首页", link: "/", icon: "icon-home" }
+    - { name: "AI 日报", link: "/categories/AI-Daily/", icon: "icon-bookmark" }
     - { name: "观点与方法", link: "/categories/芝士力量/", icon: "icon-calendar" }
     - { name: "进化记录", link: "/evolution/", icon: "icon-star" }
     - { name: "隐私文档", link: "/privacy/", icon: "icon-document" }

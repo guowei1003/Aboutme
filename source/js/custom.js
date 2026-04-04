@@ -37,7 +37,7 @@
     if (prefersReducedMotion()) return;
 
     var targets = document.querySelectorAll(
-      ".lab-section, .lab-featured, .lab-path, .lab-post-item, .lab-timeline-item, .evolution-stage, .evolution-point, .evolution-principles"
+      ".lab-section, .lab-featured, .lab-path, .lab-post-item, .lab-daily-item, .lab-timeline-item, .evolution-stage, .evolution-point, .evolution-principles"
     );
 
     if (!targets.length) return;

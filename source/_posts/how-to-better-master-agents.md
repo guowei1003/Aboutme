@@ -198,3 +198,8 @@ Agent 数量不是生产力本身。没有清晰分工和中间产物时，多�
 - [Microsoft Agent Framework: Agent Harness in Agent Framework](https://devblogs.microsoft.com/agent-framework/agent-harness-in-agent-framework/)
 - [OpenAI: New tools for building agents](https://openai.com/index/new-tools-for-building-agents/)
 - [Google ADK: Runtime](https://google.github.io/adk-docs/runtime/)
+
+## 相关 AI-Daily
+
+- [2026-04-04 AI 日报：先做可验证任务，而不是先做大而全](/2026/04/04/ai-daily-2026-04-04-agent-priority/)
+- [2026-04-03 AI 日报：上下文不是越多越好，而是越准越好](/2026/04/03/ai-daily-2026-04-03-context-contract/)

@@ -4,6 +4,7 @@
     <p class="lab-footer-title">AI芝士知识熟成实验室</p>
     <p class="lab-footer-text"><%= config.description %></p>
     <div class="lab-footer-links">
+      <a href="<%= url_for('/categories/AI-Daily/') %>"><%= (lab.nav_labels && lab.nav_labels.ai_daily) || 'AI 日报' %></a>
       <a href="<%= url_for('/categories/芝士力量/') %>"><%= (lab.nav_labels && lab.nav_labels.category) || '观点与方法' %></a>
       <a href="<%= url_for('/archives/') %>">熟成时间线</a>
       <a href="<%= url_for('/evolution/') %>"><%= (lab.nav_labels && lab.nav_labels.evolution) || '进化记录' %></a>

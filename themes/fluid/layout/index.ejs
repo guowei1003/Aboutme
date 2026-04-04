@@ -4,6 +4,13 @@ const posts = page.posts && page.posts.data ? page.posts.data : []
 const featuredPath = lab.featured_post || ''
 let featuredPost = null
 let recentPosts = []
+const dailyPosts = posts
+  .filter(function(post) {
+    return post.categories && post.categories.data && post.categories.data.some(function(category) {
+      return category.name === 'AI-Daily'
+    })
+  })
+  .slice(0, 5)
 
 for (const post of posts) {
   if (!featuredPost && featuredPath && url_for(post.path) === featuredPath) {
@@ -87,6 +94,30 @@ page.keywords = ['AI芝士', 'AI 方法论', 'Agents', '人机协作', 'AI 部�
     <% }) %>
   </div>
 </section>
+
+<% if (dailyPosts.length > 0) { %>
+  <section class="lab-section lab-section--daily">
+    <div class="lab-section-heading">
+      <p class="lab-kicker">AI 日报</p>
+      <h2>每天 3 条信号 + 1 个判断</h2>
+    </div>
+    <div class="lab-daily-list">
+      <% dailyPosts.forEach(function(post) { %>
+        <% const postUrl = url_for(post.path) %>
+        <% const excerpt = strip_html(post.description || post.excerpt || post.content || '').substring(0, 120).trim().replace(/\n/g, ' ') %>
+        <article class="lab-daily-item">
+          <div class="lab-daily-meta">
+            <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+            <span>AI-Daily</span>
+          </div>
+          <h3><a href="<%= postUrl %>" target="<%- theme.index.post_url_target %>"><%= post.title %></a></h3>
+          <p><%= excerpt %></p>
+          <a class="lab-inline-link" href="<%= postUrl %>" target="<%- theme.index.post_url_target %>">查看完整日报</a>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+<% } %>
 
 <section class="lab-section lab-section--recent">
   <div class="lab-section-heading">

@@ -1,0 +1,44 @@
+meta:
+  name: AI-Daily 发布节奏
+  timezone: Asia/Shanghai
+  status: locked
+
+week_1:
+  - date: 2026-04-04
+    theme: 可验证任务优先
+    post: /2026/04/04/ai-daily-2026-04-04-agent-priority/
+  - date: 2026-04-03
+    theme: 上下文边界
+    post: /2026/04/03/ai-daily-2026-04-03-context-contract/
+  - date: 2026-04-02
+    theme: 工具约束匹配
+    post: /2026/04/02/ai-daily-2026-04-02-tool-selection/
+  - date: 2026-04-01
+    theme: 风险闸门
+    post: /2026/04/01/ai-daily-2026-04-01-risk-gate/
+  - date: 2026-03-31
+    theme: 慢复盘机制
+    post: /2026/03/31/ai-daily-2026-03-31-feedback-loop/
+  - date: 2026-03-30
+    theme: 价值判断优先
+    post: /2026/03/30/ai-daily-2026-03-30-value-judgment/
+  - date: 2026-03-29
+    theme: 协作规则先行
+    post: /2026/03/29/ai-daily-2026-03-29-collaboration-rules/
+  - date: 2026-03-28
+    theme: 最小闭环部署
+    post: /2026/03/28/ai-daily-2026-03-28-deploy-baseline/
+
+week_2_to_week_5_rhythm:
+  monday: 趋势判断
+  tuesday: 工具实践
+  wednesday: 流程优化
+  thursday: 风险边界
+  friday: 周度复盘
+  saturday: 轻量快讯（可选）
+  sunday: 选题沉淀与下周编排
+
+mix:
+  decision_brief: 60%
+  practical_action: 30%
+  tool_comparison: 10%

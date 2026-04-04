@@ -8,6 +8,7 @@
     "server": "hexo server",
     "deploy": "hexo deploy",
     "new": "hexo new",
+    "new:daily": "hexo new ai-daily",
     "start": "hexo clean && hexo generate && hexo server",
     "sync:theme": "mkdir -p themes && rsync -a --delete node_modules/hexo-theme-fluid/ themes/fluid/"
   },

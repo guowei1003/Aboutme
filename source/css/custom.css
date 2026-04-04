@@ -2142,3 +2142,57 @@ textarea:focus-visible {
     transform: none !important;
   }
 }
+
+.lab-section--daily .lab-daily-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.lab-daily-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.3rem 1.4rem;
+  border: 1px solid var(--lab-border);
+  border-radius: var(--lab-radius-md);
+  background: rgba(255, 252, 247, 0.76);
+  box-shadow: 0 12px 28px rgba(32, 24, 18, 0.06);
+  transition: transform var(--lab-fast) var(--lab-ease), border-color var(--lab-fast) var(--lab-ease), box-shadow var(--lab-fast) var(--lab-ease);
+}
+
+.lab-daily-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--lab-border-strong);
+  box-shadow: 0 16px 32px rgba(32, 24, 18, 0.1);
+}
+
+html[data-user-color-scheme="dark"] .lab-daily-item {
+  background: rgba(36, 28, 23, 0.9);
+}
+
+.lab-daily-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--lab-muted);
+}
+
+.lab-daily-item h3 {
+  margin: 0;
+  font-size: 1.26rem;
+  line-height: 1.45;
+}
+
+.lab-daily-item p {
+  margin: 0;
+  font-size: 0.97rem;
+}
+
+@media (max-width: 991.98px) {
+  .lab-section--daily .lab-daily-list {
+    grid-template-columns: 1fr;
+  }
+}
