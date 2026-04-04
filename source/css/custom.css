@@ -316,15 +316,16 @@ html[data-user-color-scheme="dark"] #board {
   transition: opacity 440ms var(--lab-ease), transform 440ms var(--lab-ease);
 }
 
-.lab-post-hero-title {
+body.page-post .lab-post-hero-title {
   margin: 0;
   color: #fff8f1;
-  max-width: 16.2ch;
-  font-size: clamp(1.95rem, 3.15vw, 3rem);
-  line-height: 1.16;
-  letter-spacing: -0.01em;
+  max-width: 24ch;
+  font-size: clamp(1.45rem, 1.8vw, 2.1rem);
+  line-height: 1.28;
+  font-weight: 600;
+  letter-spacing: 0;
   text-wrap: balance;
-  text-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
   opacity: 0;
   transform: translateY(14px);
   filter: blur(8px);
@@ -2044,9 +2045,10 @@ textarea:focus-visible {
   }
 
   body.page-post .lab-post-hero-title {
-    max-width: 12.6ch;
-    font-size: clamp(1.58rem, 4.7vw, 2.32rem);
-    line-height: 1.18;
+    max-width: 20ch;
+    font-size: clamp(1.22rem, 2.9vw, 1.68rem);
+    line-height: 1.3;
+    font-weight: 600;
   }
 
   body.page-post .lab-post-hero-dek {
@@ -2119,9 +2121,10 @@ textarea:focus-visible {
   }
 
   body.page-post .lab-post-hero-title {
-    max-width: 11.2ch;
-    font-size: 1.38rem;
-    line-height: 1.22;
+    max-width: 18ch;
+    font-size: 1.08rem;
+    line-height: 1.36;
+    font-weight: 600;
   }
 
   body.page-post .lab-post-hero-dek,
