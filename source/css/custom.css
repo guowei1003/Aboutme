@@ -17,6 +17,8 @@
   --lab-reading: 740px;
   --lab-post-shell: 1220px;
   --lab-post-gap: 2rem;
+  --lab-nav-height: 64px;
+  --lab-nav-offset: calc(var(--lab-nav-height) + 1rem);
   --lab-serif: "Noto Serif SC", "Songti SC", "STSong", "Source Han Serif SC", serif;
   --lab-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   --lab-mono: "SFMono-Regular", "Menlo", "Monaco", "Consolas", monospace;
@@ -124,10 +126,16 @@ hr {
 }
 
 .header-inner {
+  padding-top: var(--lab-nav-height);
   min-height: 12rem;
 }
 
 #navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1080;
   min-height: 64px;
   padding: 0;
   border-bottom: 1px solid var(--lab-border);
@@ -293,6 +301,11 @@ body.page-generic .banner {
   min-height: 12rem;
 }
 
+main {
+  position: relative;
+  z-index: 1;
+}
+
 .lab-banner-panel {
   max-width: 48rem;
   color: #fffdf7;
@@ -350,6 +363,10 @@ body.page-generic .banner {
   background: rgba(251, 249, 242, 0.94);
   box-shadow: var(--lab-shadow);
   overflow: hidden;
+}
+
+body.page-post #board {
+  overflow: visible;
 }
 
 html[data-user-color-scheme="dark"] #board {
@@ -982,15 +999,18 @@ html[data-user-color-scheme="dark"] .lab-tag-card {
 
 .lab-post-rail {
   position: sticky;
-  top: 5rem;
+  top: var(--lab-nav-offset);
   display: grid;
   gap: 1rem;
+  align-self: start;
 }
 
 body.page-post #toc,
 body.page-post #tocbot,
 body.page-post .toc-container {
   padding: 1rem;
+  max-height: calc(100vh - var(--lab-nav-offset) - 1rem);
+  overflow: hidden;
 }
 
 body.page-post #toc .toc-header,
@@ -1025,7 +1045,7 @@ body.page-post .tocbot-active-link {
 }
 
 body.page-post #toc .toc-body {
-  max-height: calc(100vh - 11rem);
+  max-height: calc(100vh - var(--lab-nav-offset) - 8rem);
   overflow: auto;
 }
 
@@ -1512,6 +1532,10 @@ body.page-post #comments .wl-sort > a {
   .lab-tag-card,
   .lab-category-sidebar-group {
     padding: 1rem;
+  }
+
+  .header-inner {
+    padding-top: var(--lab-nav-height);
   }
 
   .lab-timeline::before {
