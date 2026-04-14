@@ -27,12 +27,8 @@ var cat = site.categories.find({name: page.category}).filter(cat => cat.length).
     <% if (cat) { %>
       <% cat.posts.sort('-date').each(function(post) { %>
         <% const postUrl = url_for(post.path) %>
-        <% const indexImg = post.index_img || theme.post.default_index_img %>
         <% const excerpt = strip_html(post.description || post.excerpt || post.content || '').substring(0, 150).trim().replace(/\n/g, ' ') %>
         <article class="lab-post-item">
-          <a class="lab-post-item-media" href="<%= postUrl %>">
-            <img src="<%= url_for(indexImg) %>" alt="<%= post.title %>">
-          </a>
           <div class="lab-post-item-content">
             <div class="lab-post-item-meta">
               <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>

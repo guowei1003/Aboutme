@@ -12,11 +12,12 @@ page.keywords = ['AI 归档', 'AI 时间线', 'Agents 文章', 'AI 方法论', '
 
 <section class="lab-section lab-listing lab-listing--timeline">
   <div class="lab-section-heading">
-    <p class="lab-kicker">时间索引</p>
-    <h2>沿着时间回看实验室的熟成过程</h2>
+    <p class="lab-kicker">档案索引</p>
+    <h2>按时间查阅全部归档记录</h2>
     <p><%= lab.archive_intro || '' %></p>
-    <div class="lab-meta-row">
+    <div class="lab-meta-row lab-index-state">
       <span class="lab-chip"><%= site.posts.length %> 篇样本</span>
+      <span class="lab-chip">时间编目</span>
     </div>
   </div>
   <%- partial('_partials/archive-list.ejs', { params: { key: page.layout, postTotal: site.posts.length } }) %>

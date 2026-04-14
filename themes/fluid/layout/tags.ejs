@@ -12,13 +12,18 @@ page.keywords = ['AI 标签', 'Agents 标签', 'AI 方法论', '部署指南', '
 
 <section class="lab-section lab-listing">
   <div class="lab-section-heading">
-    <p class="lab-kicker">标签导览</p>
-    <h2>从议题索引进入不同样本</h2>
+    <p class="lab-kicker">议题索引</p>
+    <h2>按标签进入不同问题域</h2>
     <p><%= lab.tag_intro || '' %></p>
+    <div class="lab-meta-row lab-index-state">
+      <span class="lab-chip"><%= site.tags.length %> 个标签</span>
+      <span class="lab-chip">主题检索</span>
+    </div>
   </div>
   <div class="lab-tag-grid">
     <% site.tags.sort('name').each(function(tag) { %>
       <a class="lab-tag-card" href="<%= url_for(tag.path) %>">
+        <span class="lab-tag-card-code">TAG</span>
         <span class="lab-tag-card-name">#<%= tag.name %></span>
         <span class="lab-tag-card-count"><%= tag.length %> 篇</span>
       </a>

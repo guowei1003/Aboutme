@@ -9,7 +9,7 @@ const hasRightSidebar = (theme.post.toc.enable && theme.post.toc.placement !== '
   || (theme.post.category_bar.enable && theme.post.category_bar.placement === 'right' && !page.hide
     && (!theme.post.category_bar.specific || (theme.post.category_bar.specific && page.category_bar)))
 const hasPostRail = hasLeftSidebar || hasRightSidebar
-const postSummary = strip_html(page.description || page.excerpt || page.content || '').substring(0, 140).trim().replace(/\n/g, ' ')
+const postSummary = strip_html(page.description || page.excerpt || page.content || '').substring(0, 160).trim().replace(/\n/g, ' ')
 %>
 
 <div class="container-fluid nopadding-x lab-post-layout">
@@ -19,7 +19,8 @@ const postSummary = strip_html(page.description || page.excerpt || page.content 
         <h1 id="seo-header" class="lab-seo-header"><%= page.subtitle || page.title %></h1>
 
         <header class="lab-post-header lab-post-intro">
-          <p class="lab-kicker">专题导读</p>
+          <p class="lab-post-code">ARTICLE RECORD</p>
+          <h1 class="lab-post-title"><%= page.subtitle || page.title %></h1>
           <div class="lab-post-header-meta">
             <div class="lab-post-meta-line">
               <span class="post-meta">
@@ -35,14 +36,15 @@ const postSummary = strip_html(page.description || page.excerpt || page.content 
             </div>
             <%- partial('_partials/post/meta-bottom.ejs') %>
           </div>
-          <p class="lab-post-summary"><%= postSummary %></p>
+          <% if (postSummary) { %>
+            <p class="lab-post-summary"><%= postSummary %></p>
+          <% } %>
         </header>
 
         <% if (theme.post.updated.enable && theme.post.updated && compare_date(page.date, page.updated)) { %>
           <p id="updated-time" class="note note-<%= theme.post.updated.note_class || 'info' %>" style="<%= theme.post.updated.relative ? 'display: none' : '' %>">
             <% if (theme.post.updated.relative) { %>
               <% if (theme.post.updated.content) { %>
-                <!-- compatible with older versions-->
                 <%- theme.post.updated.content %><%- date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ') %>
               <% } else { %>
                 <%- __('post.updated', date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ')) %>
@@ -50,7 +52,6 @@ const postSummary = strip_html(page.description || page.excerpt || page.content 
               <%- partial('_partials/plugins/moment.ejs') %>
             <% } else { %>
               <% if (theme.post.updated.content) { %>
-                <!-- compatible with older versions-->
                 <%- theme.post.updated.content %><%- date(page.updated, theme.post.updated.date_format) %>
               <% } else { %>
                 <%- __('post.updated', date(page.updated, theme.post.updated.date_format)) %>
@@ -123,8 +124,7 @@ const postSummary = strip_html(page.description || page.excerpt || page.content 
 
 <%- partial('_partials/markdown-plugins') %>
 
-<% if(theme.post.custom && theme.post.custom.enable && theme.post.custom.content && page.custom !== false) { %>
-  <!-- Custom -->
+<% if (theme.post.custom && theme.post.custom.enable && theme.post.custom.content && page.custom !== false) { %>
   <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
       <%- page.custom || theme.post.custom.content %>

@@ -14,9 +14,13 @@ var curCats = site.categories.find({ parent: { $exists: false } }).sort(orderBy)
 
 <section class="lab-section lab-listing">
   <div class="lab-section-heading">
-    <p class="lab-kicker">样本架总览</p>
-    <h2>按栏目找到已经成型的观点与方法</h2>
+    <p class="lab-kicker">栏目索引</p>
+    <h2>按栏目进入长期归档的资料</h2>
     <p><%= lab.category_intro || '' %></p>
+    <div class="lab-meta-row lab-index-state">
+      <span class="lab-chip"><%= curCats.length %> 个栏目</span>
+      <span class="lab-chip">主题编目</span>
+    </div>
   </div>
   <%- partial('_partials/category-list', {
     curCats: curCats,

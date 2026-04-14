@@ -9,7 +9,17 @@ page.banner_mask_alpha = page.banner_mask_alpha || theme.page.banner_mask_alpha
 
 <article class="page-content lab-page-content">
   <div class="lab-page-shell">
-    <%- page.content %>
+    <div class="lab-page-frame">
+      <header class="lab-page-head">
+        <p class="lab-kicker">REFERENCE RECORD</p>
+        <% if (page.description) { %>
+          <p class="lab-page-summary"><%= page.description %></p>
+        <% } %>
+      </header>
+      <div class="lab-page-body">
+        <%- page.content %>
+      </div>
+    </div>
   </div>
 
   <%- inject_point('pageComments') %>

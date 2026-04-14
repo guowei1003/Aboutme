@@ -2,9 +2,12 @@
   <div class="lab-category-sidebar">
     <% curCats.each(function(cat) { %>
       <section class="lab-category-sidebar-group">
-        <div class="lab-category-sidebar-title">
-          <span><%= cat.name.trim() %></span>
-          <span><%= cat.posts.length %></span>
+        <div class="lab-category-sidebar-head">
+          <p class="lab-category-sidebar-code">INDEX</p>
+          <div class="lab-category-sidebar-title">
+            <span><%= cat.name.trim() %></span>
+            <span><%= cat.posts.length %></span>
+          </div>
         </div>
         <div class="lab-category-sidebar-posts">
           <% var posts = cat.posts.sort(params.postOrderBy || '-date') %>
@@ -26,19 +29,19 @@
       <article class="lab-category-card">
         <div class="lab-category-card-head">
           <div>
-            <p class="lab-kicker">栏目索引</p>
+            <p class="lab-category-card-code">COLUMN</p>
             <h3><%= cat.name.trim() %></h3>
           </div>
           <span class="lab-chip"><%= cat.posts.length %> 篇</span>
         </div>
         <p class="lab-category-card-copy">围绕 <%= cat.name.trim() %> 的方法、判断与实验记录。</p>
-        <div class="lab-category-card-posts">
+        <div class="lab-category-card-posts" role="list">
           <% for (var idx = 0; idx < posts.length; idx++) { %>
             <% var post = posts.data[idx] %>
             <% if (idx && params.postLimit && idx >= params.postLimit) { break } %>
-            <a href="<%= url_for(post.path) %>">
-              <span><%= post.title %></span>
-              <time><%= date(post.date, 'MM.DD') %></time>
+            <a href="<%= url_for(post.path) %>" role="listitem">
+              <span class="lab-category-post-title"><%= post.title %></span>
+              <time class="lab-category-post-date"><%= date(post.date, 'MM.DD') %></time>
             </a>
           <% } %>
         </div>

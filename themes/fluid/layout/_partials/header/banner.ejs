@@ -21,10 +21,8 @@ if (theme.banner && theme.banner.parallax) {
 if (random_banner_attr) {
   banner_attrs += ' ' + random_banner_attr
 }
-var banner_img_height = parseFloat(page.banner_img_height || theme.index.banner_img_height)
 var banner_mask_alpha = parseFloat(page.banner_mask_alpha || theme.index.banner_mask_alpha)
 var subtitle = page.subtitle || page.title
-var postSummary = strip_html(page.description || page.excerpt || page.content || '').substring(0, 120).trim().replace(/\n/g, ' ')
 var lab = site.data.lab || {}
 var labBrand = lab.brand || {}
 var labHero = lab.hero || {}
@@ -33,46 +31,29 @@ var labHero = lab.hero || {}
 <div id="banner" class="banner"<%- banner_attrs %>
      style="background: url('<%- url_for(banner_img) %>') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, <%= banner_mask_alpha %>)">
-      <div class="banner-text fade-in-up <%= is_home() ? 'banner-text--home text-left' : 'text-center' %>">
+    <div class="mask flex-center" style="background-color: rgba(18, 19, 18, <%= banner_mask_alpha %>)">
+      <div class="banner-text <%= is_home() ? 'banner-text--home text-left' : 'text-left' %>">
         <% if (is_home()) { %>
-          <div class="lab-hero">
-            <p class="lab-hero-eyebrow"><%= labBrand.title || config.title %></p>
-            <h1 class="lab-hero-title"><%= labHero.title || subtitle %></h1>
-            <p class="lab-hero-summary"><%= labHero.summary || config.description %></p>
-            <div class="lab-hero-actions">
-              <% if (labHero.primary_cta && labHero.primary_cta.href) { %>
-                <a class="lab-button lab-button--primary" href="<%= url_for(labHero.primary_cta.href) %>"><%= labHero.primary_cta.label %></a>
-              <% } %>
-              <% if (labHero.secondary_cta && labHero.secondary_cta.href) { %>
-                <a class="lab-button lab-button--secondary" href="<%= url_for(labHero.secondary_cta.href) %>"><%= labHero.secondary_cta.label %></a>
-              <% } %>
-            </div>
+          <div class="lab-banner-panel lab-banner-panel--home">
+            <p class="lab-banner-code">ARCHIVE INDEX</p>
+            <h1 class="lab-banner-title"><%= labBrand.title || config.title %></h1>
+            <p class="lab-banner-summary"><%= labHero.summary || config.description %></p>
+            <p class="lab-banner-status">长期归档 AI 方法、协作流程与判断样本</p>
+          </div>
+        <% } else if (is_post()) { %>
+          <div class="lab-banner-panel lab-banner-panel--slim">
+            <p class="lab-banner-code">ARTICLE ARCHIVE</p>
           </div>
         <% } else { %>
-          <% if (is_post()) { %>
-            <div class="lab-post-hero">
-              <p class="lab-post-hero-kicker">熟成特刊 / Future Editorial</p>
-              <h1 class="lab-post-hero-title"><%- subtitle %></h1>
-              <p class="lab-post-hero-dek"><%= postSummary || '围绕 AI 工具、部署方法与认知演化展开的一期专题导读。' %></p>
-            </div>
-          <% } else { %>
-            <div class="h2">
-              <% if(theme.fun_features.typing.enable && in_scope(theme.fun_features.typing.scope) && !is_post()) { %>
-                <span id="subtitle" data-typed-text="<%= subtitle %>"></span>
-              <% } else { %>
-                <span id="subtitle"><%- subtitle %></span>
-              <% } %>
-            </div>
-          <% } %>
+          <div class="lab-banner-panel lab-banner-panel--page">
+            <p class="lab-banner-code">REFERENCE PAGE</p>
+            <h1 class="lab-banner-title"><%- subtitle %></h1>
+            <% if (page.subtitle && page.subtitle !== page.title) { %>
+              <p class="lab-banner-summary"><%= page.subtitle %></p>
+            <% } %>
+          </div>
         <% } %>
       </div>
-
-      <% if (theme.scroll_down_arrow.enable && theme.scroll_down_arrow.banner_height_limit <= banner_img_height && page.layout !== '404') { %>
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
-      <% } %>
     </div>
   </div>
 </div>

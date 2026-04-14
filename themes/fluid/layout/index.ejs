@@ -1,95 +1,117 @@
 <%
 const lab = site.data.lab || {}
 const posts = page.posts && page.posts.data ? page.posts.data : []
-const featuredPath = lab.featured_post || ''
-let featuredPost = null
-let recentPosts = []
-const dailyPosts = posts
-  .filter(function(post) {
-    return post.categories && post.categories.data && post.categories.data.some(function(category) {
-      return category.name === 'AI-Daily'
-    })
-  })
-  .slice(0, 5)
-
-for (const post of posts) {
-  if (!featuredPost && featuredPath && url_for(post.path) === featuredPath) {
-    featuredPost = post
-  } else {
-    recentPosts.push(post)
-  }
-}
-
-if (!featuredPost && posts.length > 0) {
-  featuredPost = posts[0]
-  recentPosts = posts.slice(1)
-}
+const aiDailyCategory = site.categories.find({ name: 'AI-Daily' }).filter(cat => cat.length).data[0]
+const methodsCategory = site.categories.find({ name: '芝士力量' }).filter(cat => cat.length).data[0]
+const dailyPosts = aiDailyCategory ? aiDailyCategory.posts.sort('-date').data.slice(0, 5) : []
+const recentPosts = posts.filter(function(post) {
+  return !(post.categories && post.categories.data && post.categories.data.some(function(category) {
+    return category.name === 'AI-Daily'
+  }))
+})
 
 page.subtitle = theme.index.slogan.text || config.subtitle || ''
 page.banner_img = theme.index.banner_img
 page.banner_img_height = theme.index.banner_img_height
 page.banner_mask_alpha = theme.index.banner_mask_alpha
-page.description = 'AI芝士是一个关于 AI 方法论、Agents 协作、部署实践与治理思考的知识实验室，持续整理值得长期复用的人机协作样本。'
+page.description = 'AI芝士是一个关于 AI 方法论、Agents 协作、部署实践与治理思考的知识资料站，持续整理值得长期复用的人机协作样本。'
 page.keywords = ['AI芝士', 'AI 方法论', 'Agents', '人机协作', 'AI 部署', 'AI 治理']
 %>
 
-<h1 style="display: none"><%= config.title %></h1>
-<div class="lab-home-bridge" aria-hidden="true">
-  <span class="lab-home-bridge-line"></span>
-  <span class="lab-home-bridge-mark"></span>
-  <span class="lab-home-bridge-line"></span>
-</div>
-
-<section class="lab-section lab-section--featured">
+<section class="lab-section lab-section--archive-cards">
   <div class="lab-section-heading">
-    <p class="lab-kicker">本期熟成样本</p>
-    <h2>从一块真正值得细读的样本开始</h2>
+    <p class="lab-kicker">栏目索引</p>
+    <h2>先按档案目录进入，再按时间继续阅读</h2>
+    <p>这个站点不是资讯流，而是按主题、方法和时间持续归档的资料站。</p>
   </div>
-  <% if (featuredPost) { %>
-    <% const featuredUrl = url_for(featuredPost.path) %>
-    <% const featuredImg = featuredPost.index_img || theme.post.default_index_img %>
-    <% const featuredExcerpt = strip_html(featuredPost.description || featuredPost.excerpt || featuredPost.content || '').substring(0, 220).trim().replace(/\n/g, ' ') %>
-    <article class="lab-featured">
-      <div class="lab-featured-media">
-        <a href="<%= featuredUrl %>" target="<%- theme.index.post_url_target %>">
-          <img src="<%= url_for(featuredImg) %>" alt="<%= featuredPost.title %>">
-        </a>
+  <div class="lab-archive-card-grid">
+    <article class="lab-archive-card">
+      <p class="lab-archive-card-code">A-01</p>
+      <h3>AI 日报</h3>
+      <p>按天记录 3 条信号与 1 个判断，适合快速扫读近期变化。</p>
+      <div class="lab-meta-row">
+        <span class="lab-chip">更新记录</span>
+        <span class="lab-chip"><%= aiDailyCategory ? aiDailyCategory.posts.length : 0 %> 篇</span>
       </div>
-      <div class="lab-featured-content">
-        <p class="lab-featured-date"><%= date(featuredPost.date, 'YYYY.MM.DD') %></p>
-        <h3><a href="<%= featuredUrl %>" target="<%- theme.index.post_url_target %>"><%= featuredPost.title %></a></h3>
-        <p class="lab-featured-excerpt"><%= featuredExcerpt %></p>
-        <div class="lab-meta-row">
-          <% if (featuredPost.categories.length > 0) { %>
-            <span class="lab-chip"><%= featuredPost.categories.data[0].name %></span>
-          <% } %>
-          <% featuredPost.tags.each(function(tag){ %>
-            <a class="lab-chip lab-chip--link" href="<%= url_for(tag.path) %>">#<%- tag.name %></a>
-          <% }) %>
-        </div>
-      </div>
+      <a class="lab-inline-link" href="<%= url_for('/categories/AI-Daily/') %>">进入日报索引</a>
     </article>
-  <% } %>
+    <article class="lab-archive-card">
+      <p class="lab-archive-card-code">A-02</p>
+      <h3>观点与方法</h3>
+      <p>围绕 Agent 协作、方法论和治理问题形成的长期内容。</p>
+      <div class="lab-meta-row">
+        <span class="lab-chip">长期栏目</span>
+        <span class="lab-chip"><%= methodsCategory ? methodsCategory.posts.length : 0 %> 篇</span>
+      </div>
+      <a class="lab-inline-link" href="<%= url_for('/categories/芝士力量/') %>">进入栏目索引</a>
+    </article>
+    <article class="lab-archive-card">
+      <p class="lab-archive-card-code">A-03</p>
+      <h3>进化记录</h3>
+      <p>用一条时间年表梳理 AI 的关键跃迁、实验室主张与工作原则。</p>
+      <div class="lab-meta-row">
+        <span class="lab-chip">专题页面</span>
+        <span class="lab-chip">长期维护</span>
+      </div>
+      <a class="lab-inline-link" href="<%= url_for('/evolution/') %>">查看进化记录</a>
+    </article>
+    <article class="lab-archive-card">
+      <p class="lab-archive-card-code">A-04</p>
+      <h3>时间归档</h3>
+      <p>按时间回看全部文章，适合从最近更新或历史节点进入站点。</p>
+      <div class="lab-meta-row">
+        <span class="lab-chip">时间索引</span>
+        <span class="lab-chip"><%= site.posts.length %> 篇</span>
+      </div>
+      <a class="lab-inline-link" href="<%= url_for('/archives/') %>">查看全部归档</a>
+    </article>
+  </div>
 </section>
 
 <section class="lab-section lab-section--paths">
   <div class="lab-section-heading">
-    <p class="lab-kicker">阅读路径</p>
-    <h2>按你的进入方式来选样本</h2>
+    <p class="lab-kicker">专题索引</p>
+    <h2>按阅读路径定位资料</h2>
   </div>
   <div class="lab-path-grid">
-    <% (lab.reading_paths || []).forEach(function(pathItem) { %>
+    <% (lab.reading_paths || []).forEach(function(pathItem, idx) { %>
       <article class="lab-path">
-        <h3><%= pathItem.title %></h3>
+        <div class="lab-path-head">
+          <span class="lab-path-code">P-0<%= idx + 1 %></span>
+          <h3><%= pathItem.title %></h3>
+        </div>
         <p><%= pathItem.intro %></p>
-        <ul class="lab-path-links">
+        <ol class="lab-path-links">
           <% (pathItem.post_urls || []).forEach(function(postUrl) { %>
-            <% const matched = (site.posts.data || []).find(post => url_for(post.path) === postUrl) %>
+            <% const matched = (site.posts.data || []).find(function(post) { return url_for(post.path) === postUrl }) %>
             <% if (matched) { %>
               <li><a href="<%= url_for(matched.path) %>"><%= matched.title %></a></li>
             <% } %>
           <% }) %>
-        </ul>
+        </ol>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<section class="lab-section lab-section--recent">
+  <div class="lab-section-heading">
+    <p class="lab-kicker">最新条目</p>
+    <h2>按时间浏览最近归档的文章</h2>
+  </div>
+  <div class="lab-recent-list">
+    <% recentPosts.forEach(function(post) { %>
+      <% const postUrl = url_for(post.path) %>
+      <% const excerpt = strip_html(post.description || post.excerpt || post.content || '').substring(0, 150).trim().replace(/\n/g, ' ') %>
+      <article class="lab-post-item">
+        <div class="lab-post-item-meta">
+          <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+          <% if (post.categories.length > 0) { %>
+            <span><%= post.categories.data[0].name %></span>
+          <% } %>
+        </div>
+        <h3><a href="<%= postUrl %>" target="<%- theme.index.post_url_target %>"><%= post.title %></a></h3>
+        <p><%= excerpt %></p>
       </article>
     <% }) %>
   </div>
@@ -98,13 +120,13 @@ page.keywords = ['AI芝士', 'AI 方法论', 'Agents', '人机协作', 'AI 部�
 <% if (dailyPosts.length > 0) { %>
   <section class="lab-section lab-section--daily">
     <div class="lab-section-heading">
-      <p class="lab-kicker">AI 日报</p>
-      <h2>每天 3 条信号 + 1 个判断</h2>
+      <p class="lab-kicker">日报更新</p>
+      <h2>AI 日报最近记录</h2>
     </div>
     <div class="lab-daily-list">
       <% dailyPosts.forEach(function(post) { %>
         <% const postUrl = url_for(post.path) %>
-        <% const excerpt = strip_html(post.description || post.excerpt || post.content || '').substring(0, 120).trim().replace(/\n/g, ' ') %>
+        <% const excerpt = strip_html(post.description || post.excerpt || post.content || '').substring(0, 100).trim().replace(/\n/g, ' ') %>
         <article class="lab-daily-item">
           <div class="lab-daily-meta">
             <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
@@ -112,46 +134,16 @@ page.keywords = ['AI芝士', 'AI 方法论', 'Agents', '人机协作', 'AI 部�
           </div>
           <h3><a href="<%= postUrl %>" target="<%- theme.index.post_url_target %>"><%= post.title %></a></h3>
           <p><%= excerpt %></p>
-          <a class="lab-inline-link" href="<%= postUrl %>" target="<%- theme.index.post_url_target %>">查看完整日报</a>
         </article>
       <% }) %>
     </div>
   </section>
 <% } %>
 
-<section class="lab-section lab-section--recent">
-  <div class="lab-section-heading">
-    <p class="lab-kicker">最近上架</p>
-    <h2>近期完成熟成的观察与方法</h2>
-  </div>
-  <div class="lab-recent-list">
-    <% recentPosts.forEach(function(post) { %>
-      <% const postUrl = url_for(post.path) %>
-      <% const indexImg = post.index_img || theme.post.default_index_img %>
-      <% const excerpt = strip_html(post.description || post.excerpt || post.content || '').substring(0, 150).trim().replace(/\n/g, ' ') %>
-      <article class="lab-post-item">
-        <a class="lab-post-item-media" href="<%= postUrl %>" target="<%- theme.index.post_url_target %>">
-          <img src="<%= url_for(indexImg) %>" alt="<%= post.title %>">
-        </a>
-        <div class="lab-post-item-content">
-          <div class="lab-post-item-meta">
-            <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
-            <% if (post.categories.length > 0) { %>
-              <span><%= post.categories.data[0].name %></span>
-            <% } %>
-          </div>
-          <h3><a href="<%= postUrl %>" target="<%- theme.index.post_url_target %>"><%= post.title %></a></h3>
-          <p><%= excerpt %></p>
-        </div>
-      </article>
-    <% }) %>
-  </div>
-</section>
-
 <section class="lab-section lab-section--about">
   <div class="lab-section-heading">
-    <p class="lab-kicker">实验室说明</p>
-    <h2>这里不是资讯流，而是认知被慢慢熟成的地方</h2>
+    <p class="lab-kicker">站点说明</p>
+    <h2>这里记录的是可以回看的判断，而不是即时噪声</h2>
   </div>
   <div class="lab-about-grid">
     <p><%= config.description %></p>

@@ -21,8 +21,8 @@ footer:
 # 首页配置
 index:
   banner_img: /img/banner-home-editorial.svg
-  banner_img_height: 100
-  banner_mask_alpha: 0.26
+  banner_img_height: 32
+  banner_mask_alpha: 0.44
   slogan:
     enable: true
     text: 慢慢熟成的知识实验室
@@ -35,8 +35,8 @@ index:
 # 文章页配置
 post:
   banner_img: /img/banner-inner-editorial.svg
-  banner_img_height: 72
-  banner_mask_alpha: 0.22
+  banner_img_height: 20
+  banner_mask_alpha: 0.52
   default_index_img: /img/default-cover-editorial.svg
   meta:
     author: true
@@ -56,34 +56,34 @@ post:
 # 归档页配置
 archive:
   banner_img: /img/banner-inner-editorial.svg
-  banner_img_height: 65
-  banner_mask_alpha: 0.2
+  banner_img_height: 22
+  banner_mask_alpha: 0.5
 
 # 分类页配置
 category:
   enable: true
   banner_img: /img/banner-inner-editorial.svg
-  banner_img_height: 65
-  banner_mask_alpha: 0.2
+  banner_img_height: 22
+  banner_mask_alpha: 0.5
 
 # 标签页配置
 tag:
   enable: true
   banner_img: /img/banner-inner-editorial.svg
-  banner_img_height: 65
-  banner_mask_alpha: 0.2
+  banner_img_height: 22
+  banner_mask_alpha: 0.5
 
 # 关于页配置
 about:
   enable: true
   banner_img: /img/banner-inner-editorial.svg
-  banner_img_height: 72
-  banner_mask_alpha: 0.2
+  banner_img_height: 20
+  banner_mask_alpha: 0.5
 
 page:
   banner_img: /img/banner-inner-editorial.svg
-  banner_img_height: 72
-  banner_mask_alpha: 0.2
+  banner_img_height: 20
+  banner_mask_alpha: 0.5
 
 # 评论系统 - Waline
 post_comments:
