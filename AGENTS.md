@@ -325,13 +325,14 @@ ssh root@SERVER_IP "cd /data/aboutme && ./deploy-server.sh"
 生产环境**不构建站点镜像**：`docker-compose.yml` 直接使用官方 `nginx:alpine`，静态文件由 CI 同步到服务器后挂载进容器。根目录的 `Dockerfile`（旧的多阶段 Hexo 构建）已不被 compose 引用，保留仅为历史参考，不要再用它发布。
 
 ```
-GitHub Actions ──rsync──> /data/aboutme/public ──bind mount──> nginx:alpine :80/:443
+GitHub Actions ──rsync──> /data/aboutme/public ──bind mount──> nginx:alpine :8888
                     └────> /data/aboutme/privacy ──alias────> /privacy/
 ```
 
 ### docker-compose.yml 服务
 
-- **web**: `nginx:alpine`，端口 80/443
+- **web**: `nginx:alpine`，宿主 `8888` → 容器 `80`（HTTP）；容器 `443` 仍监听 TLS 但默认不对外映射
+- 端口选择原因: 服务器 80 已被 collectcar-nginx 占用；如需 HTTPS，追加 `"8443:443"` 并用前置反代终结域名流量
 - 挂载: `nginx.conf`、`ssl/`、`public/`（→ `/usr/share/nginx/html`）、`privacy/`
 
 ---

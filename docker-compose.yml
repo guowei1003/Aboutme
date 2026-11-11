@@ -6,8 +6,9 @@ services:
     container_name: kapibala-web
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      # 服务器 80 已被 collectcar-nginx 占用，站点默认改走 8888 (HTTP)。
+      # 容器内 443 仍启用 TLS；如需对外 HTTPS，追加 "8443:443" 并由前置反代终结域名流量。
+      - "8888:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./ssl:/etc/ssl/certs:ro

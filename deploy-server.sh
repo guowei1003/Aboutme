@@ -37,4 +37,4 @@ log "🐳 拉取官方 nginx:alpine 并启动容器..."
 docker compose pull
 docker compose up -d --force-recreate --remove-orphans
 
-log "✅ 完成！访问 https://kapibala.uno"
+log "✅ 完成！默认端口 8888 (HTTP)，访问 http://SERVER_IP:8888/"
