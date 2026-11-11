@@ -166,7 +166,7 @@ keywords: [人工智能历史, AI 演进, AI 方法论, 人机协作, AI芝士]
     <h3>继续阅读</h3>
     <div class="lab-meta-row">
       <a class="lab-chip lab-chip--link" href="/categories/芝士力量/">进入观点与方法</a>
-      <a class="lab-chip lab-chip--link" href="/2026/04/01/how-to-better-master-agents/">阅读代表样本</a>
+      <a class="lab-chip lab-chip--link" href="/2026/04/03/how-to-better-master-agents/">阅读代表样本</a>
       <a class="lab-chip lab-chip--link" href="/">返回首页</a>
     </div>
   </section>

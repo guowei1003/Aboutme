@@ -2,11 +2,12 @@
 
 ## 项目概述
 
-**Kapibala** 是一个基于 Hexo 的静态博客网站，主题为"AI 加持下的人类进化"。项目使用 Fluid 主题，通过 Docker 容器化部署，并借助 GitHub Actions 实现自动化 CI/CD。
+**AI芝士** 是一个基于 Hexo 的中文静态博客，副标题「慢慢熟成的知识实验室」。Fluid 1.9.9 主题已完整 fork 到 `themes/fluid/` 并深度定制（16 个 ejs + `source/css/custom.css`）。静态文件由 GitHub Actions 构建，服务器只运行官方 Nginx 容器并挂载产物目录。
 
 - **站点地址**: https://kapibala.uno
-- **技术栈**: Hexo 7.3.0 + Fluid 主题 + Docker + Nginx
-- **评论系统**: Waline
+- **技术栈**: Hexo 7.3.0 + Fluid 1.9.9 (本地 fork) + GitHub Actions + Nginx (Docker)
+- **当前开发分支**: `3.0.0`（`master` 停留在 2016 年的历史提交）
+- **评论系统**: 配置中保留 Waline，但当前未渲染，服务器也无 Waline 后端
 - **语言**: 中文 (zh-CN)
 
 ---
@@ -20,22 +21,29 @@ Aboutme/
 ├── source/
 │   ├── _posts/                 # 博客文章 (Markdown)
 │   ├── evolution/
-│   │   └── index.md            # 进化页面 (自定义页面)
+│   │   └── index.md            # 进化记录页面 (自定义页面)
+│   ├── _data/                  # 站点文案/排期数据 (未被模板引用，坏链已修正)
+│   ├── privacy/                # 遗留副本 (被 Nginx alias 遮蔽，勿改)
 │   ├── css/
-│   │   └── custom.css          # 自定义样式
+│   │   └── custom.css          # 定制视觉样式 (约 1600 行)
 │   └── js/
 │       └── custom.js           # 自定义脚本
+├── themes/fluid/               # Fluid 主题本地 fork，已入库并定制
+├── privacy/                    # 唯一生效的隐私页来源 (index.html + Nginx alias)
 ├── nginx/
 │   └── nginx.conf              # Nginx 配置
-├── ssl/                        # SSL 证书目录
+├── ssl/                        # SSL 证书目录 (当前已入库，见「注意事项」)
 │   ├── kapibala.uno.key
 │   └── kapibala.uno.pem
 ├── _config.yml                 # Hexo 站点配置
 ├── _config.fluid.yml           # Fluid 主题配置 (覆盖默认)
-├── docker-compose.yml          # Docker Compose 配置
-├── Dockerfile                  # Docker 构建文件
-├── deploy-server.sh            # 服务器部署脚本
-└── package.json                # Node.js 依赖
+├── docker-compose.yml          # 官方 nginx:alpine + 挂载 ./public
+├── Dockerfile                  # 应急离线构建 (生产不用)
+├── .dockerignore               # 排除 ssl/ 私钥、.git 等
+├── .gitignore                  # 忽略 ssl/；锁文件已入库
+├── deploy-server.sh            # 服务器上启动/重启容器
+├── package.json                # Node.js 依赖
+└── package-lock.json           # 已入库，全部指向 registry.npmjs.org
 ```
 
 ---
@@ -67,14 +75,14 @@ npm run start
 ### 部署相关
 
 ```bash
-# 服务器上执行部署
+# 发布内容：push 到 3.0.0（或在 GitHub Actions 手动 workflow_dispatch）
+# CI 构建 public/ 并 rsync 到服务器 /data/aboutme/public，容器实时挂载，无需重启
+
+# 仅在首次部署、或 nginx.conf / docker-compose.yml / ssl 变更后，在服务器执行
 ./deploy-server.sh
 
-# Docker 构建
-docker build -t kapibala-web .
-
-# Docker Compose 启动
-docker compose up -d
+# 服务器目录（compose 以该目录为基准做相对挂载）
+# /data/aboutme/{docker-compose.yml,nginx/,ssl/,public/,privacy/}
 ```
 
 ---
@@ -268,8 +276,8 @@ source/_posts/
 ### _config.fluid.yml (主题配置)
 
 关键配置项:
-- 导航菜单: 博客、AI 日报、进化
-- 评论系统: Waline (`serverURL: https://kapibala.uno/comments`)
+- 导航菜单: 首页、AI 日报、观点与方法、进化记录
+- 评论: 已在 `post.comments` 显式关闭（`type: ''`）；Waline 参数保留备用，后端未部署
 - 搜索功能: 本地搜索
 - 夜间模式: 自动切换
 
@@ -277,30 +285,36 @@ source/_posts/
 
 ## 部署流程
 
-### 自动部署 (推荐)
+### 自动发布内容 (推荐)
 
-1. 推送代码到 `main` 或 `master` 分支
-2. GitHub Actions 自动触发
-3. 构建 Hexo 静态文件
-4. 通过 SSH 同步到服务器 `/data/aboutme/public`
+1. 推送代码到 `3.0.0`（`main` / `master` 同样触发），或在 Actions 里手动 `workflow_dispatch`
+2. GitHub Actions 检出仓库、`npm ci`（锁文件已入库，全部指向公共源）、`hexo clean && hexo generate`
+3. rsync 把 `public/` 同步到 `/data/aboutme/public`（`--delete`），把 `privacy/` 同步到 `/data/aboutme/privacy`
+4. 容器以 bind mount 读取这两个目录，**内容发布无需重启容器**
+
+> CI 是唯一的构建源。`themes/fluid/` 已入库，Hexo 优先加载该目录，工作流不会额外安装官方主题包。
 
 **GitHub Secrets 配置**:
 - `SERVER_SSH_KEY`: SSH 私钥
 - `SERVER_HOST`: 服务器 IP
 - `SERVER_USER`: 服务器用户名
 
-### 手动部署
+### 手动发布 / 首次部署
 
 ```bash
 # 1. 本地构建
-hexo clean && hexo generate
+npm run clean && npm run generate
 
 # 2. 同步到服务器
 rsync -avz --delete ./public/ root@SERVER_IP:/data/aboutme/public/
 
-# 3. 重启服务
-ssh root@SERVER_IP "cd /data/aboutme && docker compose restart"
+# 3. 首次部署或配置变更后，在服务器启动容器
+ssh root@SERVER_IP "cd /data/aboutme && ./deploy-server.sh"
 ```
+
+> 顺序要求：`./public/index.html` 必须先存在；若容器先挂载了空目录，站点会 404。
+> nginx.conf、docker-compose.yml、SSL 证书不在 CI 同步范围内，修改后需手动拷贝并重跑 `deploy-server.sh`。
+> 静态文件名不带内容哈希，Nginx 对 HTML 设 `no-cache`、静态资源最长缓存 1 小时，避免发布后读者看到旧样式。
 
 ---
 
@@ -308,14 +322,17 @@ ssh root@SERVER_IP "cd /data/aboutme && docker compose restart"
 
 ### 架构
 
-Dockerfile 采用多阶段构建:
-1. **构建阶段**: Node.js 18 Alpine，安装依赖并构建 Hexo
-2. **运行阶段**: Nginx Alpine，托管静态文件
+生产环境**不构建站点镜像**：`docker-compose.yml` 直接使用官方 `nginx:alpine`，静态文件由 CI 同步到服务器后挂载进容器。根目录的 `Dockerfile`（旧的多阶段 Hexo 构建）已不被 compose 引用，保留仅为历史参考，不要再用它发布。
+
+```
+GitHub Actions ──rsync──> /data/aboutme/public ──bind mount──> nginx:alpine :80/:443
+                    └────> /data/aboutme/privacy ──alias────> /privacy/
+```
 
 ### docker-compose.yml 服务
 
-- **web**: Nginx 容器，端口 80/443
-- 挂载: nginx.conf、SSL 证书、静态文件
+- **web**: `nginx:alpine`，端口 80/443
+- 挂载: `nginx.conf`、`ssl/`、`public/`（→ `/usr/share/nginx/html`）、`privacy/`
 
 ---
 
@@ -329,14 +346,18 @@ Dockerfile 采用多阶段构建:
 
 ### Git 规范
 
-- 忽略文件: `node_modules/`, `public/`, `db.json`, `.DS_Store`
-- 敏感文件: SSL 证书不应提交到仓库
+- 忽略文件: `node_modules/`, `public/`, `db.json`, `.DS_Store`, `ssl/`
+- `package-lock.json` 已入库（246 条 `resolved` 全部指向 `registry.npmjs.org`），CI 用 `npm ci` 保证可复现
+- **待处理**: `ssl/kapibala.uno.key`（私钥）仍在 Git 历史中，需轮换证书并清理历史；`.gitignore` / `.dockerignore` 只能防止新增文件
+- 隐私页以顶层 `privacy/` 为唯一生效来源；`source/privacy/` 为遗留副本，被 Nginx alias 遮蔽
 
 ### 常见问题
 
 1. **主题未生效**: 检查 `_config.fluid.yml` 是否在根目录
 2. **样式异常**: 运行 `hexo clean` 后重新生成
 3. **部署失败**: 检查 GitHub Secrets 配置和服务器 SSH 连接
+4. **内容没更新**: 确认 CI 已同步 `public/` 到 `/data/aboutme/public`，且服务器 compose 已挂载 `./public`；配置类改动需手动同步后重跑 `deploy-server.sh`
+5. **`/privacy/` 403**: 顶层 `privacy/index.html` 必须存在（Nginx alias 不会回退到镜像内 `public/privacy/`）
 
 ---
 
@@ -348,4 +369,5 @@ Dockerfile 采用多阶段构建:
 | 新建文章 | `npm run new "标题"` |
 | 构建站点 | `npm run generate` |
 | 清理缓存 | `npm run clean` |
-| 部署触发 | `git push origin main` |
+| 发布内容 | `git push origin 3.0.0` 或 Actions 手动触发 |
+| 应急离线构建 | `npm ci && npm run generate && docker build -t kapibala-web:emergency .` |

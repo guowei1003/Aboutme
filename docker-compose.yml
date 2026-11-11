@@ -1,7 +1,8 @@
 services:
   web:
-    build: .
-    image: kapibala-web:latest
+    # 构建交由 GitHub Actions 完成：CI 生成 public/ 并 rsync 到 /data/aboutme/public，
+    # 容器只负责托管，直接挂载该目录，镜像不再包含站点内容。
+    image: nginx:alpine
     container_name: kapibala-web
     restart: always
     ports:
@@ -10,5 +11,6 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./ssl:/etc/ssl/certs:ro
+      - ./public:/usr/share/nginx/html:ro
       # 应用隐私/合规等独立 HTML，URL 前缀 /privacy
       - ./privacy:/usr/share/nginx/privacy:ro

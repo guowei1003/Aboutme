@@ -1,0 +1,9 @@
+.git
+.github
+.venv
+.workbuddy
+node_modules
+db.json
+ssl
+*.log
+.DS_Store

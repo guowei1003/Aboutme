@@ -1,8 +1,8 @@
-name: Deploy to Kapibala Server
+name: Build and deploy static site
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ "3.0.0", main, master ]
   workflow_dispatch:
 
 jobs:
@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -20,16 +18,20 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
+      # 锁文件已入库且全部指向 registry.npmjs.org，用 npm ci 保证可复现。
+      # 主题已 fork 在 themes/fluid/ 并入库；Hexo 优先加载该目录，
+      # 不要再 npm install hexo-theme-fluid，否则会引入版本不一致的原版主题。
       - name: Install Dependencies
-        run: npm install
+        run: npm ci --no-audit --no-fund
 
-      - name: Install Fluid Theme
-        run: npm install hexo-theme-fluid --no-save
+      - name: Verify customized theme is checked out
+        run: test -f themes/fluid/layout/index.ejs && test -f themes/fluid/layout/_partials/header/navigation.ejs
 
       - name: Generate Static Files
         run: npx hexo clean && npx hexo generate
 
-      - name: Deploy to Server
+      # 构建产物同步到服务器目录，由 docker-compose.yml bind mount 进 Nginx
+      - name: Deploy site to /data/aboutme/public
         uses: easingthemes/ssh-deploy@v4
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}

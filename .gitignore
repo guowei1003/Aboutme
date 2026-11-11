@@ -1,6 +1,5 @@
 # 依赖
 node_modules/
-package-lock.json
 
 # 生成的静态文件
 public/
@@ -27,3 +26,9 @@ _config.local.yml
 *.temp
 
 db.json
+
+# SSL 私钥/证书：生产证书只放服务器；仓库内已有历史提交需另行轮换并清理
+ssl/
+
+# WorkBuddy 本地工作日志（项目数据，不纳入版本库）
+.workbuddy/

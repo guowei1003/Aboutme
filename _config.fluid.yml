@@ -52,6 +52,11 @@ post:
   copyright:
     enable: true
     content: '本文作者：芝士就是力量<br>本文链接：<a href="%s">%s</a><br>版权声明：欢迎转载与交流，转载请注明来源与原文链接。'
+  # 评论后端（Waline）未部署：nginx 无 /comments 反代、compose 无 waline 服务。
+  # type 置空可避免定制 comments.ejs 在首页/归档页渲染空评论容器或触发 404 请求。
+  comments:
+    enable: false
+    type: ''
 
 # 归档页配置
 archive:
@@ -85,11 +90,8 @@ page:
   banner_img_height: 20
   banner_mask_alpha: 0.5
 
-# 评论系统 - Waline
-post_comments:
-  enable: true
-  type: waline
-
+# 评论插件参数（保留备用）：启用前需先部署 Waline 后端、补 nginx /comments 反代，
+# 并把上方 post.comments.enable 改为 true、type 改为 waline。
 waline:
   enable: true
   serverURL: https://kapibala.uno/comments
